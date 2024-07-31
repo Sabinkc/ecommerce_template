@@ -21,6 +21,7 @@ class LoginScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
+          forceMaterialTransparency: true,
         ),
         body: SingleChildScrollView(
           child: Padding(
