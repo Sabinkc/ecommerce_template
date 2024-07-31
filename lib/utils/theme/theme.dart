@@ -8,5 +8,6 @@ class SQAppTheme {
     useMaterial3: true,
     fontFamily: 'Open Sans',
     textTheme: SQTextTheme.lightTextTheme,
+    scaffoldBackgroundColor: Colors.white,
   );
 }

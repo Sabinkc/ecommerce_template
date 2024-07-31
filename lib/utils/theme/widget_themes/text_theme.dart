@@ -18,5 +18,6 @@ class SQTextTheme {
     bodySmall: const TextStyle().copyWith(fontSize: 14.0, fontWeight: FontWeight.w500, color: SQColors.textPrimary.withOpacity(0.5)),
     labelLarge: const TextStyle().copyWith(fontSize: 13.0, fontWeight: FontWeight.normal, color: SQColors.textPrimary),
     labelMedium: const TextStyle().copyWith(fontSize: 12.0, fontWeight: FontWeight.normal, color: SQColors.textPrimary.withOpacity(0.5)),
+    labelSmall: const TextStyle().copyWith(fontSize: 10.0, fontWeight: FontWeight.normal, color: SQColors.textPrimary),
   );
 }

@@ -1,3 +1,4 @@
+import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +9,9 @@ class ScreenLoader {
       barrierDismissible: false,
       builder: (_) {
         return const Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            color: SQColors.primary,
+          ),
         );
       },
     );
