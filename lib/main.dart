@@ -1,5 +1,7 @@
+import 'package:ecommerce/features/authentication/screen/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'utils/theme/theme.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,14 +12,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       title: "SysQube Ecommerce",
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text("Hello"),
-        ),
-      ),
+      theme: SQAppTheme.lightTheme,
+      home: const LoginScreen(),
     );
   }
 }

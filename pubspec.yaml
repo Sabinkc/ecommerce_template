@@ -32,12 +32,26 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-  # fonts:
-  #   - family: Poppins
-  #     fonts:
-  #       - asset: assets/fonts/Poppins-Regular.ttf
-  #         weight: 400
-  #       - asset: assets/fonts/Poppins-Italic.ttf
-  #         style: italic
-  #       - asset: assets/fonts/Poppins-Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: Work Sans
+      fonts:
+        - asset: assets/fonts/WorkSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/WorkSans-Bold.ttf
+          weight: 700
+    - family: Open Sans
+      fonts:
+        - asset: assets/fonts/OpenSans-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/OpenSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/OpenSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/OpenSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/OpenSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/OpenSans-Light.ttf
+          weight: 200
+        - asset: assets/fonts/OpenSans-Italic.ttf
+          style: italic
