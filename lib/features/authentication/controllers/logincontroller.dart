@@ -11,6 +11,10 @@ class LoginController extends GetxController {
   final password = TextEditingController();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
+  void switchHide() {
+    hidepassword.value = !hidepassword.value;
+  }
+
   Future<void> textfieldchecker() async {
     String useremail = email.text.trim();
     String userpassword = password.text.trim();
