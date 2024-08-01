@@ -1,23 +1,23 @@
-import 'package:ecommerce/features/authentication/controllers/signupcontroller.dart';
 import 'package:ecommerce/widgets/passwordfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../widgets/elevatedbutton.dart';
 import '../../../widgets/logo.dart';
 import '../../../widgets/policytext.dart';
 import '../../../widgets/textfield.dart';
+import '../controllers/signupcontroller.dart';
 
-///This Screen helps user create a new account. It have four input fields through which user can fill their details.
 class SignUpScreen extends StatelessWidget {
+  ///This Screen helps user create a new account. It have four input fields through which user can fill their details.
   const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final signupController = Get.put(SignupController());
+    final size = MediaQuery.of(context).size;
     return KeyboardDismisser(
       gestures: const [GestureType.onTap, GestureType.onPanUpdateAnyDirection],
       child: Scaffold(
@@ -31,41 +31,20 @@ class SignUpScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Logo(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Already, Have an Account?",
-                        style: Theme.of(context).textTheme.labelLarge,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        style: TextButton.styleFrom(
-                          overlayColor: Colors.transparent,
-                          shape: const RoundedRectangleBorder(),
-                        ),
-                        child: Text(
-                          "Sign in to SysQube",
-                          style: Theme.of(context).textTheme.labelLarge!.apply(
-                                color: SQColors.primary,
-                                fontWeightDelta: 2,
-                              ),
-                        ),
-                      )
-                    ],
-                  ),
                   const SizedBox(
                     height: SQSizes.md,
                   ),
+                  const Logo(),
+                  const SizedBox(
+                    height: SQSizes.lg,
+                  ),
                   Text(
                     "Create your account",
-                    style: Theme.of(context).textTheme.titleMedium!.apply(
+                    style: Theme.of(context).textTheme.titleLarge!.apply(
                           color: SQColors.black,
+                          fontSizeDelta: 2,
                           letterSpacingDelta: 0.3,
-                          fontWeightDelta: 2,
+                          //fontWeightDelta: 1,
                         ),
                   ),
                   const SizedBox(
@@ -79,7 +58,6 @@ class SignUpScreen extends StatelessWidget {
                           text: "Sign up to create an account and get started with ",
                           style: Theme.of(context).textTheme.labelLarge!.apply(
                                 fontWeightDelta: 1,
-                                fontSizeDelta: 1,
                               ),
                         ),
                         TextSpan(
@@ -87,7 +65,6 @@ class SignUpScreen extends StatelessWidget {
                           style: Theme.of(context).textTheme.labelLarge!.apply(
                                 color: SQColors.primary,
                                 fontWeightDelta: 2,
-                                fontSizeDelta: 1,
                               ),
                         ),
                       ],
@@ -114,7 +91,7 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(
                     height: SQSizes.sml,
                   ),
-                  SQTextField(controller: signupController.email, hinttext: "jhonedoe@example.com"),
+                  SQTextField(controller: signupController.email, hinttext: "jhondoe@example.com"),
                   const SizedBox(
                     height: SQSizes.spaceBtwItems,
                   ),
@@ -133,7 +110,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: SQSizes.spaceBtwItems,
+                    height: SQSizes.sm,
                   ),
                   Text(
                     "Min. 8 char, incl 1 uppercase and 1 lowercase letter, 1 number and 1 special character",
@@ -162,23 +139,41 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(
                     height: SQSizes.spaceBtwSections,
                   ),
-                  const Divider(
-                    color: SQColors.borderSecondary,
-                  ),
-                  const SizedBox(
-                    height: SQSizes.spaceBtwItems,
-                  ),
-                  const SignUpPolicyText(),
-                  const SizedBox(
-                    height: SQSizes.md,
-                  ),
                   SQElevatedButton(
                     func: signupController.textfieldchecker,
                     title: "SIGN UP",
                   ),
                   const SizedBox(
-                    height: SQSizes.spaceBtwSections,
+                    height: SQSizes.md,
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Already, Have an Account?",
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ),
+                      const SizedBox(
+                        width: SQSizes.xs,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Text(
+                          "Sign in to SysQube",
+                          style: Theme.of(context).textTheme.labelLarge!.apply(
+                                color: SQColors.primary,
+                                fontWeightDelta: 2,
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: size.height * 0.1,
+                  ),
+                  const SignUpPolicyText(),
                 ],
               ),
             ),

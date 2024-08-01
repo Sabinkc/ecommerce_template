@@ -10,6 +10,7 @@ import '../../../widgets/passwordfield.dart';
 import '../../../widgets/policytext.dart';
 import '../../../widgets/textfield.dart';
 import '../controllers/logincontroller.dart';
+import 'forgotpassword.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -86,16 +87,17 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: SQSizes.xs,
+                    height: SQSizes.sml,
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {},
-                      style: TextButton.styleFrom(overlayColor: Colors.transparent),
+                    child: InkWell(
+                      onTap: () {
+                        Get.to(() => const ForgotPasswordScreen());
+                      },
                       child: Text(
                         "Forgot Password?",
-                        style: Theme.of(context).textTheme.titleMedium!.apply(
+                        style: Theme.of(context).textTheme.bodyLarge!.apply(
                               color: SQColors.primary,
                               fontWeightDelta: 1,
                             ),
@@ -103,14 +105,14 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: SQSizes.xs,
+                    height: SQSizes.sm,
                   ),
                   SQElevatedButton(
                     func: loginController.textfieldchecker,
                     title: "SIGN IN",
                   ),
                   const SizedBox(
-                    height: SQSizes.sm,
+                    height: SQSizes.md,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -119,28 +121,27 @@ class LoginScreen extends StatelessWidget {
                         "Don't have an account?",
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
-                      TextButton(
-                        onPressed: () {
+                      const SizedBox(
+                        width: SQSizes.xs,
+                      ),
+                      InkWell(
+                        onTap: () {
                           Get.to(() => const SignUpScreen());
                         },
-                        style: TextButton.styleFrom(
-                          overlayColor: Colors.transparent,
-                          shape: const RoundedRectangleBorder(),
-                        ),
                         child: Text(
                           "Register here",
                           style: Theme.of(context).textTheme.bodyLarge!.apply(
                                 color: SQColors.primary,
-                                fontWeightDelta: 2,
+                                fontWeightDelta: 1,
                               ),
                         ),
                       )
                     ],
                   ),
                   SizedBox(
-                    height: size.height * 0.1,
+                    height: size.height * 0.25,
                   ),
-                  const LoginPolicyText()
+                  const LoginPolicyText(),
                 ],
               ),
             ),

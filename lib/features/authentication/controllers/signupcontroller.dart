@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../../../utils/popups/loader.dart';
 import '../../../utils/popups/screenloader.dart';
 import '../../../utils/validators/validation.dart';
+import '../../store/screen/productdetails.dart';
 
 class SignupController extends GetxController {
   static SignupController get instance => Get.find();
@@ -48,6 +49,7 @@ class SignupController extends GetxController {
       ScreenLoader.stopLoadingDialog();
       SQLoader.warningSnackBar(title: "ERROR", message: errorlist[0]);
     } else {
+      ScreenLoader.stopLoadingDialog();
       signup(useremail, userpassword);
       fullname.clear();
       email.clear();
@@ -56,5 +58,7 @@ class SignupController extends GetxController {
     }
   }
 
-  Future<void> signup(String email, String password) async {}
+  Future<void> signup(String email, String password) async {
+    Get.to(() => const ProductDetailsScreen());
+  }
 }
