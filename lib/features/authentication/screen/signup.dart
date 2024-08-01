@@ -160,6 +160,7 @@ class SignUpScreen extends StatelessWidget {
                         onTap: () {
                           Get.back();
                         },
+                        overlayColor: WidgetStateColor.transparent,
                         child: Text(
                           "Sign in to SysQube",
                           style: Theme.of(context).textTheme.labelLarge!.apply(
@@ -171,7 +172,7 @@ class SignUpScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: size.height * 0.1,
+                    height: size.height * 0.08,
                   ),
                   const SignUpPolicyText(),
                 ],

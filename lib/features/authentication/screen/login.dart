@@ -95,6 +95,7 @@ class LoginScreen extends StatelessWidget {
                       onTap: () {
                         Get.to(() => const ForgotPasswordScreen());
                       },
+                      overlayColor: WidgetStateColor.transparent,
                       child: Text(
                         "Forgot Password?",
                         style: Theme.of(context).textTheme.bodyLarge!.apply(
@@ -128,6 +129,7 @@ class LoginScreen extends StatelessWidget {
                         onTap: () {
                           Get.to(() => const SignUpScreen());
                         },
+                        overlayColor: WidgetStateColor.transparent,
                         child: Text(
                           "Register here",
                           style: Theme.of(context).textTheme.bodyLarge!.apply(
@@ -139,7 +141,7 @@ class LoginScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: size.height * 0.25,
+                    height: size.width * 0.5,
                   ),
                   const LoginPolicyText(),
                 ],
