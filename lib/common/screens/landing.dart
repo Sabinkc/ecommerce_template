@@ -27,11 +27,12 @@ class LandingScreen extends StatelessWidget {
       bottomNavigationBar: Obx(
         () => SizedBox(
           width: size.width,
-          height: size.height * 0.08,
+          height: size.height * 0.1,
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             showUnselectedLabels: true,
             backgroundColor: Colors.white,
+            iconSize: 22,
             selectedItemColor: SQColors.primary,
             unselectedItemColor: SQColors.textSecondary,
             currentIndex: landingcontroller.index.value,

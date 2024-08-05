@@ -116,7 +116,7 @@ class HomeScreen extends StatelessWidget {
                       height: SQSizes.lg,
                     ),
                     SizedBox(
-                      height: size.height * 0.2,
+                      height: size.height * 0.25,
                       child: PageView(
                         controller: imageController,
                         scrollDirection: Axis.horizontal,
@@ -155,16 +155,11 @@ class HomeScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        InkWell(
-                          onTap: () {
-                            print(size.height * 0.302);
-                          },
-                          child: Text(
-                            "Special for you",
-                            style: Theme.of(context).textTheme.titleMedium!.apply(
-                                  fontWeightDelta: 1,
-                                ),
-                          ),
+                        Text(
+                          "Special for you",
+                          style: Theme.of(context).textTheme.titleMedium!.apply(
+                                fontWeightDelta: 1,
+                              ),
                         ),
                         Text(
                           "See all",
@@ -185,7 +180,7 @@ class HomeScreen extends StatelessWidget {
                         crossAxisCount: 2,
                         mainAxisSpacing: size.width * 0.045,
                         crossAxisSpacing: size.width * 0.045,
-                        mainAxisExtent: size.height * 0.302,
+                        mainAxisExtent: size.height * 0.34,
                       ),
                       itemBuilder: (context, index) {
                         final product = products[index];
@@ -197,6 +192,23 @@ class HomeScreen extends StatelessWidget {
                         );
                       },
                     )
+                    // const Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     HomeProductContainer(
+                    //       imagelink: "assets/images/laptop.jpg",
+                    //       productname: "productname",
+                    //       productprice: "productprice",
+                    //       productcategory: "productcategory",
+                    //     ),
+                    //     HomeProductContainer(
+                    //       imagelink: "assets/images/laptop.jpg",
+                    //       productname: "productname",
+                    //       productprice: "productprice",
+                    //       productcategory: "productcategory",
+                    //     ),
+                    //   ],
+                    // )
                   ],
                 ),
               ),
@@ -222,112 +234,122 @@ class HomeProductContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return SizedBox(
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              Container(
-                width: size.width * 0.45,
-                height: size.height * 0.2,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
-                  //color: Colors.red,
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(imagelink),
-                  ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Stack(
+          children: [
+            Container(
+              width: size.width * 0.45,
+              height: size.height * 0.2,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
+                //color: Colors.red,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(imagelink),
                 ),
-              ),
-              Positioned(
-                right: 0,
-                child: Container(
-                  width: size.width * 0.12,
-                  height: size.height * 0.06,
-                  decoration: const BoxDecoration(
-                    color: SQColors.primary,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(15),
-                    ),
-                  ),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Iconsax.heart_outline,
-                      color: Colors.white,
-                      size: SQSizes.iconMd,
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-          Container(
-            width: size.width * 0.45,
-            height: size.height * 0.1,
-            padding: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-              border: Border(
-                right: BorderSide(color: SQColors.borderSecondary, width: 2),
-                left: BorderSide(color: SQColors.borderSecondary, width: 2),
-                bottom: BorderSide(color: SQColors.borderSecondary, width: 2),
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  productname,
-                  style: Theme.of(context).textTheme.titleMedium,
-                  overflow: TextOverflow.ellipsis,
+            Positioned(
+              right: 0,
+              child: Container(
+                width: size.width * 0.12,
+                height: size.height * 0.06,
+                decoration: const BoxDecoration(
+                  color: SQColors.primary,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(15),
+                  ),
                 ),
-                const SizedBox(
-                  height: SQSizes.xs,
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Iconsax.heart_outline,
+                    color: Colors.white,
+                    size: SQSizes.iconMd,
+                  ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
+              ),
+            )
+          ],
+        ),
+        Container(
+          width: size.width * 0.45,
+          padding: const EdgeInsets.all(8),
+          decoration: const BoxDecoration(
+            border: Border(
+              right: BorderSide(color: SQColors.borderSecondary, width: 2),
+              left: BorderSide(color: SQColors.borderSecondary, width: 2),
+              bottom: BorderSide(color: SQColors.borderSecondary, width: 2),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                productname,
+                style: Theme.of(context).textTheme.titleMedium,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(
+                height: SQSizes.xs,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 90,
+                        child: Text(
                           "Rs $productprice.00",
-                          style: Theme.of(context).textTheme.titleSmall,
+                          style: Theme.of(context).textTheme.bodySmall,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        const SizedBox(
-                          height: SQSizes.xs,
-                        ),
-                        Text(
+                      ),
+                      const SizedBox(
+                        height: SQSizes.xs,
+                      ),
+                      SizedBox(
+                        width: 90,
+                        child: Text(
                           productcategory,
+                          overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.labelMedium,
                         ),
-                      ],
+                      ),
+                    ],
+                  ),
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: SQColors.black,
+                        width: 2,
+                      ),
                     ),
-                    Container(
-                      width: size.height * 0.05,
-                      height: size.height * 0.05,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: SQColors.borderSecondary,
-                          width: 2,
-                        ),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.add_shopping_cart_rounded,
+                        size: 24,
+                        color: SQColors.textPrimary,
                       ),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.add_shopping_cart_rounded,
-                          color: SQColors.textPrimary,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: SQSizes.xs,
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
