@@ -127,7 +127,6 @@ class HomeScreen extends StatelessWidget {
                             margin: const EdgeInsets.symmetric(horizontal: 4),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.amber,
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: AssetImage(image),
@@ -156,11 +155,16 @@ class HomeScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Special for you",
-                          style: Theme.of(context).textTheme.titleMedium!.apply(
-                                fontWeightDelta: 1,
-                              ),
+                        InkWell(
+                          onTap: () {
+                            print(size.height * 0.302);
+                          },
+                          child: Text(
+                            "Special for you",
+                            style: Theme.of(context).textTheme.titleMedium!.apply(
+                                  fontWeightDelta: 1,
+                                ),
+                          ),
                         ),
                         Text(
                           "See all",
@@ -177,11 +181,11 @@ class HomeScreen extends StatelessWidget {
                       itemCount: products.length,
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        mainAxisSpacing: 20,
-                        crossAxisSpacing: 20,
-                        mainAxisExtent: 267,
+                        mainAxisSpacing: size.width * 0.045,
+                        crossAxisSpacing: size.width * 0.045,
+                        mainAxisExtent: size.height * 0.302,
                       ),
                       itemBuilder: (context, index) {
                         final product = products[index];

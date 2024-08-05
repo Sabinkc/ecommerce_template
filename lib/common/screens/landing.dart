@@ -21,12 +21,13 @@ class LandingScreen extends StatelessWidget {
       const CartScreen(),
       const ProfileScreen(),
     ];
-
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Obx(() => pages[landingcontroller.index.value]),
       bottomNavigationBar: Obx(
         () => SizedBox(
-          height: 70,
+          width: size.width,
+          height: size.height * 0.08,
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             showUnselectedLabels: true,
