@@ -27,17 +27,15 @@ class LoginScreen extends StatelessWidget {
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: size.height * 0.065,
-                  ),
                   const Logo(),
                   SizedBox(
-                    height: size.height * 0.065,
+                    height: size.height * 0.05,
                   ),
                   Text(
                     "Sign In To Your Account",

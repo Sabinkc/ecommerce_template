@@ -27,7 +27,7 @@ class LandingScreen extends StatelessWidget {
       bottomNavigationBar: Obx(
         () => SizedBox(
           width: size.width,
-          height: size.height * 0.1,
+          height: size.height * 0.12,
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             showUnselectedLabels: true,
