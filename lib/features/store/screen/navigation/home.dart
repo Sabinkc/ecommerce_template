@@ -1,10 +1,14 @@
+import 'package:ecommerce/features/store/controllers/wishlistcontroller.dart';
+import 'package:ecommerce/features/store/screen/search.dart';
+import 'package:ecommerce/features/store/screen/widgets/quickcart.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../../../utils/constants/colors.dart';
+import '../../model/products.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,6 +17,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final imageController = PageController();
+
     final List<String> imageLink = [
       "assets/images/HeadPhoneBanner.jpg",
       "assets/images/iPhoneBanner.jpg",
@@ -38,36 +43,10 @@ class HomeScreen extends StatelessWidget {
       {
         "image": "assets/images/airpodcat.jpg",
         "categoryName": "Airpods",
-      }
-    ];
-    final List products = [
-      {
-        "image": "assets/images/laptop.jpg",
-        "productName": "Acer Nitro",
-        "productPrice": "130,000",
-        "discountedPrice": "110,00",
-        "discount": true,
       },
       {
-        "image": "assets/images/watch.jpg",
-        "productName": "G-Shock",
-        "productPrice": "10,000",
-        "discountedPrice": "0",
-        "discount": false,
-      },
-      {
-        "image": "assets/images/phonecase.jpg",
-        "productName": "Iphone Case",
-        "productPrice": "1,054",
-        "discountedPrice": "0",
-        "discount": false,
-      },
-      {
-        "image": "assets/images/headphone.jpg",
-        "productName": "HeadPhone",
-        "productPrice": "1,100",
-        "discountedPrice": "1,000",
-        "discount": true,
+        "image": "assets/images/screencat.jpg",
+        "categoryName": "Protectors",
       },
     ];
 
@@ -110,49 +89,51 @@ class HomeScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: size.height * 0.067,
-                          // width: size.width * 0.7,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              prefixIcon: const Icon(
-                                Iconsax.search_normal_1_outline,
-                                color: SQColors.borderSecondary,
-                              ),
-                              hintText: "Search",
-                              hintStyle: Theme.of(context).textTheme.labelLarge!.apply(color: SQColors.textSecondary),
-                              border: const OutlineInputBorder(
-                                borderSide: BorderSide(color: SQColors.borderSecondary, width: 2),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(6),
-                                borderSide: const BorderSide(color: SQColors.black, width: 2),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(6),
-                                borderSide: const BorderSide(color: SQColors.borderSecondary, width: 2),
-                              ),
-                            ),
+                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  child: InkWell(
+                    onTap: () {
+                      Get.to(() => const SearchScreen(), transition: Transition.rightToLeft);
+                    },
+                    child: Container(
+                      height: size.height * 0.055,
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 2,
+                          color: SQColors.borderSecondary,
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Iconsax.search_normal_1_outline,
+                            color: SQColors.borderSecondary,
+                            size: 24,
                           ),
-                        ),
+                          const SizedBox(
+                            width: SQSizes.sm,
+                          ),
+                          Text(
+                            "Search...",
+                            style: Theme.of(context).textTheme.bodyLarge!.apply(color: SQColors.textSecondary),
+                          ),
+                          const Spacer(),
+                          const VerticalDivider(
+                            thickness: 1.5,
+                          ),
+                          const SizedBox(
+                            width: SQSizes.xs,
+                          ),
+                          const Icon(
+                            Icons.sort,
+                            color: Colors.black,
+                            size: 30,
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        width: SQSizes.xs,
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.sort,
-                          color: Colors.black,
-                          size: 30,
-                        ),
-                      )
-                    ],
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -162,6 +143,7 @@ class HomeScreen extends StatelessWidget {
                   height: size.width * 0.5,
                   child: PageView(
                     controller: imageController,
+                    physics: const ClampingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     children: imageLink.map((image) {
                       return Container(
@@ -193,26 +175,9 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: SQSizes.md,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Shop By Category",
-                        style: Theme.of(context).textTheme.bodyLarge!.apply(
-                              fontWeightDelta: 2,
-                              color: Colors.black,
-                            ),
-                      ),
-                      Text(
-                        "See all",
-                        style: Theme.of(context).textTheme.bodyMedium!.apply(
-                              color: SQColors.textSecondary,
-                            ),
-                      ),
-                    ],
-                  ),
+                SectionHeading(
+                  headingTitle: "Shop By Category",
+                  func: () {},
                 ),
                 const SizedBox(
                   height: SQSizes.md,
@@ -236,26 +201,9 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: SQSizes.md,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Exclusive Products",
-                        style: Theme.of(context).textTheme.bodyLarge!.apply(
-                              fontWeightDelta: 2,
-                              color: Colors.black,
-                            ),
-                      ),
-                      Text(
-                        "See all",
-                        style: Theme.of(context).textTheme.bodyMedium!.apply(
-                              color: SQColors.textSecondary,
-                            ),
-                      ),
-                    ],
-                  ),
+                SectionHeading(
+                  headingTitle: "Exclusive Products",
+                  func: () {},
                 ),
                 const SizedBox(
                   height: SQSizes.md,
@@ -280,6 +228,7 @@ class HomeScreen extends StatelessWidget {
                         productPrice: product["productPrice"],
                         discountedPrice: product["discountedPrice"],
                         gotDiscount: product["discount"],
+                        productDetails: product,
                       );
                     },
                   ),
@@ -287,26 +236,9 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: SQSizes.md,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "New Arrivals",
-                        style: Theme.of(context).textTheme.bodyLarge!.apply(
-                              fontWeightDelta: 2,
-                              color: Colors.black,
-                            ),
-                      ),
-                      Text(
-                        "See all",
-                        style: Theme.of(context).textTheme.bodyMedium!.apply(
-                              color: SQColors.textSecondary,
-                            ),
-                      ),
-                    ],
-                  ),
+                SectionHeading(
+                  headingTitle: "New Arrivals",
+                  func: () {},
                 ),
                 const SizedBox(
                   height: SQSizes.md,
@@ -331,6 +263,7 @@ class HomeScreen extends StatelessWidget {
                         productPrice: product["productPrice"],
                         discountedPrice: product["discountedPrice"],
                         gotDiscount: product["discount"],
+                        productDetails: product,
                       );
                     },
                   ),
@@ -338,26 +271,9 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: SQSizes.md,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Deals & Discounts",
-                        style: Theme.of(context).textTheme.bodyLarge!.apply(
-                              fontWeightDelta: 2,
-                              color: Colors.black,
-                            ),
-                      ),
-                      Text(
-                        "See all",
-                        style: Theme.of(context).textTheme.bodyMedium!.apply(
-                              color: SQColors.textSecondary,
-                            ),
-                      ),
-                    ],
-                  ),
+                SectionHeading(
+                  headingTitle: "Deals & Discounts",
+                  func: () {},
                 ),
                 const SizedBox(
                   height: SQSizes.md,
@@ -382,6 +298,7 @@ class HomeScreen extends StatelessWidget {
                         productPrice: product["productPrice"],
                         discountedPrice: product["discountedPrice"],
                         gotDiscount: product["discount"],
+                        productDetails: product,
                       );
                     },
                   ),
@@ -398,6 +315,48 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+class SectionHeading extends StatelessWidget {
+  const SectionHeading({
+    super.key,
+    required this.headingTitle,
+    required this.func,
+    this.showButton = true,
+  });
+  final String headingTitle;
+  final VoidCallback func;
+  final bool? showButton;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            headingTitle,
+            style: Theme.of(context).textTheme.bodyLarge!.apply(
+                  fontWeightDelta: 2,
+                  fontSizeDelta: 1,
+                  color: Colors.black,
+                ),
+          ),
+          showButton!
+              ? InkWell(
+                  onTap: func,
+                  child: Text(
+                    "See all",
+                    style: Theme.of(context).textTheme.bodyMedium!.apply(
+                          color: SQColors.textSecondary,
+                        ),
+                  ),
+                )
+              : Container(),
+        ],
+      ),
+    );
+  }
+}
+
 class ProductContainer extends StatelessWidget {
   const ProductContainer({
     super.key,
@@ -406,14 +365,27 @@ class ProductContainer extends StatelessWidget {
     required this.productPrice,
     required this.discountedPrice,
     required this.gotDiscount,
+    this.productDetails,
   });
 
   final String imagelink, productTitle, productPrice, discountedPrice;
   final bool gotDiscount;
+  final dynamic productDetails;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final wishlistController = Get.put(WishlistController());
+    void onCartClicked() {
+      showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (context) => QuickCartScreen(
+          productInfo: productDetails,
+        ),
+      );
+    }
+
     return SizedBox(
       width: size.width * 0.4,
       child: Column(
@@ -432,12 +404,16 @@ class ProductContainer extends StatelessWidget {
               ),
               Positioned(
                 right: 0,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Iconsax.heart_outline,
-                    size: 25,
-                    color: SQColors.primary,
+                child: Obx(
+                  () => IconButton(
+                    onPressed: () {
+                      wishlistController.addToWishList(productDetails["productId"]);
+                    },
+                    icon: Icon(
+                      wishlistController.isFav(productDetails["productId"]) ? Iconsax.heart_bold : Iconsax.heart_outline,
+                      color: SQColors.primary,
+                      size: 30,
+                    ),
                   ),
                 ),
               )
@@ -446,67 +422,92 @@ class ProductContainer extends StatelessWidget {
           const SizedBox(
             height: SQSizes.xs,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Text(
-              productTitle,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodyLarge!.apply(
-                    color: Colors.black,
-                    fontWeightDelta: 1,
-                  ),
-              maxLines: 2,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    gotDiscount
-                        ? SizedBox(
-                            width: size.width * 0.2,
-                            child: Text(
-                              "Rs $productPrice",
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                decorationThickness: 5,
-                                fontSize: 12,
-                                color: SQColors.darkerGrey,
-                                decoration: TextDecoration.lineThrough,
+          SizedBox(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8, right: 5),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: size.width * 0.28,
+                        child: Text(
+                          productDetails["productName"],
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.titleMedium!.apply(
+                                color: Colors.black,
+                                fontWeightDelta: 1,
+                              ),
+                        ),
+                      ),
+                      gotDiscount
+                          ? SizedBox(
+                              width: size.width * 0.28,
+                              child: Text(
+                                "Rs $productPrice",
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  decorationThickness: 5,
+                                  fontSize: 13,
+                                  color: SQColors.darkerGrey,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                              ),
+                            )
+                          : const SizedBox(
+                              height: SQSizes.xs,
+                            ),
+                      gotDiscount
+                          ? SizedBox(
+                              width: size.width * 0.28,
+                              child: Text(
+                                "Rs $discountedPrice",
+                                style: Theme.of(context).textTheme.titleSmall!.apply(
+                                      color: Colors.red,
+                                      fontSizeFactor: 1,
+                                      fontWeightDelta: 1,
+                                    ),
+                              ),
+                            )
+                          : SizedBox(
+                              width: size.width * 0.28,
+                              child: Text(
+                                "Rs $productPrice",
+                                style: Theme.of(context).textTheme.titleSmall!.apply(
+                                      color: Colors.red,
+                                      fontWeightDelta: 2,
+                                      fontSizeFactor: 1,
+                                    ),
                               ),
                             ),
-                          )
-                        : Container(),
-                    gotDiscount
-                        ? Text(
-                            "Rs $discountedPrice",
-                            style: Theme.of(context).textTheme.bodySmall!.apply(
-                                  color: Colors.red,
-                                  fontWeightDelta: 1,
-                                ),
-                          )
-                        : Text(
-                            "Rs $productPrice",
-                            style: Theme.of(context).textTheme.bodySmall!.apply(
-                                  color: Colors.red,
-                                  fontWeightDelta: 1,
-                                ),
-                          ),
-                  ],
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.add_shopping_cart_outlined,
-                    size: 20,
+                    ],
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: 35,
+                    height: 35,
+                    child: IconButton(
+                      onPressed: onCartClicked,
+                      style: IconButton.styleFrom(
+                        side: const BorderSide(
+                          width: 2,
+                          color: SQColors.borderSecondary,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      icon: const Icon(
+                        Icons.add_shopping_cart_outlined,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -538,6 +539,10 @@ class CategoryContainer extends StatelessWidget {
             height: size.width * 0.15,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
+              border: Border.all(
+                width: 2,
+                color: SQColors.borderSecondary,
+              ),
               image: DecorationImage(
                 image: AssetImage(imagelink),
               ),
