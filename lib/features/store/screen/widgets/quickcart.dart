@@ -14,7 +14,10 @@ class QuickCartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final colorController = Get.put(ColorController());
+    final specController = Get.put(SpecController());
     final wishlistController = Get.put(WishlistController());
+    final List allColors = productInfo["colors"];
+    final List allSpecs = productInfo["specs"] ?? [];
     return SizedBox(
       width: size.width,
       child: Padding(
@@ -29,6 +32,7 @@ class QuickCartScreen extends StatelessWidget {
                 onPressed: () {
                   Get.back();
                   colorController.chageSelectedColorIndex(0);
+                  specController.chageSelectedSpecIndex(0);
                 },
                 icon: const Icon(
                   Iconsax.close_circle_outline,
@@ -182,50 +186,92 @@ class QuickCartScreen extends StatelessWidget {
                   ),
             ),
             const SizedBox(
-              height: SQSizes.xs,
+              height: SQSizes.sm,
             ),
-            SizedBox(
-              height: 50,
-              child: ListView.builder(
-                itemCount: productInfo["colors"].length,
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: false,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  List allColors = productInfo["colors"];
-
-                  Color test = allColors.elementAt(index);
-                  return Obx(
-                    () => InkWell(
-                      overlayColor: WidgetStateColor.transparent,
-                      onTap: () => colorController.chageSelectedColorIndex(index),
-                      child: Container(
-                        width: 40,
-                        margin: const EdgeInsets.only(right: 2),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            strokeAlign: BorderSide.strokeAlignOutside,
-                            width: 2,
-                            color: colorController.selectedColorIndex.value == index ? SQColors.primary : Colors.transparent,
-                          ),
-                          shape: BoxShape.circle,
+            Wrap(
+              spacing: 8,
+              runSpacing: 6,
+              children: allColors.asMap().entries.map((entry) {
+                int index = entry.key;
+                Color color = entry.value;
+                return Obx(
+                  () => InkWell(
+                    overlayColor: WidgetStateColor.transparent,
+                    onTap: () => colorController.chageSelectedColorIndex(index),
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          strokeAlign: BorderSide.strokeAlignOutside,
+                          width: 2,
+                          color: colorController.selectedColorIndex.value == index ? SQColors.primary : Colors.transparent,
                         ),
-                        child: Center(
-                          child: Container(
-                            width: 30,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: test,
-                            ),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Container(
+                          width: 25,
+                          height: 25,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: color,
                           ),
                         ),
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              }).toList(),
             ),
+            allSpecs.isNotEmpty
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 15, bottom: 10),
+                    child: Text(
+                      "Specs: ",
+                      style: Theme.of(context).textTheme.titleMedium!.apply(
+                            color: Colors.black,
+                            fontWeightDelta: 2,
+                          ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
+            allSpecs.isNotEmpty
+                ? Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: allSpecs.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      String spec = entry.value;
+                      return Obx(
+                        () => InkWell(
+                          overlayColor: WidgetStateColor.transparent,
+                          onTap: () {
+                            specController.selectedSpecIndex(index);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
+                            decoration: BoxDecoration(
+                              color: SQColors.softGrey,
+                              border: Border.all(
+                                width: 2,
+                                color: specController.selectedSpecIndex.value == index ? SQColors.black : SQColors.borderPrimary,
+                              ),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Text(
+                              spec,
+                              style: Theme.of(context).textTheme.bodyMedium!.apply(
+                                    color: Colors.black,
+                                    fontWeightDelta: 1,
+                                  ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  )
+                : const SizedBox.shrink(),
             const SizedBox(
               height: SQSizes.spaceBtwSections,
             ),

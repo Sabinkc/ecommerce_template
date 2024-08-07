@@ -12,6 +12,7 @@ final List products = [
       Colors.grey,
       Colors.black,
     ],
+    "specs": ["4GB / 64GB", "6GB / 128GB", "8GB / 256GB", "16GB / 512GB"]
   },
   {
     "productId": "Ghock1",
@@ -41,6 +42,12 @@ final List products = [
       Colors.green,
       Colors.orange,
       Colors.pink,
+      Colors.amber,
+      Colors.brown,
+      Colors.cyan,
+      Colors.indigo,
+      Colors.lime,
+      Colors.purple,
     ],
   },
   {

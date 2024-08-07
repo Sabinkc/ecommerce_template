@@ -7,3 +7,11 @@ class ColorController extends GetxController {
     selectedColorIndex.value = currentValue;
   }
 }
+
+class SpecController extends GetxController {
+  static SpecController get instance => Get.find();
+  RxInt selectedSpecIndex = 0.obs;
+  void chageSelectedSpecIndex(int currentValue) {
+    selectedSpecIndex.value = currentValue;
+  }
+}
