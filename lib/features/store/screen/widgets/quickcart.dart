@@ -205,7 +205,7 @@ class QuickCartScreen extends StatelessWidget {
                         border: Border.all(
                           strokeAlign: BorderSide.strokeAlignOutside,
                           width: 2,
-                          color: colorController.selectedColorIndex.value == index ? SQColors.primary : Colors.transparent,
+                          color: colorController.selectedColorIndex.value == index ? color : Colors.transparent,
                         ),
                         shape: BoxShape.circle,
                       ),
