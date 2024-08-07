@@ -17,7 +17,7 @@ class SQElevatedButton extends StatelessWidget {
 
     return SizedBox(
       width: size.width,
-      height: size.height * 0.062,
+      height: size.height * 0.055,
       child: ElevatedButton(
         onPressed: func,
         style: ElevatedButton.styleFrom(

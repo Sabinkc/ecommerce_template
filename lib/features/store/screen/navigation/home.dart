@@ -208,31 +208,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: SQSizes.md,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisExtent: 235,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 15,
-                    ),
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      final product = products[index];
-                      return ProductContainer(
-                        imagelink: product["image"],
-                        productTitle: product["productName"],
-                        productPrice: product["productPrice"],
-                        discountedPrice: product["discountedPrice"],
-                        gotDiscount: product["discount"],
-                        productDetails: product,
-                      );
-                    },
-                  ),
-                ),
+                const SQGridLayout(),
                 const SizedBox(
                   height: SQSizes.md,
                 ),
@@ -243,31 +219,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: SQSizes.md,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisExtent: 235,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 15,
-                    ),
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      final product = products[index];
-                      return ProductContainer(
-                        imagelink: product["image"],
-                        productTitle: product["productName"],
-                        productPrice: product["productPrice"],
-                        discountedPrice: product["discountedPrice"],
-                        gotDiscount: product["discount"],
-                        productDetails: product,
-                      );
-                    },
-                  ),
-                ),
+                const SQGridLayout(),
                 const SizedBox(
                   height: SQSizes.md,
                 ),
@@ -278,31 +230,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: SQSizes.md,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisExtent: 235,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 15,
-                    ),
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      final product = products[index];
-                      return ProductContainer(
-                        imagelink: product["image"],
-                        productTitle: product["productName"],
-                        productPrice: product["productPrice"],
-                        discountedPrice: product["discountedPrice"],
-                        gotDiscount: product["discount"],
-                        productDetails: product,
-                      );
-                    },
-                  ),
-                ),
+                const SQGridLayout(),
                 const SizedBox(
                   height: SQSizes.md,
                 ),
@@ -310,6 +238,41 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class SQGridLayout extends StatelessWidget {
+  const SQGridLayout({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: GridView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisExtent: 235,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 15,
+        ),
+        itemCount: products.length,
+        itemBuilder: (context, index) {
+          final product = products[index];
+          return ProductContainer(
+            imagelink: product["image"],
+            productTitle: product["productName"],
+            productPrice: product["productPrice"],
+            discountedPrice: product["discountedPrice"],
+            gotDiscount: product["discount"],
+            productDetails: product,
+          );
+        },
       ),
     );
   }
