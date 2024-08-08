@@ -1,7 +1,9 @@
+import 'package:ecommerce/features/store/controllers/cartcontrollers.dart';
 import 'package:ecommerce/features/store/controllers/colorcontroller.dart';
 import 'package:ecommerce/features/store/controllers/wishlistcontroller.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
+import 'package:ecommerce/utils/popups/loader.dart';
 import 'package:ecommerce/widgets/elevatedbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +18,7 @@ class QuickCartScreen extends StatelessWidget {
     final colorController = Get.put(ColorController());
     final specController = Get.put(SpecController());
     final wishlistController = Get.put(WishlistController());
+    final cartController = Get.put(CartControllers());
     final List allColors = productInfo["colors"];
     final List allSpecs = productInfo["specs"] ?? [];
     return SizedBox(
@@ -252,7 +255,6 @@ class QuickCartScreen extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
                             decoration: BoxDecoration(
-                              color: SQColors.softGrey,
                               border: Border.all(
                                 width: 2,
                                 color: specController.selectedSpecIndex.value == index ? SQColors.black : SQColors.borderPrimary,
@@ -295,7 +297,24 @@ class QuickCartScreen extends StatelessWidget {
                 ),
                 Flexible(
                   child: SQElevatedButton(
-                    func: () {},
+                    func: () {
+                      cartController.allCartItems.add({
+                        "cartItemId": UniqueKey(),
+                        "productId": productInfo["productId"],
+                        "image": productInfo["image"],
+                        "productName": productInfo["productName"],
+                        "productPrice": productInfo["productPrice"],
+                        "discountedPrice": productInfo["discountedPrice"],
+                        "discount": productInfo["discount"],
+                        "selectedColors": productInfo["colors"][colorController.selectedColorIndex.value],
+                        "selectedSpecs": allSpecs.isNotEmpty ? productInfo["specs"][specController.selectedSpecIndex.value] : "",
+                      });
+                      SQLoader.sucessSnackBar(
+                        title: "Added to Cart",
+                        message: "${productInfo["productName"]} has been added to the cart.",
+                        duration: 1,
+                      );
+                    },
                     title: "ADD TO CART",
                   ),
                 )
