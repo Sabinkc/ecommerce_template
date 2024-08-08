@@ -54,7 +54,7 @@ class LoginScreen extends StatelessWidget {
                     child: Text(
                       "We're glad to see you again! Let's get started!",
                       style: Theme.of(context).textTheme.labelLarge!.apply(
-                            fontWeightDelta: 2,
+                            fontWeightDelta: 1,
                             fontSizeDelta: 1,
                           ),
                     ),
@@ -105,7 +105,6 @@ class LoginScreen extends StatelessWidget {
                         "Forgot Password?",
                         style: Theme.of(context).textTheme.bodyLarge!.apply(
                               color: SQColors.primary,
-                              fontWeightDelta: 1,
                             ),
                       ),
                     ),
@@ -142,7 +141,6 @@ class LoginScreen extends StatelessWidget {
                           "Register here",
                           style: Theme.of(context).textTheme.bodyLarge!.apply(
                                 color: SQColors.primary,
-                                fontWeightDelta: 1,
                               ),
                         ),
                       )

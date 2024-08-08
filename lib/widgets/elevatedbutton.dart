@@ -26,9 +26,9 @@ class SQElevatedButton extends StatelessWidget {
         ),
         child: Text(
           title,
+          maxLines: 1,
           style: Theme.of(context).textTheme.headlineSmall!.apply(
                 color: Colors.white,
-                letterSpacingDelta: 1,
               ),
         ),
       ),

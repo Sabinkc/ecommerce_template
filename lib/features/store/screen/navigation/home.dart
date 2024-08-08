@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
             child: Text(
               "SysQube",
               style: Theme.of(context).textTheme.headlineSmall!.apply(
-                    fontWeightDelta: 2,
+                    fontWeightDelta: 1,
                   ),
             ),
           ),
@@ -109,7 +109,7 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           const Icon(
                             Iconsax.search_normal_1_outline,
-                            color: SQColors.borderSecondary,
+                            color: SQColors.darkGrey,
                             size: 24,
                           ),
                           const SizedBox(
@@ -298,7 +298,6 @@ class SectionHeading extends StatelessWidget {
           Text(
             headingTitle,
             style: Theme.of(context).textTheme.bodyLarge!.apply(
-                  fontWeightDelta: 2,
                   fontSizeDelta: 1,
                   color: Colors.black,
                 ),
@@ -341,6 +340,7 @@ class ProductContainer extends StatelessWidget {
     final wishlistController = Get.put(WishlistController());
     void onCartClicked() {
       showModalBottomSheet(
+        enableDrag: false,
         isScrollControlled: true,
         context: context,
         builder: (context) => QuickCartScreen(
