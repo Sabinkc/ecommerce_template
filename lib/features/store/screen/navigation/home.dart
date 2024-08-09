@@ -1,14 +1,15 @@
-import 'package:ecommerce/features/store/controllers/wishlistcontroller.dart';
-import 'package:ecommerce/features/store/screen/search.dart';
-import 'package:ecommerce/features/store/screen/widgets/quickcart.dart';
-import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../../controllers/wishlistcontroller.dart';
+import '../../model/functions.dart';
 import '../../model/products.dart';
+import '../search.dart';
+import '../widgets/quickcart.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -148,7 +149,7 @@ class HomeScreen extends StatelessWidget {
                     children: imageLink.map((image) {
                       return Container(
                         width: size.width,
-                        margin: const EdgeInsets.symmetric(horizontal: 4),
+                        margin: const EdgeInsets.symmetric(horizontal: 0),
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.fill,
@@ -250,14 +251,15 @@ class SQGridLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisExtent: 235,
+          mainAxisExtent: size.width * 0.61,
           mainAxisSpacing: 10,
           crossAxisSpacing: 15,
         ),
@@ -265,11 +267,6 @@ class SQGridLayout extends StatelessWidget {
         itemBuilder: (context, index) {
           final product = products[index];
           return ProductContainer(
-            imagelink: product["image"],
-            productTitle: product["productName"],
-            productPrice: product["productPrice"],
-            discountedPrice: product["discountedPrice"],
-            gotDiscount: product["discount"],
             productDetails: product,
           );
         },
@@ -322,16 +319,9 @@ class SectionHeading extends StatelessWidget {
 class ProductContainer extends StatelessWidget {
   const ProductContainer({
     super.key,
-    required this.imagelink,
-    required this.productTitle,
-    required this.productPrice,
-    required this.discountedPrice,
-    required this.gotDiscount,
-    this.productDetails,
+    required this.productDetails,
   });
 
-  final String imagelink, productTitle, productPrice, discountedPrice;
-  final bool gotDiscount;
   final dynamic productDetails;
 
   @override
@@ -359,9 +349,9 @@ class ProductContainer extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: Image.asset(
-                  imagelink,
+                  productDetails["image"],
                   width: size.width,
-                  height: 160,
+                  //height: size.width * 0.4,
                   fit: BoxFit.fill,
                 ),
               ),
@@ -375,7 +365,7 @@ class ProductContainer extends StatelessWidget {
                     icon: Icon(
                       wishlistController.isFav(productDetails["productId"]) ? Iconsax.heart_bold : Iconsax.heart_outline,
                       color: SQColors.primary,
-                      size: 30,
+                      size: 25,
                     ),
                   ),
                 ),
@@ -387,10 +377,10 @@ class ProductContainer extends StatelessWidget {
           ),
           SizedBox(
             child: Padding(
-              padding: const EdgeInsets.only(left: 8, right: 5),
+              padding: const EdgeInsets.only(left: 8, right: 2),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     mainAxisSize: MainAxisSize.min,
@@ -407,11 +397,11 @@ class ProductContainer extends StatelessWidget {
                               ),
                         ),
                       ),
-                      gotDiscount
+                      productDetails["discount"]
                           ? SizedBox(
                               width: size.width * 0.28,
                               child: Text(
-                                "Rs $productPrice",
+                                "Rs ${formatNumber(productDetails["productPrice"])}",
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   decorationThickness: 5,
@@ -424,11 +414,11 @@ class ProductContainer extends StatelessWidget {
                           : const SizedBox(
                               height: SQSizes.xs,
                             ),
-                      gotDiscount
+                      productDetails["discount"]
                           ? SizedBox(
                               width: size.width * 0.28,
                               child: Text(
-                                "Rs $discountedPrice",
+                                "Rs ${formatNumber(productDetails["discountedPrice"])}",
                                 style: Theme.of(context).textTheme.titleSmall!.apply(
                                       color: Colors.red,
                                       fontSizeFactor: 1,
@@ -439,7 +429,7 @@ class ProductContainer extends StatelessWidget {
                           : SizedBox(
                               width: size.width * 0.28,
                               child: Text(
-                                "Rs $productPrice",
+                                "Rs ${formatNumber(productDetails["productPrice"])}",
                                 style: Theme.of(context).textTheme.titleSmall!.apply(
                                       color: Colors.red,
                                       fontWeightDelta: 2,
