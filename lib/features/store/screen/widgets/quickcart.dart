@@ -1,13 +1,15 @@
-import 'package:ecommerce/features/store/controllers/cartcontrollers.dart';
-import 'package:ecommerce/features/store/controllers/colorcontroller.dart';
-import 'package:ecommerce/features/store/controllers/wishlistcontroller.dart';
-import 'package:ecommerce/utils/constants/colors.dart';
-import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/popups/loader.dart';
-import 'package:ecommerce/widgets/elevatedbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
+
+import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../../../../utils/popups/loader.dart';
+import '../../../../widgets/elevatedbutton.dart';
+import '../../controllers/cartcontrollers.dart';
+import '../../controllers/colorcontroller.dart';
+import '../../controllers/wishlistcontroller.dart';
+import '../../model/functions.dart';
 
 class QuickCartScreen extends StatelessWidget {
   const QuickCartScreen({super.key, this.productInfo});
@@ -148,7 +150,7 @@ class QuickCartScreen extends StatelessWidget {
                             ),
                       ),
                       TextSpan(
-                        text: productInfo["discount"] ? productInfo["discountedPrice"] : productInfo["productPrice"],
+                        text: productInfo["discount"] ? formatNumber(productInfo["discountedPrice"]) : formatNumber(productInfo["productPrice"]),
                         style: Theme.of(context).textTheme.headlineSmall!.apply(
                               color: SQColors.primary,
                               fontWeightDelta: 1,
@@ -168,7 +170,7 @@ class QuickCartScreen extends StatelessWidget {
                   width: SQSizes.sm,
                 ),
                 Text(
-                  productInfo["discount"] ? productInfo["productPrice"] : "",
+                  productInfo["discount"] ? formatNumber(productInfo["productPrice"]) : "",
                   style: const TextStyle(
                     decorationThickness: 5,
                     fontSize: 15,
@@ -287,7 +289,7 @@ class QuickCartScreen extends StatelessWidget {
                     },
                     icon: Icon(
                       wishlistController.isFav(productInfo["productId"]) ? Iconsax.heart_bold : Iconsax.heart_outline,
-                      color: Colors.red,
+                      color: SQColors.primary,
                       size: 30,
                     ),
                   ),
@@ -298,8 +300,9 @@ class QuickCartScreen extends StatelessWidget {
                 Flexible(
                   child: SQElevatedButton(
                     func: () {
+                      String cartId = UniqueKey().toString();
                       cartController.allCartItems.add({
-                        "cartItemId": UniqueKey(),
+                        "cartItemId": cartId,
                         "productId": productInfo["productId"],
                         "image": productInfo["image"],
                         "productName": productInfo["productName"],
@@ -308,7 +311,11 @@ class QuickCartScreen extends StatelessWidget {
                         "discount": productInfo["discount"],
                         "selectedColors": productInfo["colors"][colorController.selectedColorIndex.value],
                         "selectedSpecs": allSpecs.isNotEmpty ? productInfo["specs"][specController.selectedSpecIndex.value] : "",
+                        "itemQuantity": 1,
                       });
+                      cartController.selectItems(cartId);
+                      colorController.chageSelectedColorIndex(0);
+                      specController.chageSelectedSpecIndex(0);
                       SQLoader.sucessSnackBar(
                         title: "Added to Cart",
                         message: "${productInfo["productName"]} has been added to the cart.",

@@ -1,13 +1,16 @@
-import 'package:ecommerce/features/store/controllers/cartcontrollers.dart';
-import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/popups/loader.dart';
-import 'package:ecommerce/widgets/elevatedbutton.dart';
+import 'package:ecommerce/features/store/model/products.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../../../../utils/popups/loader.dart';
+import '../../../../widgets/elevatedbutton.dart';
+import '../../controllers/cartcontrollers.dart';
 import '../../controllers/wishlistcontroller.dart';
+import '../../model/functions.dart';
+import 'home.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -16,12 +19,6 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final cartControllers = Get.put(CartControllers());
-    String formatNumber(num value) {
-      return value.toString().replaceAllMapped(
-            RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
-            (Match match) => '${match[1]},',
-          );
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -178,6 +175,7 @@ class CartScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -186,18 +184,80 @@ class CartScreen extends StatelessWidget {
                 height: SQSizes.sml,
               ),
               Obx(
-                () => ListView(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: cartControllers.allCartItems
-                      .map(
-                        (items) => CartItemContainer(cartItemDetails: items),
+                () => cartControllers.allCartItems.isNotEmpty
+                    ? ListView(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: cartControllers.allCartItems
+                            .map(
+                              (items) => CartItemContainer(cartItemDetails: items),
+                            )
+                            .toList(),
                       )
-                      .toList(),
-                ),
+                    : Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              EvaIcons.shopping_cart_outline,
+                              size: 80,
+                            ),
+                            const SizedBox(
+                              height: SQSizes.sml,
+                            ),
+                            Text(
+                              "Your Cart is Empty.",
+                              style: Theme.of(context).textTheme.headlineSmall,
+                            ),
+                            const SizedBox(
+                              height: SQSizes.xs,
+                            ),
+                            Text(
+                              "Please add a few items.",
+                              style: Theme.of(context).textTheme.headlineSmall,
+                            ),
+                          ],
+                        ),
+                      ),
               ),
               const SizedBox(
-                height: 200,
+                height: SQSizes.sml,
+              ),
+              const Divider(),
+              const SizedBox(
+                height: SQSizes.sm,
+              ),
+              const Align(
+                alignment: Alignment.center,
+                child: Text("You might like to fill it with"),
+              ),
+              const SizedBox(
+                height: SQSizes.md,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: Center(
+                  child: Wrap(
+                    spacing: 20,
+                    runSpacing: 15,
+                    children: products.map((entry) {
+                      return ProductContainer(
+                        productDetails: entry,
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+              Obx(
+                () => cartControllers.selectedCartItems.isNotEmpty
+                    ? const SizedBox(
+                        height: 180,
+                      )
+                    : const SizedBox(
+                        height: SQSizes.md,
+                      ),
               ),
             ],
           ),
@@ -306,7 +366,7 @@ class CartItemContainer extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              "Rs ${cartItemDetails["discount"] ? cartItemDetails["discountedPrice"] : cartItemDetails["productPrice"]}",
+                              "Rs ${cartItemDetails["discount"] ? formatNumber(cartItemDetails["discountedPrice"]) : formatNumber(cartItemDetails["productPrice"])}",
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                             const SizedBox(
@@ -314,7 +374,7 @@ class CartItemContainer extends StatelessWidget {
                             ),
                             Flexible(
                               child: Text(
-                                cartItemDetails["discount"] ? cartItemDetails["productPrice"] : "",
+                                cartItemDetails["discount"] ? formatNumber(cartItemDetails["productPrice"]) : "",
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   decorationThickness: 5,
@@ -380,8 +440,7 @@ class CartItemContainer extends StatelessWidget {
                             ),
                             const Spacer(),
                             InkWell(
-                              onLongPress: () => cartControllers.quantity.value = 0,
-                              onTap: () => cartControllers.removeQuantity(),
+                              onTap: () => cartControllers.decrementItemQuantity(cartItemDetails["cartItemId"]),
                               child: Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(),
@@ -397,7 +456,7 @@ class CartItemContainer extends StatelessWidget {
                             ),
                             Obx(
                               () => Text(
-                                "${cartControllers.quantity.value}",
+                                "${cartControllers.getItemQuantity(cartItemDetails["cartItemId"])}",
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
                             ),
@@ -405,8 +464,7 @@ class CartItemContainer extends StatelessWidget {
                               width: SQSizes.sml,
                             ),
                             InkWell(
-                              onLongPress: () => cartControllers.quantity.value += 5,
-                              onTap: () => cartControllers.addQuantity(),
+                              onTap: () => cartControllers.incrementItemQuantity(cartItemDetails["cartItemId"]),
                               child: Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(),
@@ -444,9 +502,9 @@ class CartItemContainer extends StatelessWidget {
                   type: GFCheckboxType.custom,
                   customBgColor: SQColors.primary,
                   onChanged: (value) {
-                    cartControllers.selectItems(cartItemDetails["cartItemId"].toString());
+                    cartControllers.selectItems(cartItemDetails["cartItemId"]);
                   },
-                  value: cartControllers.isSelected(cartItemDetails["cartItemId"].toString()),
+                  value: cartControllers.isSelected(cartItemDetails["cartItemId"]),
                 ),
               ),
             ),
@@ -456,7 +514,7 @@ class CartItemContainer extends StatelessWidget {
             left: 0,
             child: IconButton(
               onPressed: () {
-                cartControllers.removeItemFromCart(cartItemDetails["cartItemId"].toString());
+                cartControllers.removeItemFromCart(cartItemDetails["cartItemId"]);
                 SQLoader.warningSnackBar(
                   title: "Removed from Cart",
                   message: "An Item has been removed from the cart.",

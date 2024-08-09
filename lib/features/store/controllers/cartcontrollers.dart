@@ -5,7 +5,6 @@ class CartControllers extends GetxController {
   RxList allCartItems = <Map<String, dynamic>>[].obs;
   RxBool selectAll = false.obs;
   RxList selectedCartItems = [].obs;
-  RxInt quantity = 1.obs;
 
   bool isSelected(String id) {
     return selectedCartItems.contains(id);
@@ -17,38 +16,69 @@ class CartControllers extends GetxController {
   }
 
   void selectAllItems() {
-    if (!selectAll.value) {
-      selectedCartItems.value = allCartItems.map((item) => item["cartItemId"].toString()).toList();
-      selectAll.value = true;
-    } else {
-      selectedCartItems.clear();
-      selectAll.value = false;
-    }
+    selectedCartItems.length == allCartItems.length ? selectedCartItems.clear() : selectedCartItems.value = allCartItems.map((item) => item["cartItemId"]).toList();
+    selectAllValue();
+  }
+
+  void selectAllValue() {
+    allCartItems.isNotEmpty
+        ? selectedCartItems.length == allCartItems.length
+            ? selectAll.value = true
+            : selectAll.value = false
+        : selectAll.value = false;
   }
 
   void removeItemFromCart(String cartItemId) {
     selectedCartItems.remove(cartItemId);
-    allCartItems.removeWhere((item) => item["cartItemId"].toString() == cartItemId);
+    allCartItems.removeWhere((item) => item["cartItemId"] == cartItemId);
+    selectAllValue();
+  }
+
+  int getItemQuantity(String cartId) {
+    for (var cartItem in allCartItems) {
+      if (cartItem["cartItemId"] == cartId) {
+        return cartItem["itemQuantity"];
+      }
+    }
+    return 0;
+  }
+
+  void incrementItemQuantity(String cartId) {
+    for (var cartItem in allCartItems) {
+      if (cartItem["cartItemId"] == cartId) {
+        cartItem["itemQuantity"] += 1;
+
+        break;
+      }
+    }
+    allCartItems.refresh();
+  }
+
+  void decrementItemQuantity(String cartId) {
+    for (var cartItem in allCartItems) {
+      if (cartItem["cartItemId"] == cartId) {
+        if (cartItem["itemQuantity"] > 1) {
+          cartItem["itemQuantity"] -= 1;
+        }
+        break;
+      }
+    }
+    allCartItems.refresh();
   }
 
   int calculateTotalPrice() {
     int totalPrice = 0;
 
     for (var item in allCartItems) {
-      if (selectedCartItems.contains(item["cartItemId"].toString())) {
-        int price = item["discount"] ? int.parse(item["discountedPrice"].replaceAll(',', '')) : int.parse(item["productPrice"].replaceAll(',', ''));
+      if (selectedCartItems.contains(item["cartItemId"])) {
+        int discountprice = item["discountedPrice"];
+        int productPrice = item["productPrice"];
+        int itemQuantity = item["itemQuantity"];
+        int price = item["discount"] ? discountprice * itemQuantity : productPrice * itemQuantity;
         totalPrice += price;
       }
     }
 
     return totalPrice;
-  }
-
-  void addQuantity() {
-    quantity.value += 1;
-  }
-
-  void removeQuantity() {
-    quantity.value <= 1 ? quantity.value = 1 : quantity.value -= 1;
   }
 }

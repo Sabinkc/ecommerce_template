@@ -5,8 +5,8 @@ final List products = [
     "productId": "Acer1",
     "image": "assets/images/laptop.jpg",
     "productName": "Acer Nitro",
-    "productPrice": "130,000",
-    "discountedPrice": "110,000",
+    "productPrice": 130000,
+    "discountedPrice": 110000,
     "discount": true,
     "colors": [
       Colors.grey,
@@ -18,8 +18,8 @@ final List products = [
     "productId": "Ghock1",
     "image": "assets/images/watch.jpg",
     "productName": "G-Shock",
-    "productPrice": "10,000",
-    "discountedPrice": "0",
+    "productPrice": 10000,
+    "discountedPrice": 0,
     "discount": false,
     "colors": [
       Colors.red,
@@ -31,8 +31,8 @@ final List products = [
     "productId": "Case1",
     "image": "assets/images/phonecase.jpg",
     "productName": "Iphone Case",
-    "productPrice": "1,054",
-    "discountedPrice": "0",
+    "productPrice": 1054,
+    "discountedPrice": 0,
     "discount": false,
     "colors": [
       Colors.blue,
@@ -54,8 +54,8 @@ final List products = [
     "productId": "Headphone1",
     "image": "assets/images/headphone.jpg",
     "productName": "HeadPhone",
-    "productPrice": "1,100",
-    "discountedPrice": "1,000",
+    "productPrice": 1100,
+    "discountedPrice": 1000,
     "discount": true,
     "colors": [
       Colors.red,
