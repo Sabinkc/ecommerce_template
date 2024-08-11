@@ -30,7 +30,7 @@ class ImageCarousel extends StatelessWidget {
                 width: size.width,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    fit: BoxFit.contain,
+                    fit: BoxFit.cover,
                     image: AssetImage(image),
                   ),
                 ),
