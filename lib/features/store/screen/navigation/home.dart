@@ -1,3 +1,5 @@
+import 'package:ecommerce/features/store/controllers/imagecarouselcontroller.dart';
+import 'package:ecommerce/features/store/screen/productdetails.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -9,7 +11,6 @@ import '../../controllers/wishlistcontroller.dart';
 import '../../model/functions.dart';
 import '../../model/products.dart';
 import '../search.dart';
-import '../widgets/quickcart.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,13 +18,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final imageController = PageController();
+    final imageController = Get.put(ImageCarouselController());
 
-    final List<String> imageLink = [
-      "assets/images/HeadPhoneBanner.jpg",
-      "assets/images/iPhoneBanner.jpg",
-      "assets/images/HeadPhoneBanner.jpg",
-    ];
     final List categories = [
       {
         "image": "assets/images/headphonecat.jpg",
@@ -143,10 +139,10 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: size.width * 0.5,
                   child: PageView(
-                    controller: imageController,
+                    controller: imageController.pageController,
                     physics: const ClampingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
-                    children: imageLink.map((image) {
+                    children: imageController.imageLink.map((image) {
                       return Container(
                         width: size.width,
                         margin: const EdgeInsets.symmetric(horizontal: 0),
@@ -164,7 +160,7 @@ class HomeScreen extends StatelessWidget {
                   height: SQSizes.sml,
                 ),
                 SmoothPageIndicator(
-                  controller: imageController,
+                  controller: imageController.pageController,
                   count: 3,
                   effect: const WormEffect(
                     activeDotColor: SQColors.primary,
@@ -328,142 +324,142 @@ class ProductContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final wishlistController = Get.put(WishlistController());
-    void onCartClicked() {
-      showModalBottomSheet(
-        enableDrag: false,
-        isScrollControlled: true,
-        context: context,
-        builder: (context) => QuickCartScreen(
-          productInfo: productDetails,
-        ),
-      );
-    }
 
-    return SizedBox(
-      width: size.width * 0.4,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: Image.asset(
-                  productDetails["image"],
-                  width: size.width,
-                  //height: size.width * 0.4,
-                  fit: BoxFit.fill,
-                ),
-              ),
-              Positioned(
-                right: 0,
-                child: Obx(
-                  () => IconButton(
-                    onPressed: () {
-                      wishlistController.addToWishList(productDetails["productId"]);
-                    },
-                    icon: Icon(
-                      wishlistController.isFav(productDetails["productId"]) ? Iconsax.heart_bold : Iconsax.heart_outline,
-                      color: SQColors.primary,
-                      size: 25,
-                    ),
+    return InkWell(
+      overlayColor: WidgetStateColor.transparent,
+      onTap: () {
+        Get.to(
+          () => ProductDetailsScreen(productDetails: productDetails),
+        );
+      },
+      child: SizedBox(
+        width: size.width * 0.4,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: Image.asset(
+                    productDetails["image"][0],
+                    width: size.width,
+                    //height: size.width * 0.4,
+                    fit: BoxFit.fill,
                   ),
                 ),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: SQSizes.xs,
-          ),
-          SizedBox(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8, right: 2),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: size.width * 0.28,
-                        child: Text(
-                          productDetails["productName"],
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.titleMedium!.apply(
-                                color: Colors.black,
-                                fontWeightDelta: 1,
-                              ),
-                        ),
+                Positioned(
+                  right: 0,
+                  child: Obx(
+                    () => IconButton(
+                      onPressed: () {
+                        wishlistController.addToWishList(productDetails["productId"]);
+                      },
+                      icon: Icon(
+                        wishlistController.isFav(productDetails["productId"]) ? Iconsax.heart_bold : Iconsax.heart_outline,
+                        color: SQColors.primary,
+                        size: 25,
                       ),
-                      productDetails["discount"]
-                          ? SizedBox(
-                              width: size.width * 0.28,
-                              child: Text(
-                                "Rs ${formatNumber(productDetails["productPrice"])}",
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  decorationThickness: 5,
-                                  fontSize: 13,
-                                  color: SQColors.darkerGrey,
-                                  decoration: TextDecoration.lineThrough,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: SQSizes.xs,
+            ),
+            SizedBox(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8, right: 2),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: size.width * 0.28,
+                          child: Text(
+                            productDetails["productName"],
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.titleMedium!.apply(
+                                  color: Colors.black,
+                                  fontWeightDelta: 1,
+                                ),
+                          ),
+                        ),
+                        productDetails["discount"]
+                            ? SizedBox(
+                                width: size.width * 0.28,
+                                child: Text(
+                                  "Rs ${formatNumber(productDetails["productPrice"])}",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    decorationThickness: 5,
+                                    fontSize: 13,
+                                    color: SQColors.darkerGrey,
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                ),
+                              )
+                            : const SizedBox(
+                                height: SQSizes.xs,
+                              ),
+                        productDetails["discount"]
+                            ? SizedBox(
+                                width: size.width * 0.28,
+                                child: Text(
+                                  "Rs ${formatNumber(productDetails["discountedPrice"])}",
+                                  style: Theme.of(context).textTheme.titleSmall!.apply(
+                                        color: Colors.red,
+                                        fontSizeFactor: 1,
+                                        fontWeightDelta: 1,
+                                      ),
+                                ),
+                              )
+                            : SizedBox(
+                                width: size.width * 0.28,
+                                child: Text(
+                                  "Rs ${formatNumber(productDetails["productPrice"])}",
+                                  style: Theme.of(context).textTheme.titleSmall!.apply(
+                                        color: Colors.red,
+                                        fontWeightDelta: 2,
+                                        fontSizeFactor: 1,
+                                      ),
                                 ),
                               ),
-                            )
-                          : const SizedBox(
-                              height: SQSizes.xs,
-                            ),
-                      productDetails["discount"]
-                          ? SizedBox(
-                              width: size.width * 0.28,
-                              child: Text(
-                                "Rs ${formatNumber(productDetails["discountedPrice"])}",
-                                style: Theme.of(context).textTheme.titleSmall!.apply(
-                                      color: Colors.red,
-                                      fontSizeFactor: 1,
-                                      fontWeightDelta: 1,
-                                    ),
-                              ),
-                            )
-                          : SizedBox(
-                              width: size.width * 0.28,
-                              child: Text(
-                                "Rs ${formatNumber(productDetails["productPrice"])}",
-                                style: Theme.of(context).textTheme.titleSmall!.apply(
-                                      color: Colors.red,
-                                      fontWeightDelta: 2,
-                                      fontSizeFactor: 1,
-                                    ),
-                              ),
-                            ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 35,
-                    height: 35,
-                    child: IconButton(
-                      onPressed: onCartClicked,
-                      style: IconButton.styleFrom(
-                        side: const BorderSide(
-                          width: 2,
-                          color: SQColors.borderSecondary,
+                      ],
+                    ),
+                    SizedBox(
+                      width: 35,
+                      height: 35,
+                      child: IconButton(
+                        onPressed: () {
+                          onCartClicked(productDetails);
+                        },
+                        style: IconButton.styleFrom(
+                          side: const BorderSide(
+                            width: 2,
+                            color: SQColors.borderSecondary,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                        icon: const Icon(
+                          Icons.add_shopping_cart_outlined,
+                          size: 20,
                         ),
-                      ),
-                      icon: const Icon(
-                        Icons.add_shopping_cart_outlined,
-                        size: 20,
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
