@@ -7,9 +7,10 @@ import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/popups/loader.dart';
 import '../../../../widgets/elevatedbutton.dart';
 import '../../controllers/cartcontrollers.dart';
-import '../../controllers/colorcontroller.dart';
+import '../../controllers/quickcartcontrollers.dart';
 import '../../controllers/wishlistcontroller.dart';
 import '../../model/functions.dart';
+import '../productdetails.dart';
 
 class QuickCartScreen extends StatelessWidget {
   const QuickCartScreen({super.key, this.productInfo});
@@ -17,10 +18,11 @@ class QuickCartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final colorController = Get.put(ColorController());
-    final specController = Get.put(SpecController());
+
+    final quickcartControllers = Get.put(QuickCartControllers());
     final wishlistController = Get.put(WishlistController());
     final cartController = Get.put(CartControllers());
+    final List allImages = productInfo["image"];
     final List allColors = productInfo["colors"];
     final List allSpecs = productInfo["specs"] ?? [];
     return SizedBox(
@@ -36,8 +38,9 @@ class QuickCartScreen extends StatelessWidget {
               child: IconButton(
                 onPressed: () {
                   Get.back();
-                  colorController.chageSelectedColorIndex(0);
-                  specController.chageSelectedSpecIndex(0);
+                  quickcartControllers.changeSelectedColorIndex(0);
+                  quickcartControllers.changeSelectedSpecIndex(0);
+                  quickcartControllers.quantity(1);
                 },
                 icon: const Icon(
                   Iconsax.close_circle_outline,
@@ -54,53 +57,23 @@ class QuickCartScreen extends StatelessWidget {
                 physics: const ClampingScrollPhysics(),
                 controller: PageController(),
                 scrollDirection: Axis.horizontal,
-                children: [
-                  Container(
-                    width: size.width * 0.4,
-                    height: size.height * 0.25,
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(
-                          productInfo["image"],
+                children: allImages
+                    .map(
+                      (image) => Container(
+                        width: size.width * 0.4,
+                        height: size.height * 0.25,
+                        margin: const EdgeInsets.only(right: SQSizes.sml),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage(
+                              image,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: SQSizes.sml,
-                  ),
-                  Container(
-                    width: size.width * 0.4,
-                    height: size.height * 0.25,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(
-                          productInfo["image"],
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: SQSizes.sml,
-                  ),
-                  Container(
-                    width: size.width * 0.4,
-                    height: size.height * 0.25,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(
-                          productInfo["image"],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                    )
+                    .toList(),
               ),
             ),
             const SizedBox(
@@ -122,7 +95,13 @@ class QuickCartScreen extends StatelessWidget {
                   width: SQSizes.sm,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(
+                      () => ProductDetailsScreen(
+                        productDetails: productInfo,
+                      ),
+                    );
+                  },
                   child: Text(
                     "View Details",
                     style: Theme.of(context).textTheme.labelLarge!.apply(
@@ -202,7 +181,7 @@ class QuickCartScreen extends StatelessWidget {
                 return Obx(
                   () => InkWell(
                     overlayColor: WidgetStateColor.transparent,
-                    onTap: () => colorController.chageSelectedColorIndex(index),
+                    onTap: () => quickcartControllers.changeSelectedColorIndex(index),
                     child: Container(
                       width: 35,
                       height: 35,
@@ -210,7 +189,7 @@ class QuickCartScreen extends StatelessWidget {
                         border: Border.all(
                           strokeAlign: BorderSide.strokeAlignOutside,
                           width: 2,
-                          color: colorController.selectedColorIndex.value == index ? color : Colors.transparent,
+                          color: quickcartControllers.selectedColorIndex.value == index ? color : Colors.transparent,
                         ),
                         shape: BoxShape.circle,
                       ),
@@ -252,14 +231,14 @@ class QuickCartScreen extends StatelessWidget {
                         () => InkWell(
                           overlayColor: WidgetStateColor.transparent,
                           onTap: () {
-                            specController.selectedSpecIndex(index);
+                            quickcartControllers.changeSelectedSpecIndex(index);
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
                             decoration: BoxDecoration(
                               border: Border.all(
                                 width: 2,
-                                color: specController.selectedSpecIndex.value == index ? SQColors.black : SQColors.borderPrimary,
+                                color: quickcartControllers.selectedSpecIndex.value == index ? SQColors.black : SQColors.borderPrimary,
                               ),
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -276,6 +255,58 @@ class QuickCartScreen extends StatelessWidget {
                     }).toList(),
                   )
                 : const SizedBox.shrink(),
+            const SizedBox(
+              height: SQSizes.md,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "Quantity: ",
+                  style: Theme.of(context).textTheme.titleMedium!.apply(
+                        color: Colors.black,
+                        fontWeightDelta: 2,
+                      ),
+                ),
+                const Spacer(),
+                InkWell(
+                  onTap: () => quickcartControllers.removeQuantity(),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: const Icon(
+                      Iconsax.minus_outline,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: SQSizes.sml,
+                ),
+                Obx(
+                  () => Text(
+                    "${quickcartControllers.quantity.value}",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
+                const SizedBox(
+                  width: SQSizes.sml,
+                ),
+                InkWell(
+                  onTap: () => quickcartControllers.addQuantity(),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: const Icon(
+                      Iconsax.add_outline,
+                    ),
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(
               height: SQSizes.spaceBtwSections,
             ),
@@ -309,16 +340,17 @@ class QuickCartScreen extends StatelessWidget {
                         "productPrice": productInfo["productPrice"],
                         "discountedPrice": productInfo["discountedPrice"],
                         "discount": productInfo["discount"],
-                        "selectedColors": productInfo["colors"][colorController.selectedColorIndex.value],
-                        "selectedSpecs": allSpecs.isNotEmpty ? productInfo["specs"][specController.selectedSpecIndex.value] : "",
-                        "itemQuantity": 1,
+                        "selectedColors": productInfo["colors"][quickcartControllers.selectedColorIndex.value],
+                        "selectedSpecs": allSpecs.isNotEmpty ? productInfo["specs"][quickcartControllers.selectedSpecIndex.value] : "",
+                        "itemQuantity": quickcartControllers.quantity.value,
                       });
                       cartController.selectItems(cartId);
-                      colorController.chageSelectedColorIndex(0);
-                      specController.chageSelectedSpecIndex(0);
+                      quickcartControllers.changeSelectedColorIndex(0);
+                      quickcartControllers.changeSelectedSpecIndex(0);
+                      quickcartControllers.quantity(1);
                       SQLoader.sucessSnackBar(
                         title: "Added to Cart",
-                        message: "${productInfo["productName"]} has been added to the cart.",
+                        message: "An item has been added to the cart.",
                         duration: 1,
                       );
                     },
