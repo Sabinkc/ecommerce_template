@@ -336,7 +336,7 @@ class CartItemContainer extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Image.asset(
-                  cartItemDetails["image"],
+                  cartItemDetails["image"][0],
                   width: 150,
                   height: 160,
                   fit: BoxFit.cover,
