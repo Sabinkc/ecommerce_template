@@ -2,38 +2,79 @@ import 'package:flutter/material.dart';
 
 final List products = [
   {
-    "productId": "Acer1",
-    "image": "assets/images/laptop.jpg",
-    "productName": "Acer Nitro",
+    "productId": "Lenovo",
+    "image": [
+      "assets/images/laptop.jpg",
+      "assets/images/laptop_1.jpg",
+      "assets/images/laptop.jpg",
+    ],
+    "productName": "Lenovo Ideapad 1 15lGL7 11thGen Intel Celeron N4020 8GB DDR4 RAM 256GB SSD 15.6 HD Display",
+    "category": "Laptop",
     "productPrice": 130000,
     "discountedPrice": 110000,
     "discount": true,
+    "desc": "The slim and light Lenovo IdeaPad 3i laptop packs powerful 12th generation Intel Core i5 U series processors and Intel Iris Xe graphics card.Voltage:3.7 volts.",
     "colors": [
       Colors.grey,
       Colors.black,
     ],
+    "specifications": {
+      "Brand": "Lenovo",
+      "Display Size": "15.4 inch",
+      "CPU Cores": "Dual Core",
+      "Operating System": "Windows",
+      "Graphic Card": "Integrated",
+    },
     "specs": ["4GB / 64GB", "6GB / 128GB", "8GB / 256GB", "16GB / 512GB"]
   },
   {
     "productId": "Ghock1",
-    "image": "assets/images/watch.jpg",
-    "productName": "G-Shock",
+    "image": [
+      "assets/images/watch.jpg",
+      "assets/images/watch.jpg",
+      "assets/images/watch.jpg",
+    ],
+    "productName": "Casio GM-2100-1AJF G-Shock Men's Watch",
+    "category": "Watch",
     "productPrice": 10000,
     "discountedPrice": 0,
     "discount": false,
+    "desc": "Casio GM-2100-1AJF G-Shock Men's Watch, Metal Cover, Black",
     "colors": [
       Colors.red,
       Colors.grey,
       Colors.black,
     ],
+    "specifications": {
+      "Brand": "Casio",
+      "Model number": "GA2100",
+      "Item Shape": "Round",
+      "Dial window material type": "Mineral",
+      "Display Type": "Analog",
+      "Clasp": "Buckle",
+      "Case material": "Resin",
+      "Case Size": "48.5 x 45.4 x 11.8 mm",
+      "Band Material": "Resin",
+      "Band length": "Men's Standard",
+      "Calendar": "Day and date",
+      "Movement": "Japanese Quartz",
+      "Water resistant depth": "200 Meters"
+    },
   },
   {
     "productId": "Case1",
-    "image": "assets/images/phonecase.jpg",
-    "productName": "Iphone Case",
+    "image": [
+      "assets/images/phonecase.jpg",
+      "assets/images/phonecase_1.jpg",
+      "assets/images/phonecase_2.jpg",
+    ],
+    "productName": "Benks ArmorPro Case for iPhone 15 Pro Max 600D Aramid Fiber Cover",
+    "category": "Phone Case",
     "productPrice": 1054,
     "discountedPrice": 0,
     "discount": false,
+    "desc":
+        "Made with 600D DuPont™ Kevlar® fiber, Benks ArmorPro Case offers robust protection and minimalistic style for your iPhone 15 Pro Max MagSafe, Compatible Ultra-Slim, Minimalist, Design Easily, Detachable Durable and Robust Minimalist Style. It is sleek and elegant.- Buttons and lens frame color blends in well with the new iPhone natural. Titanium color- Has a dedicated action button (with a orange accent that matches the Ultra iWatch)- Cut outs are large and easy to access-&nbsp; actually provide drop data, and use real kevlar. The back looks and feels luxurious, and it is very smooth, but grippy.- Easy to clean, very few places for anything to accumulate, and no hard to reach corners when disinfecting- Slim, slender, thin but protective, and light.",
     "colors": [
       Colors.blue,
       Colors.grey,
@@ -52,11 +93,18 @@ final List products = [
   },
   {
     "productId": "Headphone1",
-    "image": "assets/images/headphone.jpg",
+    "image": [
+      "assets/images/headphone.jpg",
+      "assets/images/headphone.jpg",
+      "assets/images/headphone.jpg",
+    ],
     "productName": "HeadPhone",
+    "category": "headphone",
     "productPrice": 1100,
     "discountedPrice": 1000,
     "discount": true,
+    "desc":
+        "What's in the box: Beats Studio3 Wireless headphones, Carrying case, 3.5mm RemoteTalk cable, Universal USB charging cable, Quick Start Guide, Warranty Card (USB power adapter sold separately)",
     "colors": [
       Colors.red,
       Colors.blue,
@@ -64,5 +112,18 @@ final List products = [
       Colors.black,
       Colors.orange,
     ],
+    "specifications": {
+      " Model": "MWC Firo (MH01B)",
+      "Chip": "Jieli 6956",
+      "Battery Capacity": "300mAh",
+      "Stand-by Time": "300h",
+      "Play music": "12h",
+      "Charging Time": "2h",
+      "Size": "W 17.4cm * L 18.4cm H 4.6cm",
+      "Frequency Rage": "2.402MHz-2.480MHz",
+      "Charging Voltage": "DC5V 300MA",
+      "Ambient Temperature": "-20℃/+60℃",
+      "Transmission Distance": "10m",
+    },
   },
 ];
