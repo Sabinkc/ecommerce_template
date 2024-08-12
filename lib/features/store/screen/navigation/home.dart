@@ -409,14 +409,17 @@ class ProductContainer extends StatelessWidget {
                                   width: SQSizes.xs,
                                 ),
                                 productDetails["discount"]
-                                    ? Text(
-                                        "Rs ${formatNumber(productDetails["productPrice"])}",
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                          decorationThickness: 5,
-                                          fontSize: 10,
-                                          color: SQColors.darkerGrey,
-                                          decoration: TextDecoration.lineThrough,
+                                    ? Flexible(
+                                        child: Text(
+                                          "Rs ${formatNumber(productDetails["productPrice"])}",
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            overflow: TextOverflow.ellipsis,
+                                            decorationThickness: 5,
+                                            fontSize: 9,
+                                            color: SQColors.darkerGrey,
+                                            decoration: TextDecoration.lineThrough,
+                                          ),
                                         ),
                                       )
                                     : const SizedBox(
