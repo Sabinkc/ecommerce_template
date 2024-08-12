@@ -367,7 +367,44 @@ class ProductContainer extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
+                productDetails["discount"]
+                    ? Positioned(
+                        left: 0,
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: SQColors.primary,
+                          ),
+                          child: Text(
+                            "12% off",
+                            style: Theme.of(context).textTheme.labelMedium!.apply(
+                                  color: Colors.white,
+                                ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+                productDetails["discount"]
+                    ? const SizedBox.shrink()
+                    : Positioned(
+                        left: 0,
+                        bottom: 0,
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2),
+                            color: SQColors.primary,
+                          ),
+                          child: Text(
+                            "12% off",
+                            style: Theme.of(context).textTheme.labelMedium!.apply(
+                                  color: Colors.white,
+                                ),
+                          ),
+                        ),
+                      ),
               ],
             ),
             const SizedBox(
@@ -393,6 +430,9 @@ class ProductContainer extends StatelessWidget {
                                     color: Colors.black,
                                   ),
                             ),
+                            const SizedBox(
+                              height: SQSizes.xs,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.end,
@@ -402,29 +442,44 @@ class ProductContainer extends StatelessWidget {
                                   style: Theme.of(context).textTheme.bodySmall!.apply(
                                         color: Colors.red,
                                         fontSizeFactor: 1,
-                                        fontWeightDelta: 1,
+                                        fontWeightDelta: 2,
                                       ),
                                 ),
                                 const SizedBox(
-                                  width: SQSizes.xs,
+                                  width: SQSizes.sm,
                                 ),
                                 productDetails["discount"]
-                                    ? Flexible(
+                                    ? Container(
+                                        padding: const EdgeInsets.all(2),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(5),
+                                          color: const Color.fromARGB(108, 255, 182, 72),
+                                        ),
                                         child: Text(
-                                          "Rs ${formatNumber(productDetails["productPrice"])}",
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                            overflow: TextOverflow.ellipsis,
-                                            decorationThickness: 5,
-                                            fontSize: 9,
-                                            color: SQColors.darkerGrey,
-                                            decoration: TextDecoration.lineThrough,
-                                          ),
+                                          "-12%",
+                                          style: Theme.of(context).textTheme.labelMedium!.apply(
+                                                color: Colors.red,
+                                              ),
                                         ),
                                       )
-                                    : const SizedBox(
-                                        height: SQSizes.xs,
-                                      ),
+                                    : const SizedBox.shrink(),
+                                // productDetails["discount"]
+                                //     ? Flexible(
+                                //         child: Text(
+                                //           "Rs ${formatNumber(productDetails["productPrice"])}",
+                                //           overflow: TextOverflow.ellipsis,
+                                //           style: const TextStyle(
+                                //             overflow: TextOverflow.ellipsis,
+                                //             decorationThickness: 5,
+                                //             fontSize: 9,
+                                //             color: SQColors.darkerGrey,
+                                //             decoration: TextDecoration.lineThrough,
+                                //           ),
+                                //         ),
+                                //       )
+                                //     : const SizedBox(
+                                //         height: SQSizes.xs,
+                                //       ),
                               ],
                             ),
                           ],
