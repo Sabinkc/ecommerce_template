@@ -1,5 +1,6 @@
 import 'package:ecommerce/features/store/controllers/imagecarouselcontroller.dart';
 import 'package:ecommerce/features/store/screen/productdetails.dart';
+import 'package:ecommerce/features/store/screen/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -57,7 +58,7 @@ class HomeScreen extends StatelessWidget {
           centerTitle: false,
           automaticallyImplyLeading: false,
           title: Padding(
-            padding: const EdgeInsets.only(left: 15.0),
+            padding: const EdgeInsets.only(left: 10.0),
             child: Text(
               "SysQube",
               style: Theme.of(context).textTheme.headlineSmall!.apply(
@@ -70,10 +71,14 @@ class HomeScreen extends StatelessWidget {
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: 15.0),
+              padding: const EdgeInsets.only(right: 10.0),
               child: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.shopping_cart_outlined),
+                onPressed: () {
+                  Get.to(
+                    () => const WishListScreen(),
+                  );
+                },
+                icon: const Icon(Iconsax.heart_outline),
               ),
             ),
           ],
@@ -86,7 +91,7 @@ class HomeScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                   child: InkWell(
                     onTap: () {
                       Get.to(() => const SearchScreen(), transition: Transition.rightToLeft);
@@ -180,7 +185,7 @@ class HomeScreen extends StatelessWidget {
                   height: SQSizes.md,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: SizedBox(
                     height: size.width * 0.22,
                     child: ListView.builder(
@@ -249,15 +254,15 @@ class SQGridLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisExtent: size.width * 0.61,
+          mainAxisExtent: size.width * 0.6,
           mainAxisSpacing: 10,
-          crossAxisSpacing: 15,
+          crossAxisSpacing: 10,
         ),
         itemCount: products.length,
         itemBuilder: (context, index) {
@@ -284,7 +289,7 @@ class SectionHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -333,7 +338,7 @@ class ProductContainer extends StatelessWidget {
         );
       },
       child: SizedBox(
-        width: size.width * 0.4,
+        width: size.width * 0.41,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -366,93 +371,77 @@ class ProductContainer extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: SQSizes.xs,
+              height: SQSizes.sm,
             ),
             SizedBox(
               child: Padding(
                 padding: const EdgeInsets.only(left: 8, right: 2),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: size.width * 0.28,
-                          child: Text(
-                            productDetails["productName"],
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.titleMedium!.apply(
-                                  color: Colors.black,
-                                  fontWeightDelta: 1,
-                                ),
-                          ),
-                        ),
-                        productDetails["discount"]
-                            ? SizedBox(
-                                width: size.width * 0.28,
-                                child: Text(
-                                  "Rs ${formatNumber(productDetails["productPrice"])}",
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    decorationThickness: 5,
-                                    fontSize: 13,
-                                    color: SQColors.darkerGrey,
-                                    decoration: TextDecoration.lineThrough,
+                    Flexible(
+                      child: SizedBox(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              productDetails["productName"],
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.bodySmall!.apply(
+                                    color: Colors.black,
                                   ),
-                                ),
-                              )
-                            : const SizedBox(
-                                height: SQSizes.xs,
-                              ),
-                        productDetails["discount"]
-                            ? SizedBox(
-                                width: size.width * 0.28,
-                                child: Text(
-                                  "Rs ${formatNumber(productDetails["discountedPrice"])}",
-                                  style: Theme.of(context).textTheme.titleSmall!.apply(
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  productDetails["discount"] ? "Rs ${formatNumber(productDetails["discountedPrice"])}" : "Rs ${formatNumber(productDetails["productPrice"])}",
+                                  style: Theme.of(context).textTheme.bodySmall!.apply(
                                         color: Colors.red,
                                         fontSizeFactor: 1,
                                         fontWeightDelta: 1,
                                       ),
                                 ),
-                              )
-                            : SizedBox(
-                                width: size.width * 0.28,
-                                child: Text(
-                                  "Rs ${formatNumber(productDetails["productPrice"])}",
-                                  style: Theme.of(context).textTheme.titleSmall!.apply(
-                                        color: Colors.red,
-                                        fontWeightDelta: 2,
-                                        fontSizeFactor: 1,
-                                      ),
+                                const SizedBox(
+                                  width: SQSizes.xs,
                                 ),
-                              ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 35,
-                      height: 35,
-                      child: IconButton(
-                        onPressed: () {
-                          onCartClicked(productDetails);
-                        },
-                        style: IconButton.styleFrom(
-                          side: const BorderSide(
-                            width: 2,
-                            color: SQColors.borderSecondary,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        icon: const Icon(
-                          Icons.add_shopping_cart_outlined,
-                          size: 20,
+                                productDetails["discount"]
+                                    ? Text(
+                                        "Rs ${formatNumber(productDetails["productPrice"])}",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          decorationThickness: 5,
+                                          fontSize: 10,
+                                          color: SQColors.darkerGrey,
+                                          decoration: TextDecoration.lineThrough,
+                                        ),
+                                      )
+                                    : const SizedBox(
+                                        height: SQSizes.xs,
+                                      ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
+                    ),
+                    const SizedBox(
+                      width: SQSizes.md,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        onCartClicked(productDetails);
+                      },
+                      child: const Icon(
+                        AntDesign.shopping_cart_outline,
+                        size: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: SQSizes.xs,
                     ),
                   ],
                 ),
