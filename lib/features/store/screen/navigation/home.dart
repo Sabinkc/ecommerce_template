@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
           centerTitle: false,
           automaticallyImplyLeading: false,
           title: Padding(
-            padding: const EdgeInsets.only(left: 10.0),
+            padding: const EdgeInsets.only(left: 0),
             child: Text(
               "SysQube",
               style: Theme.of(context).textTheme.headlineSmall!.apply(
@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: 10.0),
+              padding: const EdgeInsets.only(right: 0),
               child: IconButton(
                 onPressed: () {
                   Get.to(
@@ -91,7 +91,7 @@ class HomeScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                   child: InkWell(
                     onTap: () {
                       Get.to(() => const SearchScreen(), transition: Transition.rightToLeft);
@@ -185,7 +185,7 @@ class HomeScreen extends StatelessWidget {
                   height: SQSizes.md,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
                   child: SizedBox(
                     height: size.width * 0.22,
                     child: ListView.builder(
@@ -254,7 +254,7 @@ class SQGridLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
@@ -289,7 +289,7 @@ class SectionHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
