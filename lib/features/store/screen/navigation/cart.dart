@@ -234,31 +234,31 @@ class CartScreen extends StatelessWidget {
               const SizedBox(
                 height: SQSizes.md,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
-                child: Center(
-                  child: Wrap(
-                    spacing: 20,
-                    runSpacing: 15,
-                    children: products.map((entry) {
-                      return ProductContainer(
-                        productDetails: entry,
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-              Obx(
-                () => cartControllers.selectedCartItems.isNotEmpty
-                    ? const SizedBox(
-                        height: 180,
-                      )
-                    : const SizedBox(
-                        height: SQSizes.md,
-                      ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(
+              //     horizontal: 15,
+              //   ),
+              //   child: Center(
+              //     child: Wrap(
+              //       spacing: 15,
+              //       runSpacing: 15,
+              //       children: products.map((entry) {
+              //         return ProductContainer(
+              //           productDetails: entry,
+              //         );
+              //       }).toList(),
+              //     ),
+              //   ),
+              // ),
+              // Obx(
+              //   () => cartControllers.selectedCartItems.isNotEmpty
+              //       ? const SizedBox(
+              //           height: 180,
+              //         )
+              //       : const SizedBox(
+              //           height: SQSizes.md,
+              //         ),
+              // ),
             ],
           ),
         ),
