@@ -1,4 +1,5 @@
-import 'package:ecommerce/features/store/model/products.dart';
+import 'package:ecommerce/features/store/screen/navigation/home.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
@@ -10,7 +11,6 @@ import '../../../../widgets/elevatedbutton.dart';
 import '../../controllers/cartcontrollers.dart';
 import '../../controllers/wishlistcontroller.dart';
 import '../../model/functions.dart';
-import 'home.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -64,7 +64,7 @@ class CartScreen extends StatelessWidget {
         () => cartControllers.selectedCartItems.isNotEmpty
             ? Container(
                 width: size.width,
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   border: Border(
@@ -199,7 +199,7 @@ class CartScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             const Icon(
-                              EvaIcons.shopping_cart_outline,
+                              CupertinoIcons.shopping_cart,
                               size: 80,
                             ),
                             const SizedBox(
@@ -234,31 +234,20 @@ class CartScreen extends StatelessWidget {
               const SizedBox(
                 height: SQSizes.md,
               ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(
-              //     horizontal: 15,
-              //   ),
-              //   child: Center(
-              //     child: Wrap(
-              //       spacing: 15,
-              //       runSpacing: 15,
-              //       children: products.map((entry) {
-              //         return ProductContainer(
-              //           productDetails: entry,
-              //         );
-              //       }).toList(),
-              //     ),
-              //   ),
-              // ),
-              // Obx(
-              //   () => cartControllers.selectedCartItems.isNotEmpty
-              //       ? const SizedBox(
-              //           height: 180,
-              //         )
-              //       : const SizedBox(
-              //           height: SQSizes.md,
-              //         ),
-              // ),
+              const Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 15,
+                  ),
+                  child: SQGridLayout()),
+              Obx(
+                () => cartControllers.selectedCartItems.isNotEmpty
+                    ? const SizedBox(
+                        height: 180,
+                      )
+                    : const SizedBox(
+                        height: SQSizes.md,
+                      ),
+              ),
             ],
           ),
         ),
@@ -324,7 +313,7 @@ class CartItemContainer extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final cartControllers = Get.put(CartControllers());
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
       child: Stack(
         children: [
           Container(

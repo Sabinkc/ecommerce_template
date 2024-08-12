@@ -1,10 +1,10 @@
 import 'package:ecommerce/widgets/elevatedbutton.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
-import '../model/products.dart';
 import 'navigation/home.dart';
 
 class WishListScreen extends StatelessWidget {
@@ -40,8 +40,9 @@ class WishListScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
         child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
           child: Column(
             children: [
               const Icon(
@@ -138,7 +139,7 @@ class WishListScreen extends StatelessWidget {
                                   child: IconButton(
                                     onPressed: () {},
                                     icon: const Icon(
-                                      Icons.add_shopping_cart_rounded,
+                                      CupertinoIcons.cart_badge_plus,
                                       color: Colors.white,
                                     ),
                                   ),
@@ -165,16 +166,9 @@ class WishListScreen extends StatelessWidget {
               const SizedBox(
                 height: SQSizes.md,
               ),
-              Center(
-                child: Wrap(
-                  spacing: 20,
-                  runSpacing: 15,
-                  children: products.map((entry) {
-                    return ProductContainer(
-                      productDetails: entry,
-                    );
-                  }).toList(),
-                ),
+              const SQGridLayout(),
+              const SizedBox(
+                height: 80,
               ),
             ],
           ),

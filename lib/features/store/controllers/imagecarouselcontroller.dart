@@ -16,15 +16,17 @@ class ImageCarouselController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    startAutoScroll();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      startAutoScroll();
+    });
   }
 
-  @override
-  void onClose() {
-    timer?.cancel();
-    pageController.dispose();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   timer?.cancel();
+  //   pageController.dispose();
+  //   super.onClose();
+  // }
 
   void startAutoScroll() {
     timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {

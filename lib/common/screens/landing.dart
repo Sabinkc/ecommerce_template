@@ -3,6 +3,7 @@ import 'package:ecommerce/features/store/screen/navigation/cart.dart';
 import 'package:ecommerce/features/store/screen/navigation/category.dart';
 import 'package:ecommerce/features/store/screen/navigation/profile.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -51,8 +52,8 @@ class LandingScreen extends StatelessWidget {
                 label: "Category",
               ),
               BottomNavigationBarItem(
-                activeIcon: Icon(Icons.shopping_cart),
-                icon: Icon(Icons.shopping_cart_outlined),
+                activeIcon: Icon(CupertinoIcons.cart_fill),
+                icon: Icon(CupertinoIcons.shopping_cart),
                 label: "Cart",
               ),
               BottomNavigationBarItem(

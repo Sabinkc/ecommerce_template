@@ -362,3 +362,22 @@ class ProductDetailsOptionContainer extends StatelessWidget {
     );
   }
 }
+
+/**
+ * 
+ *   productDetails["discount"]
+? Container(
+padding: const EdgeInsets.all(2),
+decoration: BoxDecoration(
+  borderRadius: BorderRadius.circular(5),
+  color: const Color.fromARGB(108, 255, 182, 72),
+),
+child: Text(
+  "-12%",
+  style: Theme.of(context).textTheme.labelMedium!.apply(
+        color: Colors.red,
+      ),
+),
+ )
+ : const SizedBox.shrink(),
+ */
