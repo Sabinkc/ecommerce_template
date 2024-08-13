@@ -107,14 +107,19 @@ class HomeScreen extends StatelessWidget {
                   SliverAppBar(
                     automaticallyImplyLeading: false,
                     backgroundColor: SQColors.white,
-                    expandedHeight: size.width * 1.05,
-                    collapsedHeight: size.width * 1.05,
+                    expandedHeight: size.width * 1,
+                    collapsedHeight: size.width * 1,
                     flexibleSpace: SizedBox(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          const SizedBox(
+                            height: SQSizes.md,
+                          ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                            ),
                             child: InkWell(
                               onTap: () {
                                 Get.to(() => const SearchScreen(), transition: Transition.rightToLeft);
@@ -161,9 +166,6 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: SQSizes.xs,
-                          ),
                           SizedBox(
                             width: size.width,
                             height: size.width * 0.5,
@@ -188,9 +190,12 @@ class HomeScreen extends StatelessWidget {
                               }).toList(),
                             ),
                           ),
-                          SectionHeading(
-                            headingTitle: "Shop By Category",
-                            func: () {},
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: SectionHeading(
+                              headingTitle: "Shop By Category",
+                              func: () {},
+                            ),
                           ),
                           const SizedBox(
                             height: SQSizes.md,
@@ -242,7 +247,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 decoration: BoxDecoration(
                                   color: tabbarController.currentTabIndex.value == option.key ? SQColors.primary : Colors.white,
-                                  border: Border.all(color: SQColors.borderSecondary),
+                                  border: Border.all(color: tabbarController.currentTabIndex.value == option.key ? Colors.transparent : SQColors.borderSecondary),
                                   borderRadius: BorderRadius.circular(
                                     100,
                                   ),
@@ -298,7 +303,7 @@ class MyDelegate extends SliverPersistentHeaderDelegate {
         color: Colors.white,
         border: Border(
           top: BorderSide(
-            color: SQColors.borderPrimary,
+            color: SQColors.borderSecondary,
           ),
           bottom: BorderSide(
             color: SQColors.borderSecondary,
@@ -356,37 +361,37 @@ class SectionHeading extends StatelessWidget {
     required this.headingTitle,
     required this.func,
     this.showButton = true,
+    this.buttonTitle = "See all",
   });
   final String headingTitle;
   final VoidCallback func;
   final bool? showButton;
+  final String? buttonTitle;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            headingTitle,
-            style: Theme.of(context).textTheme.bodyLarge!.apply(
-                  fontSizeDelta: 1,
-                  color: Colors.black,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          headingTitle,
+          style: Theme.of(context).textTheme.bodyLarge!.apply(
+                fontSizeDelta: 1,
+                color: Colors.black,
+              ),
+        ),
+        showButton!
+            ? InkWell(
+                overlayColor: WidgetStateColor.transparent,
+                onTap: func,
+                child: Text(
+                  buttonTitle!,
+                  style: Theme.of(context).textTheme.bodyMedium!.apply(
+                        color: SQColors.textSecondary,
+                      ),
                 ),
-          ),
-          showButton!
-              ? InkWell(
-                  onTap: func,
-                  child: Text(
-                    "See all",
-                    style: Theme.of(context).textTheme.bodyMedium!.apply(
-                          color: SQColors.textSecondary,
-                        ),
-                  ),
-                )
-              : Container(),
-        ],
-      ),
+              )
+            : Container(),
+      ],
     );
   }
 }
@@ -560,7 +565,7 @@ class CategoryContainer extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                width: 2,
+                width: 1,
                 color: SQColors.borderSecondary,
               ),
               image: DecorationImage(

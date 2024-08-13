@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/store/screen/checkout.dart';
 import 'package:ecommerce/features/store/screen/navigation/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,12 +25,9 @@ class CartScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: false,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 15.0),
-          child: Text(
-            "My Cart",
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
+        title: Text(
+          "My Cart",
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
         shape: const Border(
           bottom: BorderSide(color: SQColors.borderSecondary),
@@ -40,23 +38,25 @@ class CartScreen extends StatelessWidget {
             "Select all",
             style: Theme.of(context).textTheme.bodySmall,
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 4,
-              right: 15,
-              left: 2,
-            ),
-            child: Obx(
-              () => GFCheckbox(
-                type: GFCheckboxType.custom,
-                customBgColor: SQColors.primary,
-                size: 25,
-                onChanged: (value) {
-                  cartControllers.selectAllItems();
-                },
-                value: cartControllers.selectAll.value,
+          Center(
+            child: SizedBox(
+              width: 40,
+              height: 40,
+              child: Obx(
+                () => GFCheckbox(
+                  type: GFCheckboxType.custom,
+                  customBgColor: SQColors.primary,
+                  size: 20,
+                  onChanged: (value) {
+                    cartControllers.selectAllItems();
+                  },
+                  value: cartControllers.selectAll.value,
+                ),
               ),
             ),
+          ),
+          const SizedBox(
+            width: SQSizes.xs,
           ),
         ],
       ),
@@ -157,7 +157,11 @@ class CartScreen extends StatelessWidget {
                             child: SizedBox(
                               height: 45,
                               child: SQElevatedButton(
-                                func: () {},
+                                func: () {
+                                  Get.to(
+                                    () => const CheckOutScreen(),
+                                  );
+                                },
                                 title: "CHECKOUT (${cartControllers.selectedCartItems.length})",
                               ),
                             ),

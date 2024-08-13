@@ -30,7 +30,7 @@ class WishListScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           color: Colors.white,
           border: Border(
-            top: BorderSide(color: SQColors.borderPrimary, width: 2),
+            top: BorderSide(color: SQColors.borderPrimary, width: 1),
           ),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),

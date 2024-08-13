@@ -19,25 +19,19 @@ class SearchScreen extends StatelessWidget {
         appBar: AppBar(
           centerTitle: false,
           automaticallyImplyLeading: false,
-          title: Padding(
-            padding: const EdgeInsets.only(left: 15.0),
-            child: Text(
-              "Search Products",
-              style: Theme.of(context).textTheme.headlineSmall!.apply(),
-            ),
+          title: Text(
+            "Search Products",
+            style: Theme.of(context).textTheme.headlineSmall!.apply(),
           ),
           shape: const Border(
             bottom: BorderSide(color: SQColors.borderSecondary),
           ),
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 15.0),
-              child: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: const Icon(Icons.close),
-              ),
+            IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: const Icon(Icons.close),
             ),
           ],
           forceMaterialTransparency: true,
@@ -45,7 +39,7 @@ class SearchScreen extends StatelessWidget {
         body: SafeArea(
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
