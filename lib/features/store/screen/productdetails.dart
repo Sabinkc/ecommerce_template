@@ -106,14 +106,34 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 productDetails["discount"]
-                    ? Text(
-                        "Rs ${formatNumber(productDetails["productPrice"])}",
-                        style: const TextStyle(
-                          decorationThickness: 5,
-                          fontSize: 12,
-                          color: SQColors.darkerGrey,
-                          decoration: TextDecoration.lineThrough,
-                        ),
+                    ? Row(
+                        children: [
+                          Text(
+                            "Rs ${formatNumber(productDetails["productPrice"])}",
+                            style: const TextStyle(
+                              decorationThickness: 5,
+                              fontSize: 12,
+                              color: SQColors.darkerGrey,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: SQSizes.sm,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: const Color.fromARGB(108, 255, 182, 72),
+                            ),
+                            child: Text(
+                              "-${productDetails["discountPerc"]}%",
+                              style: Theme.of(context).textTheme.labelSmall!.apply(
+                                    color: Colors.red,
+                                  ),
+                            ),
+                          )
+                        ],
                       )
                     : const SizedBox.shrink(),
                 const SizedBox(
@@ -365,9 +385,9 @@ class ProductDetailsOptionContainer extends StatelessWidget {
 
 /**
  * 
- *   productDetails["discount"]
+ *  : productDetails["discount"]
 ? Container(
-padding: const EdgeInsets.all(2),
+padding const EdgeInsets.all(2),
 decoration: BoxDecoration(
   borderRadius: BorderRadius.circular(5),
   color: const Color.fromARGB(108, 255, 182, 72),

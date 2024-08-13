@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -43,7 +44,7 @@ class QuickCartScreen extends StatelessWidget {
                   quickcartControllers.quantity(1);
                 },
                 icon: const Icon(
-                  Iconsax.close_circle_outline,
+                  CupertinoIcons.xmark,
                   size: 30,
                 ),
               ),

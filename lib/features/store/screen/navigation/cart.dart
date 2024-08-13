@@ -356,7 +356,9 @@ class CartItemContainer extends StatelessWidget {
                           children: [
                             Text(
                               "Rs ${cartItemDetails["discount"] ? formatNumber(cartItemDetails["discountedPrice"]) : formatNumber(cartItemDetails["productPrice"])}",
-                              style: Theme.of(context).textTheme.headlineSmall,
+                              style: Theme.of(context).textTheme.headlineSmall!.apply(
+                                    color: SQColors.primary,
+                                  ),
                             ),
                             const SizedBox(
                               width: SQSizes.sm,

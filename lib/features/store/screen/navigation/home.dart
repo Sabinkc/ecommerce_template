@@ -1,19 +1,20 @@
-import 'package:ecommerce/features/store/controllers/imagecarouselcontroller.dart';
-import 'package:ecommerce/features/store/screen/productdetails.dart';
-import 'package:ecommerce/features/store/screen/widgets/cartcounteritem.dart';
-import 'package:ecommerce/features/store/screen/wishlist.dart';
+import 'package:ecommerce/features/store/controllers/tabbarcontroller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
+import '../../controllers/imagecarouselcontroller.dart';
 import '../../controllers/wishlistcontroller.dart';
 import '../../model/functions.dart';
 import '../../model/products.dart';
+import '../productdetails.dart';
 import '../search.dart';
+import '../widgets/cartcounteritem.dart';
+import '../wishlist.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,7 +23,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final imageController = Get.put(ImageCarouselController());
-
+    final tabbarController = Get.put(TabbarController());
     final List categories = [
       {
         "image": "assets/images/headphonecat.jpg",
@@ -106,124 +107,112 @@ class HomeScreen extends StatelessWidget {
                   SliverAppBar(
                     automaticallyImplyLeading: false,
                     backgroundColor: SQColors.white,
-                    collapsedHeight: size.width * 1.099,
-                    flexibleSpace: ListView(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
-                          child: InkWell(
-                            onTap: () {
-                              Get.to(() => const SearchScreen(), transition: Transition.rightToLeft);
-                            },
-                            child: Container(
-                              height: size.height * 0.055,
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 2,
-                                  color: SQColors.borderSecondary,
-                                ),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    Iconsax.search_normal_1_outline,
-                                    color: SQColors.darkGrey,
-                                    size: 24,
-                                  ),
-                                  const SizedBox(
-                                    width: SQSizes.sm,
-                                  ),
-                                  Text(
-                                    "Search...",
-                                    style: Theme.of(context).textTheme.bodyLarge!.apply(color: SQColors.textSecondary),
-                                  ),
-                                  const Spacer(),
-                                  const VerticalDivider(
-                                    thickness: 1.5,
-                                  ),
-                                  const SizedBox(
-                                    width: SQSizes.xs,
-                                  ),
-                                  const Icon(
-                                    Icons.sort,
-                                    color: Colors.black,
-                                    size: 30,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: SQSizes.xs,
-                        ),
-                        SizedBox(
-                          height: size.width * 0.5,
-                          child: PageView(
-                            controller: imageController.pageController,
-                            physics: const ClampingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            children: imageController.imageLink.map((image) {
-                              return Container(
-                                width: size.width,
-                                margin: const EdgeInsets.symmetric(horizontal: 0),
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: AssetImage(image),
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: SQSizes.sml,
-                        ),
-                        Center(
-                          child: SmoothPageIndicator(
-                            controller: imageController.pageController,
-                            count: 3,
-                            effect: const WormEffect(
-                              activeDotColor: SQColors.primary,
-                              dotHeight: 10,
-                              dotWidth: 10,
-                              strokeWidth: 1,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: SQSizes.md,
-                        ),
-                        SectionHeading(
-                          headingTitle: "Shop By Category",
-                          func: () {},
-                        ),
-                        const SizedBox(
-                          height: SQSizes.md,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                          child: SizedBox(
-                            height: size.width * 0.22,
-                            child: ListView.builder(
-                              itemCount: categories.length,
-                              physics: const ClampingScrollPhysics(),
-                              shrinkWrap: false,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                final category = categories[index];
-                                return CategoryContainer(imagelink: category["image"], categroyName: category["categoryName"]);
+                    expandedHeight: size.width * 1.05,
+                    collapsedHeight: size.width * 1.05,
+                    flexibleSpace: SizedBox(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                            child: InkWell(
+                              onTap: () {
+                                Get.to(() => const SearchScreen(), transition: Transition.rightToLeft);
                               },
+                              child: Container(
+                                height: size.height * 0.055,
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: 2,
+                                    color: SQColors.borderSecondary,
+                                  ),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const Icon(
+                                      Iconsax.search_normal_1_outline,
+                                      color: SQColors.darkGrey,
+                                      size: 24,
+                                    ),
+                                    const SizedBox(
+                                      width: SQSizes.sm,
+                                    ),
+                                    Text(
+                                      "Search...",
+                                      style: Theme.of(context).textTheme.bodyLarge!.apply(color: SQColors.textSecondary),
+                                    ),
+                                    const Spacer(),
+                                    const VerticalDivider(
+                                      thickness: 1.5,
+                                    ),
+                                    const SizedBox(
+                                      width: SQSizes.xs,
+                                    ),
+                                    const Icon(
+                                      Icons.sort,
+                                      color: Colors.black,
+                                      size: 30,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(
+                            height: SQSizes.xs,
+                          ),
+                          SizedBox(
+                            width: size.width,
+                            height: size.width * 0.5,
+                            child: CarouselSlider(
+                              options: CarouselOptions(
+                                autoPlay: true,
+                                enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+                                enlargeCenterPage: true,
+                                aspectRatio: 2,
+                              ),
+                              items: imageController.imageLink.map((image) {
+                                return Container(
+                                  width: size.width,
+                                  margin: const EdgeInsets.symmetric(horizontal: 5),
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      fit: BoxFit.contain,
+                                      image: AssetImage(image),
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                          SectionHeading(
+                            headingTitle: "Shop By Category",
+                            func: () {},
+                          ),
+                          const SizedBox(
+                            height: SQSizes.md,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: SizedBox(
+                              height: size.width * 0.22,
+                              child: ListView.builder(
+                                itemCount: categories.length,
+                                physics: const ClampingScrollPhysics(),
+                                shrinkWrap: false,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  final category = categories[index];
+                                  return CategoryContainer(imagelink: category["image"], categroyName: category["categoryName"]);
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   SliverPersistentHeader(
@@ -232,36 +221,55 @@ class HomeScreen extends StatelessWidget {
                     delegate: MyDelegate(
                       tabbar: TabBar(
                         tabAlignment: TabAlignment.start,
-                        isScrollable: true,
                         indicatorSize: TabBarIndicatorSize.label,
+                        isScrollable: true,
+                        padding: EdgeInsets.zero,
+                        indicatorPadding: EdgeInsets.zero,
+                        labelPadding: const EdgeInsets.symmetric(horizontal: 8),
                         dividerColor: Colors.transparent,
-                        splashBorderRadius: BorderRadius.circular(10),
-                        indicatorColor: SQColors.primary,
-                        labelColor: SQColors.primary,
-                        unselectedLabelColor: SQColors.darkGrey,
-                        tabs: tabsOption.map(
+                        indicatorColor: Colors.transparent,
+                        onTap: (value) {
+                          tabbarController.changeTabIndex(value);
+                        },
+                        tabs: tabsOption.asMap().entries.map(
                           (option) {
-                            return Tab(
-                              child: Text(option),
+                            String tabsText = option.value;
+                            return Obx(
+                              () => Container(
+                                height: 30,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: tabbarController.currentTabIndex.value == option.key ? SQColors.primary : Colors.white,
+                                  border: Border.all(color: SQColors.borderSecondary),
+                                  borderRadius: BorderRadius.circular(
+                                    100,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Tab(
+                                    child: Text(
+                                      tabsText,
+                                      style: Theme.of(context).textTheme.bodyMedium!.apply(
+                                            color: tabbarController.currentTabIndex.value == option.key ? Colors.white : Colors.black,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             );
                           },
                         ).toList(),
-                        // tabs: const [
-                        //   Tab(child: Text("For you")),
-                        //   Tab(child: Text("New In")),
-                        //   Tab(child: Text("Deals")),
-                        //   Tab(child: Text("Best Seller")),
-                        //   Tab(child: Text("Popular")),
-                        // ],
                       ),
                     ),
-                  )
+                  ),
                 ];
               },
               body: const Padding(
                 padding: EdgeInsets.only(top: 15, left: 12, right: 12),
                 child: TabBarView(
-                  physics: ClampingScrollPhysics(),
+                  physics: NeverScrollableScrollPhysics(),
                   children: [
                     SQGridLayout(),
                     SQGridLayout(),
@@ -285,14 +293,28 @@ class MyDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(color: Colors.white, height: 60, child: tabbar);
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          top: BorderSide(
+            color: SQColors.borderPrimary,
+          ),
+          bottom: BorderSide(
+            color: SQColors.borderSecondary,
+          ),
+        ),
+      ),
+      height: 50,
+      child: tabbar,
+    );
   }
 
   @override
-  double get maxExtent => 70;
+  double get maxExtent => 50;
 
   @override
-  double get minExtent => 70;
+  double get minExtent => 50;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
@@ -314,8 +336,8 @@ class SQGridLayout extends StatelessWidget {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisExtent: size.width * 0.6,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
+        mainAxisSpacing: 5,
+        crossAxisSpacing: 12,
       ),
       itemCount: products.length,
       itemBuilder: (context, index) {
@@ -431,7 +453,7 @@ class ProductContainer extends StatelessWidget {
                             color: SQColors.primary,
                           ),
                           child: Text(
-                            "12% off",
+                            "${productDetails["discountPerc"]}% off",
                             style: Theme.of(context).textTheme.labelMedium!.apply(
                                   color: Colors.white,
                                 ),
@@ -474,7 +496,7 @@ class ProductContainer extends StatelessWidget {
                                 Text(
                                   productDetails["discount"] ? "Rs ${formatNumber(productDetails["discountedPrice"])}" : "Rs ${formatNumber(productDetails["productPrice"])}",
                                   style: Theme.of(context).textTheme.bodySmall!.apply(
-                                        color: Colors.red,
+                                        color: SQColors.primary,
                                         fontSizeFactor: 1,
                                         fontWeightDelta: 2,
                                       ),
