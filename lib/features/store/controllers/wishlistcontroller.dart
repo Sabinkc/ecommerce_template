@@ -6,10 +6,12 @@ class WishlistController extends GetxController {
   RxList favoriteItems = [].obs;
 
   bool isFav(String id) {
-    return favoriteItems.contains(id);
+    bool itemExists = favoriteItems.any((element) => element["productId"] == id);
+
+    return itemExists;
   }
 
-  void addToWishList(String id) {
-    isFav(id) ? favoriteItems.remove(id) : favoriteItems.add(id);
+  void addToWishList(String id, dynamic product) {
+    isFav(id) ? favoriteItems.remove(product) : favoriteItems.add(product);
   }
 }

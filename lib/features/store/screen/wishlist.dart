@@ -1,6 +1,9 @@
-import 'package:ecommerce/widgets/elevatedbutton.dart';
+import 'package:ecommerce/features/store/controllers/wishlistcontroller.dart';
+import 'package:ecommerce/features/store/model/functions.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../../../utils/constants/colors.dart';
@@ -12,7 +15,7 @@ class WishListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final wishlistController = Get.put(WishlistController());
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -25,136 +28,43 @@ class WishListScreen extends StatelessWidget {
         ),
         forceMaterialTransparency: true,
       ),
-      bottomSheet: Container(
-        width: size.width,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          border: Border(
-            top: BorderSide(color: SQColors.borderPrimary, width: 1),
-          ),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
-        child: SQElevatedButton(
-          func: () {},
-          title: "ADD ALL TO CART",
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Column(
             children: [
-              const Icon(
-                Iconsax.heart_bold,
-                color: SQColors.primary,
-                size: 100,
-              ),
-              Text(
-                "You currently have nothing saved in your wishlist.",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(
-                height: SQSizes.md,
-              ),
-              Container(
-                width: size.width,
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: SQColors.borderPrimary),
-                  ),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 120,
-                      height: 120,
-                      decoration: const BoxDecoration(
-                        color: Colors.amber,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage("assets/images/phonecase.jpg"),
+              Obx(
+                () => wishlistController.favoriteItems.isEmpty
+                    ? Column(
+                        children: [
+                          const Icon(
+                            Iconsax.heart_bold,
+                            color: SQColors.primary,
+                            size: 100,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "You currently have nothing saved in your wishlist.",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: ListView(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          children: wishlistController.favoriteItems.map((product) {
+                            return WishlistItemContainer(
+                              productDetails: product,
+                            );
+                          }).toList(),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: SQSizes.sm,
-                    ),
-                    Flexible(
-                      child: SizedBox(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                "Benks ArmorPro Case for iPhone 15 Pro Max 600D Aramid Fiber Cover",
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: SQSizes.sm,
-                            ),
-                            Text(
-                              "Rs. 1,054",
-                              style: Theme.of(context).textTheme.headlineSmall,
-                            ),
-                            const SizedBox(
-                              height: SQSizes.xs,
-                            ),
-                            const Text(
-                              "Rs 1200",
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                decorationThickness: 4,
-                                fontSize: 16,
-                                color: SQColors.darkerGrey,
-                                decoration: TextDecoration.lineThrough,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: SQSizes.sm,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Icon(
-                                  Iconsax.trash_outline,
-                                  size: 26,
-                                ),
-                                Container(
-                                  width: 50,
-                                  height: 40,
-                                  margin: const EdgeInsets.only(right: 5),
-                                  decoration: BoxDecoration(
-                                    color: SQColors.primary,
-                                    borderRadius: BorderRadius.circular(2),
-                                  ),
-                                  child: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      CupertinoIcons.cart_badge_plus,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: SQSizes.sml,
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
               ),
               const SizedBox(
                 height: SQSizes.md,
@@ -167,12 +77,146 @@ class WishListScreen extends StatelessWidget {
                 height: SQSizes.md,
               ),
               const SQGridLayout(),
-              const SizedBox(
-                height: 80,
-              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class WishlistItemContainer extends StatelessWidget {
+  const WishlistItemContainer({
+    super.key,
+    required this.productDetails,
+  });
+  final dynamic productDetails;
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final wishlistController = Get.put(WishlistController());
+
+    return Container(
+      width: size.width,
+      margin: const EdgeInsets.only(bottom: 15),
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: SQColors.borderPrimary),
+        ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 120,
+            height: 120,
+            decoration: BoxDecoration(
+              color: Colors.amber,
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage(productDetails["image"][0]),
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: SQSizes.sm,
+          ),
+          Flexible(
+            child: SizedBox(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Text(
+                      productDetails["productName"],
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: SQSizes.sm,
+                  ),
+                  Text(
+                    "Rs.${productDetails["discount"] ? formatNumber(productDetails["discountedPrice"]) : formatNumber(productDetails["productPrice"])}",
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  productDetails["discount"]
+                      ? Row(
+                          children: [
+                            Text(
+                              "Rs ${formatNumber(productDetails["productPrice"])}",
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                decorationThickness: 4,
+                                fontSize: 16,
+                                color: SQColors.darkerGrey,
+                                decoration: TextDecoration.lineThrough,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: SQSizes.sm,
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: const Color.fromARGB(108, 255, 182, 72),
+                              ),
+                              child: Text(
+                                "-${productDetails["discountPerc"]}%",
+                                style: Theme.of(context).textTheme.labelSmall!.apply(
+                                      color: Colors.red,
+                                    ),
+                              ),
+                            )
+                          ],
+                        )
+                      : const SizedBox.shrink(),
+                  const SizedBox(
+                    height: SQSizes.sm,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () => wishlistController.addToWishList(productDetails["productId"], productDetails),
+                        child: const Icon(
+                          Iconsax.trash_outline,
+                          size: 26,
+                        ),
+                      ),
+                      Container(
+                        width: 50,
+                        height: 40,
+                        margin: const EdgeInsets.only(right: 5),
+                        decoration: BoxDecoration(
+                          color: SQColors.primary,
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            onCartClicked(productDetails);
+                          },
+                          icon: const Icon(
+                            CupertinoIcons.cart_badge_plus,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: SQSizes.sml,
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

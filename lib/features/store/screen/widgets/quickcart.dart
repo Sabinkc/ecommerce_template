@@ -317,7 +317,7 @@ class QuickCartScreen extends StatelessWidget {
                 Obx(
                   () => IconButton(
                     onPressed: () {
-                      wishlistController.addToWishList(productInfo["productId"]);
+                      wishlistController.addToWishList(productInfo["productId"], productInfo);
                     },
                     icon: Icon(
                       wishlistController.isFav(productInfo["productId"]) ? Iconsax.heart_bold : Iconsax.heart_outline,

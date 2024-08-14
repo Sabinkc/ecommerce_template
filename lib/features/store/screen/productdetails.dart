@@ -53,7 +53,7 @@ class ProductDetailsScreen extends StatelessWidget {
             child: Obx(
               () => IconButton(
                 onPressed: () {
-                  wishlistController.addToWishList(productDetails["productId"]);
+                  wishlistController.addToWishList(productDetails["productId"], productDetails);
                 },
                 icon: Icon(
                   wishlistController.isFav(productDetails["productId"]) ? Iconsax.heart_bold : Iconsax.heart_outline,
