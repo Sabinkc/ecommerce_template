@@ -1,5 +1,8 @@
+import 'package:ecommerce/features/store/controllers/checkoutcontroller.dart';
 import 'package:ecommerce/features/store/screen/navigation/home.dart';
+import 'package:ecommerce/features/store/screen/ordersuccess.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
@@ -12,6 +15,7 @@ class CheckOutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final checkoutController = Get.put(CheckoutController());
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -34,7 +38,9 @@ class CheckOutScreen extends StatelessWidget {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
         child: SQElevatedButton(
-          func: () {},
+          func: () {
+            Get.to(() => const OrderSuccessScreen());
+          },
           title: "Place Order",
         ),
       ),
@@ -46,98 +52,19 @@ class CheckOutScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Container(
-                width: size.width,
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  //color: Colors.amber,
-                  border: Border.all(
-                    color: SQColors.borderSecondary,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 130,
-                      height: 130,
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                          image: AssetImage("assets/images/laptop.jpg"),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: SQSizes.sml,
-                    ),
-                    Flexible(
-                      child: SizedBox(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Lenovo Ideapad 1 15lGL7 11th Gen Intel Celeron N4020 8GB DDR4 RAM 256GB SSD 15.6 HD Display",
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                            const SizedBox(
-                              height: SQSizes.xs,
-                            ),
-                            Text(
-                              "Rs ${formatNumber(110500)}",
-                              style: Theme.of(context).textTheme.titleSmall!.apply(
-                                    color: SQColors.primary,
-                                  ),
-                            ),
-                            const SizedBox(
-                              height: SQSizes.sm,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: SQSizes.md,
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(width: 1, color: SQColors.borderPrimary),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: Text(
-                                    "16GB / 512GB",
-                                    style: Theme.of(context).textTheme.labelSmall!.apply(
-                                          color: Colors.black,
-                                          fontWeightDelta: 1,
-                                        ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: SQSizes.sm,
-                            ),
-                            Text(
-                              "Qty: 1",
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+              ListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: checkoutController.checkoutItem.map((product) {
+                  return CheckoutItemContainer(
+                    imagelink: product["image"][0],
+                    selectedColor: product["selectedColors"],
+                    productPrice: product["discount"] ? product["discountedPrice"] : product["productPrice"],
+                    productQty: product["itemQuantity"].toString(),
+                    productSpec: product["selectedSpecs"],
+                    productTitle: product["productName"],
+                  );
+                }).toList(),
               ),
               const SizedBox(
                 height: SQSizes.sm,
@@ -169,18 +96,18 @@ class CheckOutScreen extends StatelessWidget {
                     const SizedBox(
                       height: SQSizes.xs,
                     ),
-                    const ReceiptContent(
+                    ReceiptContent(
                       title: "Subtotal",
-                      price: "110,500",
+                      price: formatNumber(checkoutController.getSubTotalPrice()),
                     ),
-                    const ReceiptContent(
+                    ReceiptContent(
                       title: "Shipping Fee",
-                      price: "100",
+                      price: "${checkoutController.shippingFee}",
                     ),
-                    const ReceiptContent(
-                      title: "Tax Fee",
-                      price: "105",
-                    ),
+                    // ReceiptContent(
+                    //   title: "Tax Fee",
+                    //   price: formatNumber(checkoutController.taxCalculator()),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 3),
                       child: Row(
@@ -199,7 +126,7 @@ class CheckOutScreen extends StatelessWidget {
                                   style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                                 TextSpan(
-                                  text: "110,705",
+                                  text: formatNumber(checkoutController.getOrderTotal()),
                                   style: Theme.of(context).textTheme.headlineSmall!.apply(
                                         fontWeightDelta: 1,
                                         color: SQColors.primary,
@@ -330,6 +257,123 @@ class CheckOutScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class CheckoutItemContainer extends StatelessWidget {
+  const CheckoutItemContainer({
+    super.key,
+    required this.imagelink,
+    required this.productTitle,
+    required this.productPrice,
+    required this.productSpec,
+    required this.productQty,
+    required this.selectedColor,
+  });
+
+  final String imagelink, productTitle, productSpec, productQty;
+  final int productPrice;
+  final Color selectedColor;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width,
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        //color: Colors.amber,
+        border: Border.all(
+          color: SQColors.borderSecondary,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 130,
+            height: 130,
+            decoration: BoxDecoration(
+              color: Colors.amber,
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: AssetImage(imagelink),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: SQSizes.sml,
+          ),
+          Flexible(
+            child: SizedBox(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    productTitle,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  const SizedBox(
+                    height: SQSizes.xs,
+                  ),
+                  Text(
+                    "Rs ${formatNumber(productPrice)}",
+                    style: Theme.of(context).textTheme.titleSmall!.apply(
+                          color: SQColors.primary,
+                        ),
+                  ),
+                  const SizedBox(
+                    height: SQSizes.sm,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: selectedColor,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: SQSizes.md,
+                      ),
+                      productSpec.isNotEmpty
+                          ? Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 1, color: SQColors.borderPrimary),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Text(
+                                productSpec,
+                                style: Theme.of(context).textTheme.labelSmall!.apply(
+                                      color: Colors.black,
+                                      fontWeightDelta: 1,
+                                    ),
+                              ),
+                            )
+                          : const SizedBox.shrink(),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: SQSizes.sm,
+                  ),
+                  Text(
+                    "Qty: $productQty",
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

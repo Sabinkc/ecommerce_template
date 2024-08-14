@@ -158,6 +158,8 @@ class CartScreen extends StatelessWidget {
                               height: 45,
                               child: SQElevatedButton(
                                 func: () {
+                                  cartControllers.addToCheckout();
+
                                   Get.to(
                                     () => const CheckOutScreen(),
                                   );
@@ -425,7 +427,7 @@ class CartItemContainer extends StatelessWidget {
                               () => InkWell(
                                 overlayColor: WidgetStateColor.transparent,
                                 onTap: () {
-                                  wishlistController.addToWishList(cartItemDetails["productId"]);
+                                  wishlistController.addToWishList(cartItemDetails["productId"], cartItemDetails);
                                 },
                                 child: Icon(
                                   wishlistController.isFav(cartItemDetails["productId"]) ? Iconsax.heart_bold : Iconsax.heart_outline,

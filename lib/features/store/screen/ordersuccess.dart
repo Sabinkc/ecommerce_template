@@ -1,4 +1,4 @@
-import 'package:ecommerce/features/authentication/screen/login.dart';
+import 'package:ecommerce/common/screens/landing.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/widgets/elevatedbutton.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +83,7 @@ class OrderSuccessScreen extends StatelessWidget {
                   height: size.height * 0.062,
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.offAll(() => const LoginScreen());
+                      Get.offAll(() => const LandingScreen());
                     },
                     style: ElevatedButton.styleFrom(
                       overlayColor: SQColors.primary,

@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/store/controllers/checkoutcontroller.dart';
 import 'package:get/get.dart';
 
 class CartControllers extends GetxController {
@@ -5,7 +6,7 @@ class CartControllers extends GetxController {
   RxList allCartItems = <Map<String, dynamic>>[].obs;
   RxBool selectAll = false.obs;
   RxList selectedCartItems = [].obs;
-
+  final checkoutController = Get.put(CheckoutController());
   bool isSelected(String id) {
     return selectedCartItems.contains(id);
   }
@@ -80,5 +81,17 @@ class CartControllers extends GetxController {
     }
 
     return totalPrice;
+  }
+
+  void addToCheckout() {
+    checkoutController.resetValue();
+    for (var item in allCartItems) {
+      if (selectedCartItems.contains(item["cartItemId"])) {
+        bool itemExists = checkoutController.checkoutItem.any((element) => element["cartItemId"] == item["cartItemId"]);
+        if (!itemExists) {
+          checkoutController.checkoutItem.add(item);
+        }
+      }
+    }
   }
 }
