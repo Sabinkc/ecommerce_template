@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controllers/quickcartcontrollers.dart';
 import '../screen/widgets/quickcart.dart';
 
 String formatNumber(num value) {
@@ -11,6 +12,10 @@ String formatNumber(num value) {
 }
 
 void onCartClicked(productDetails) {
+  final quickcartControllers = Get.put(QuickCartControllers());
+  quickcartControllers.changeSelectedColorIndex(0);
+  quickcartControllers.changeSelectedSpecIndex(0);
+  quickcartControllers.quantity(1);
   showModalBottomSheet(
     enableDrag: false,
     isScrollControlled: true,

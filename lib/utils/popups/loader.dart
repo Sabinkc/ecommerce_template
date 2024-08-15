@@ -26,7 +26,7 @@ class SQLoader {
     );
   }
 
-  static sucessSnackBar({required title, message = '', duration = 3}) {
+  static sucessSnackBar({required title, message = '', duration = 3, icon = Icons.check}) {
     Get.snackbar(
       title,
       message,
@@ -38,14 +38,14 @@ class SQLoader {
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: duration),
       margin: const EdgeInsets.all(0),
-      icon: const Icon(
-        Icons.check,
+      icon: Icon(
+        icon,
         color: Colors.white,
       ),
     );
   }
 
-  static warningSnackBar({required title, message = '', duration = 3}) {
+  static warningSnackBar({required title, message = '', duration = 3, icon = Icons.warning}) {
     Get.snackbar(
       title,
       message,
@@ -57,8 +57,8 @@ class SQLoader {
       snackStyle: SnackStyle.GROUNDED,
       duration: Duration(seconds: duration),
       margin: const EdgeInsets.all(0),
-      icon: const Icon(
-        Icons.warning,
+      icon: Icon(
+        icon,
         color: Colors.white,
       ),
     );
