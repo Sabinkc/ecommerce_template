@@ -371,10 +371,11 @@ class SectionHeading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(
           headingTitle,
-          style: Theme.of(context).textTheme.bodyLarge!.apply(
+          style: Theme.of(context).textTheme.titleLarge!.apply(
                 fontSizeDelta: 1,
                 color: Colors.black,
               ),
@@ -385,8 +386,8 @@ class SectionHeading extends StatelessWidget {
                 onTap: func,
                 child: Text(
                   buttonTitle!,
-                  style: Theme.of(context).textTheme.bodyMedium!.apply(
-                        color: SQColors.textSecondary,
+                  style: Theme.of(context).textTheme.bodySmall!.apply(
+                        color: SQColors.black,
                       ),
                 ),
               )
