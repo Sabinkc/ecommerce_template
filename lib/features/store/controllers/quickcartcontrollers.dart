@@ -5,6 +5,11 @@ class QuickCartControllers extends GetxController {
   RxInt selectedColorIndex = 0.obs;
   RxInt selectedSpecIndex = 0.obs;
   RxInt quantity = 1.obs;
+  RxInt selectedImageIndex = 0.obs;
+
+  void changeImageIndex(int index) {
+    selectedImageIndex.value = index;
+  }
 
   void changeSelectedColorIndex(int currentValue) {
     selectedColorIndex.value = currentValue;

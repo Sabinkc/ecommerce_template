@@ -26,6 +26,7 @@ class ProductDetailsScreen extends StatelessWidget {
     final wishlistController = Get.put(WishlistController());
     final String description = productDetails["desc"];
     final Map specifications = productDetails["specifications"] ?? {};
+    final Map image = productDetails["imagewithColor"] ?? {};
     void onSpecificationClicked() {
       showModalBottomSheet(
         //isScrollControlled: true,
@@ -169,7 +170,7 @@ class ProductDetailsScreen extends StatelessWidget {
             children: [
               ImageCarousel(
                 imageController: imageController,
-                images: productDetails["image"],
+                images: image.values.elementAt(0),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 8),

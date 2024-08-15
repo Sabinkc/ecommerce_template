@@ -402,13 +402,13 @@ class ProductContainer extends StatelessWidget {
     required this.productDetails,
   });
 
-  final dynamic productDetails;
+  final Map productDetails;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final wishlistController = Get.put(WishlistController());
-
+    final Map firstImage = productDetails["imagewithColor"];
     return InkWell(
       overlayColor: WidgetStateColor.transparent,
       onTap: () {
@@ -426,7 +426,7 @@ class ProductContainer extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: Image.asset(
-                    productDetails["image"][0],
+                    firstImage.values.elementAt(0)[0],
                     width: size.width,
                     //height: size.width * 0.4,
                     fit: BoxFit.fill,
@@ -434,8 +434,8 @@ class ProductContainer extends StatelessWidget {
                 ),
                 Positioned(
                   right: 0,
-                  child: Obx(
-                    () => IconButton(
+                  child: Obx(() {
+                    return IconButton(
                       onPressed: () {
                         wishlistController.addToWishList(productDetails["productId"], productDetails);
                       },
@@ -444,8 +444,8 @@ class ProductContainer extends StatelessWidget {
                         color: SQColors.primary,
                         size: 25,
                       ),
-                    ),
-                  ),
+                    );
+                  }),
                 ),
                 productDetails["discount"]
                     ? Positioned(

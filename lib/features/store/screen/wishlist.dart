@@ -90,12 +90,12 @@ class WishlistItemContainer extends StatelessWidget {
     super.key,
     required this.productDetails,
   });
-  final dynamic productDetails;
+  final Map productDetails;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final wishlistController = Get.put(WishlistController());
-
+    final Map image = productDetails["imagewithColor"] ?? {};
     return Container(
       width: size.width,
       margin: const EdgeInsets.only(bottom: 15),
@@ -115,7 +115,7 @@ class WishlistItemContainer extends StatelessWidget {
               color: Colors.amber,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(productDetails["image"][0]),
+                image: AssetImage(image.values.elementAt(0)[0]),
               ),
             ),
           ),
@@ -183,7 +183,9 @@ class WishlistItemContainer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
-                        onTap: () => wishlistController.addToWishList(productDetails["productId"], productDetails),
+                        onTap: () {
+                          wishlistController.addToWishList(productDetails["productId"], productDetails);
+                        },
                         child: const Icon(
                           Iconsax.trash_outline,
                           size: 26,

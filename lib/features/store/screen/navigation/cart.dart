@@ -10,7 +10,6 @@ import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/popups/loader.dart';
 import '../../../../widgets/elevatedbutton.dart';
 import '../../controllers/cartcontrollers.dart';
-import '../../controllers/wishlistcontroller.dart';
 import '../../model/functions.dart';
 
 class CartScreen extends StatelessWidget {
@@ -315,7 +314,6 @@ class CartItemContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final spec = cartItemDetails["selectedSpecs"];
-    final wishlistController = Get.put(WishlistController());
     final size = MediaQuery.of(context).size;
     final cartControllers = Get.put(CartControllers());
     return Padding(
@@ -423,19 +421,6 @@ class CartItemContainer extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Obx(
-                              () => InkWell(
-                                overlayColor: WidgetStateColor.transparent,
-                                onTap: () {
-                                  wishlistController.addToWishList(cartItemDetails["productId"], cartItemDetails);
-                                },
-                                child: Icon(
-                                  wishlistController.isFav(cartItemDetails["productId"]) ? Iconsax.heart_bold : Iconsax.heart_outline,
-                                  color: SQColors.primary,
-                                ),
-                              ),
-                            ),
-                            const Spacer(),
                             InkWell(
                               onTap: () => cartControllers.decrementItemQuantity(cartItemDetails["cartItemId"]),
                               child: Container(
@@ -472,6 +457,20 @@ class CartItemContainer extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            const Spacer(),
+                            InkWell(
+                              overlayColor: WidgetStateColor.transparent,
+                              onTap: () {
+                                cartControllers.removeItemFromCart(cartItemDetails["cartItemId"]);
+                                SQLoader.warningSnackBar(
+                                  title: "Removed from Cart",
+                                  message: "An Item has been removed from the cart.",
+                                  duration: 1,
+                                  icon: Iconsax.bag_cross_1_outline,
+                                );
+                              },
+                              child: const Icon(Iconsax.trash_outline),
+                            ),
                           ],
                         ),
                         const SizedBox(
@@ -506,21 +505,6 @@ class CartItemContainer extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            bottom: 2,
-            left: 0,
-            child: IconButton(
-              onPressed: () {
-                cartControllers.removeItemFromCart(cartItemDetails["cartItemId"]);
-                SQLoader.warningSnackBar(
-                  title: "Removed from Cart",
-                  message: "An Item has been removed from the cart.",
-                  duration: 1,
-                );
-              },
-              icon: const Icon(Iconsax.trash_outline),
-            ),
-          )
         ],
       ),
     );
