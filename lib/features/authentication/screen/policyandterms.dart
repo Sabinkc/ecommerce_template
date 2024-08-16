@@ -22,7 +22,7 @@ class PolicyAndTermsScreen extends StatelessWidget {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 25,
+              horizontal: 15,
               vertical: 10,
             ),
             child: Column(
@@ -35,10 +35,9 @@ class PolicyAndTermsScreen extends StatelessWidget {
                 SizedBox(
                   height: size.height * 0.065,
                   child: TabBar(
-                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorSize: TabBarIndicatorSize.label,
                     indicatorColor: SQColors.primary,
                     overlayColor: WidgetStateColor.transparent,
-                    tabAlignment: TabAlignment.fill,
                     labelStyle: Theme.of(context).textTheme.titleMedium!.apply(color: Colors.black),
                     unselectedLabelStyle: Theme.of(context).textTheme.titleMedium!.apply(color: SQColors.textSecondary),
                     tabs: const [
