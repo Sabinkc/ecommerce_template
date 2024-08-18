@@ -29,7 +29,7 @@ class AppSettings extends StatelessWidget {
               AppSettingsTile(
                 leading: const Icon(
                   Iconsax.language_square_outline,
-                  size: 28,
+                  size: 26,
                   color: SQColors.black,
                 ),
                 title: "Language",
@@ -41,7 +41,7 @@ class AppSettings extends StatelessWidget {
               AppSettingsTile(
                 leading: const Icon(
                   Bootstrap.sun,
-                  size: 28,
+                  size: 26,
                   color: SQColors.black,
                 ),
                 title: "Dark Mode",
@@ -74,7 +74,6 @@ class AppSettingsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
       onTap: func,
       shape: const Border(
         bottom: BorderSide(

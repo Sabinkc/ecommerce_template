@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/store/screen/orderdetails.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -11,14 +12,13 @@ class OrdersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final size = MediaQuery.of(context).size;
     final orderController = Get.put(OrderControllers());
     final List orderTabs = [
       "All",
       "To Pay",
       "To Ship",
       "To Receive",
-      "Returns",
+      "All Returns",
     ];
     return DefaultTabController(
       length: orderTabs.length,
@@ -64,7 +64,28 @@ class OrdersScreen extends StatelessWidget {
               child: TabBarView(
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  EmptyOrderListContainer(),
+                  Column(
+                    children: [
+                      OrderedItemContainer(
+                        placedDate: "18 Aug, 2024",
+                        orderNo: "#98731223",
+                        imageLink: "assets/images/phonecase.jpg",
+                        productTitle: "Benks ArmorPro Case for iPhone 15 Pro Max 600D Aramid Fiber Cover",
+                        quantityNo: "1",
+                        orderStatus: "PENDING",
+                        deliveredBy: "20 Aug, 2024",
+                      ),
+                      OrderedItemContainer(
+                        placedDate: "18 Aug, 2024",
+                        orderNo: "#1549879654",
+                        imageLink: "assets/images/laptop.jpg",
+                        productTitle: "Lenovo Ideapad 1 15lGL7 11th Gen Intel Celeron",
+                        quantityNo: "1",
+                        orderStatus: "PENDING",
+                        deliveredBy: "20 Aug, 2024",
+                      ),
+                    ],
+                  ),
                   EmptyOrderListContainer(),
                   EmptyOrderListContainer(),
                   EmptyOrderListContainer(),
@@ -72,6 +93,188 @@ class OrdersScreen extends StatelessWidget {
                 ],
               ),
             )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class OrderedItemContainer extends StatelessWidget {
+  const OrderedItemContainer({
+    super.key,
+    required this.placedDate,
+    required this.orderNo,
+    required this.imageLink,
+    required this.productTitle,
+    required this.quantityNo,
+    required this.orderStatus,
+    required this.deliveredBy,
+  });
+
+  final String placedDate, orderNo, imageLink, productTitle, quantityNo, orderStatus, deliveredBy;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return InkWell(
+      onTap: () => Get.to(
+        () => const OrderDetailsScreen(),
+      ),
+      child: Container(
+        margin: const EdgeInsets.symmetric(
+          horizontal: 15,
+          vertical: 5,
+        ),
+        padding: const EdgeInsets.all(
+          10,
+        ),
+        width: size.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(
+            width: 1,
+            color: SQColors.borderPrimary,
+          ),
+        ),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "Placed on: ",
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ),
+                      TextSpan(
+                        text: placedDate,
+                        style: Theme.of(context).textTheme.labelLarge!.apply(
+                              fontWeightDelta: 1,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "Order no: ",
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ),
+                      TextSpan(
+                        text: orderNo,
+                        style: Theme.of(context).textTheme.labelLarge!.apply(
+                              fontWeightDelta: 1,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: SQSizes.sml,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.circular(
+                      10,
+                    ),
+                    image: DecorationImage(
+                      image: AssetImage(imageLink),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: SQSizes.sml,
+                ),
+                Flexible(
+                  child: SizedBox(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            productTitle,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: SQSizes.sm,
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "Quantity: ",
+                                style: Theme.of(context).textTheme.labelLarge,
+                              ),
+                              TextSpan(
+                                text: quantityNo,
+                                style: Theme.of(context).textTheme.labelLarge!.apply(
+                                      fontWeightDelta: 1,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: SQSizes.sm,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: SQColors.primary,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Text(
+                            orderStatus,
+                            style: Theme.of(context).textTheme.labelLarge!.apply(
+                                  color: Colors.white,
+                                ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: SQSizes.sm,
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "Delivery By: ",
+                                style: Theme.of(context).textTheme.labelLarge,
+                              ),
+                              TextSpan(
+                                text: deliveredBy,
+                                style: Theme.of(context).textTheme.labelLarge!.apply(
+                                      fontWeightDelta: 1,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

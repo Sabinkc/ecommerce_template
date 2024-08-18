@@ -1,15 +1,17 @@
-import 'package:ecommerce/features/personalization/screen/address.dart';
-import 'package:ecommerce/features/store/controllers/ordercontrollers.dart';
-import 'package:ecommerce/features/store/screen/navigation/home.dart';
-import 'package:ecommerce/features/store/screen/orders.dart';
-import 'package:ecommerce/features/store/screen/widgets/profiletile.dart';
-import 'package:ecommerce/features/store/screen/wishlist.dart';
-import 'package:ecommerce/utils/constants/sizes.dart';
+import 'package:ecommerce/features/store/controllers/wishlistcontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../../../personalization/screen/address/address.dart';
+import '../../../personalization/screen/editprofile.dart';
+import '../../controllers/ordercontrollers.dart';
+import '../orders.dart';
 import '../settings/settings.dart';
+import '../widgets/profiletile.dart';
+import '../wishlist.dart';
+import 'home.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -18,6 +20,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final orderController = Get.put(OrderControllers());
+    final wishlistController = Get.put(WishlistController());
     final List<Map<String, dynamic>> myorderOptions = [
       {
         "icon": Iconsax.wallet_2_outline,
@@ -141,7 +144,7 @@ class ProfileScreen extends StatelessWidget {
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
-                                          text: "1",
+                                          text: "${wishlistController.favoriteItems.length}",
                                           style: Theme.of(context).textTheme.bodyLarge!.apply(
                                                 color: SQColors.primary,
                                               ),
@@ -167,6 +170,7 @@ class ProfileScreen extends StatelessWidget {
                                   width: SQSizes.sm,
                                 ),
                                 InkWell(
+                                  overlayColor: WidgetStateColor.transparent,
                                   onTap: () {},
                                   child: RichText(
                                     text: TextSpan(
@@ -191,14 +195,14 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
+                    IconButton(
+                      onPressed: () {
                         Get.to(
                           () => const SettingScreen(),
                           transition: Transition.rightToLeft,
                         );
                       },
-                      child: const Icon(
+                      icon: const Icon(
                         Iconsax.setting_2_outline,
                       ),
                     )
@@ -212,28 +216,6 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 const SizedBox(
                   height: SQSizes.xs,
-                ),
-                SectionHeading(
-                  headingTitle: "Account Information",
-                  func: () {},
-                  showButton: false,
-                ),
-                SQProfileTile(
-                  icon: Iconsax.edit_2_outline,
-                  title: "Edit Profile",
-                  subtitle: "Edit your details here.",
-                  onTap: () {},
-                ),
-                SQProfileTile(
-                  icon: Iconsax.archive_book_outline,
-                  title: "Address Book",
-                  subtitle: "Manage your address here.",
-                  onTap: () => Get.to(
-                    () => const AddressScreen(),
-                  ),
-                ),
-                const SizedBox(
-                  height: SQSizes.md,
                 ),
                 SectionHeading(
                   headingTitle: "My Orders",
@@ -270,6 +252,30 @@ class ProfileScreen extends StatelessWidget {
                         );
                       },
                     ).toList(),
+                  ),
+                ),
+                const SizedBox(
+                  height: SQSizes.md,
+                ),
+                SectionHeading(
+                  headingTitle: "Account Information",
+                  func: () {},
+                  showButton: false,
+                ),
+                SQProfileTile(
+                  icon: Iconsax.edit_2_outline,
+                  title: "Edit Profile",
+                  subtitle: "Edit your details here.",
+                  onTap: () => Get.to(
+                    () => const EditProfileScreen(),
+                  ),
+                ),
+                SQProfileTile(
+                  icon: Iconsax.archive_book_outline,
+                  title: "Address Book",
+                  subtitle: "Manage your address here.",
+                  onTap: () => Get.to(
+                    () => const AddressScreen(),
                   ),
                 ),
                 const SizedBox(
