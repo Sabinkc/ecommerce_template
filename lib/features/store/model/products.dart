@@ -15,7 +15,7 @@ final List products = [
         "assets/images/laptop.jpg",
       ],
     },
-    "productName": "Lenovo Ideapad 1 15lGL7 11thGen Intel Celeron N4020 8GB DDR4 RAM 256GB SSD 15.6 HD Display",
+    "productName": "Lenovo Ideapad 1 15lGL7 11th Gen Intel Celeron N4020 8GB DDR4 RAM 256GB SSD 15.6 HD Display",
     "category": "Laptop",
     "productPrice": 130000,
     "discountedPrice": 110500,

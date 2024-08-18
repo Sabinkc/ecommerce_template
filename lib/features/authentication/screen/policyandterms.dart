@@ -14,6 +14,10 @@ class PolicyAndTermsScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          title: Text(
+            "Conditions",
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
           forceMaterialTransparency: true,
           shape: const Border(
             bottom: BorderSide(color: SQColors.borderSecondary),

@@ -1,9 +1,8 @@
-import 'package:ecommerce/features/personalization/screen/address.dart';
-import 'package:ecommerce/common/screens/landing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:ecommerce/features/authentication/screen/signup.dart';
+import '../../../common/screens/landing.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../widgets/elevatedbutton.dart';
@@ -47,18 +46,14 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: SQSizes.sm,
                   ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(() => const AddressScreen());
-                    },
-                    child: Text(
-                      "We're glad to see you again! Let's get started!",
-                      style: Theme.of(context).textTheme.labelLarge!.apply(
-                            fontWeightDelta: 1,
-                            fontSizeDelta: 1,
-                          ),
-                    ),
+                  Text(
+                    "We're glad to see you again! Let's get started!",
+                    style: Theme.of(context).textTheme.labelLarge!.apply(
+                          fontWeightDelta: 1,
+                          fontSizeDelta: 1,
+                        ),
                   ),
+
                   const SizedBox(
                     height: SQSizes.spaceBtwSections,
                   ),

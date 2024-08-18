@@ -20,13 +20,13 @@ class SQTextField extends StatelessWidget {
         hintText: hinttext,
         hintStyle: Theme.of(context).textTheme.labelLarge!.apply(color: SQColors.textSecondary),
         border: const OutlineInputBorder(
-          borderSide: BorderSide(color: SQColors.borderSecondary, width: 2),
+          borderSide: BorderSide(color: SQColors.borderPrimary, width: 2),
         ),
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: SQColors.black, width: 2),
         ),
         enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: SQColors.borderSecondary, width: 2),
+          borderSide: BorderSide(color: SQColors.borderPrimary, width: 2),
         ),
       ),
     );
