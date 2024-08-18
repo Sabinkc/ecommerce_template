@@ -1,8 +1,11 @@
+import 'package:ecommerce/features/personalization/screen/address/addaddress.dart';
+import 'package:ecommerce/features/personalization/screen/address/editaddress.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
-import '../../../utils/constants/sizes.dart';
-import 'widget/addresscontiner.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../widget/addresscontainer.dart';
 
 class AddressScreen extends StatelessWidget {
   const AddressScreen({super.key});
@@ -26,7 +29,9 @@ class AddressScreen extends StatelessWidget {
         height: size.height * 0.08,
         child: FittedBox(
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () => Get.to(
+              () => const AddAddressScreen(),
+            ),
             backgroundColor: SQColors.primary,
             child: const Icon(
               Iconsax.add_outline,
@@ -36,9 +41,9 @@ class AddressScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: const SafeArea(
+      body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Center(
             child: Column(
               children: [
@@ -50,8 +55,11 @@ class AddressScreen extends StatelessWidget {
                   landmark: "Karuna Hospital",
                   place: "HOME",
                   defaultShipping: true,
+                  func: () => Get.to(
+                    () => const EditAddressScreen(),
+                  ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: SQSizes.md,
                 ),
                 AddressContainer(
@@ -62,6 +70,7 @@ class AddressScreen extends StatelessWidget {
                   landmark: "Shankhamul Health Care",
                   place: "OFFICE",
                   defaultShipping: false,
+                  func: () {},
                 ),
               ],
             ),

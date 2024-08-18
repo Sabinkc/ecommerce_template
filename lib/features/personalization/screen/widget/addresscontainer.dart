@@ -12,9 +12,11 @@ class AddressContainer extends StatelessWidget {
     required this.landmark,
     required this.place,
     required this.defaultShipping,
+    required this.func,
   });
   final String fullname, phoneno, municipality, street, landmark, place;
   final bool defaultShipping;
+  final VoidCallback func;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -24,7 +26,7 @@ class AddressContainer extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         border: Border.all(
-          color: SQColors.borderSecondary,
+          color: SQColors.borderPrimary,
           width: 2,
         ),
       ),
@@ -49,11 +51,14 @@ class AddressContainer extends StatelessWidget {
                       ),
                 ),
               ),
-              Text(
-                "Edit",
-                style: Theme.of(context).textTheme.titleSmall!.apply(
-                      fontWeightDelta: 1,
-                    ),
+              InkWell(
+                onTap: func,
+                child: Text(
+                  "Edit",
+                  style: Theme.of(context).textTheme.titleSmall!.apply(
+                        fontWeightDelta: 1,
+                      ),
+                ),
               ),
             ],
           ),
@@ -93,7 +98,7 @@ class AddressContainer extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                width: SQSizes.sm,
+                width: SQSizes.md,
               ),
               if (defaultShipping)
                 Container(
@@ -106,7 +111,8 @@ class AddressContainer extends StatelessWidget {
                   ),
                   child: const Center(
                     child: Text(
-                      "Default Shipping & Billing address",
+                      "Shipping & Billing address",
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ),
