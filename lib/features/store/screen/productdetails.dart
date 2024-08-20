@@ -1,3 +1,6 @@
+import 'package:ecommerce/features/store/model/products.dart';
+import 'package:ecommerce/features/store/screen/reviews/review.dart';
+import 'package:ecommerce/features/store/screen/reviews/smallreview.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,9 +9,12 @@ import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../widgets/elevatedbutton.dart';
 import '../../../widgets/imagecarousel.dart';
+import '../../../widgets/sectionheading.dart';
 import '../controllers/wishlistcontroller.dart';
 import '../model/functions.dart';
-import 'navigation/productdetailscontroller.dart';
+import '../controllers/productdetailscontroller.dart';
+import 'reviews/SmallReviewContainer.dart';
+import 'widgets/productcontainer.dart';
 import 'widgets/specifications.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -35,6 +41,13 @@ class ProductDetailsScreen extends StatelessWidget {
         builder: (context) => SpecificationsScreen(
           specificationDetails: specifications,
         ),
+      );
+    }
+
+    void onReviewClicked() {
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => const SmallReviewScreen(),
       );
     }
 
@@ -125,15 +138,15 @@ class ProductDetailsScreen extends StatelessWidget {
                             padding: const EdgeInsets.all(2),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              color: const Color.fromARGB(108, 255, 182, 72),
+                              color: SQColors.primary.withOpacity(0.2),
                             ),
                             child: Text(
                               "-${productDetails["discountPerc"]}%",
                               style: Theme.of(context).textTheme.labelSmall!.apply(
-                                    color: Colors.red,
+                                    color: SQColors.primary,
                                   ),
                             ),
-                          )
+                          ),
                         ],
                       )
                     : const SizedBox.shrink(),
@@ -166,6 +179,7 @@ class ProductDetailsScreen extends StatelessWidget {
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ImageCarousel(
@@ -173,7 +187,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 images: image.values.elementAt(0),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -217,7 +231,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       children: [
                         const Icon(
                           Icons.star_rounded,
-                          color: Colors.amber,
+                          color: SQColors.primary,
                         ),
                         const SizedBox(
                           width: SQSizes.sm,
@@ -244,8 +258,8 @@ class ProductDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         const Icon(
-                          Iconsax.like_1_bold,
-                          color: Colors.amber,
+                          Iconsax.like_tag_outline,
+                          color: SQColors.primary,
                         ),
                         const SizedBox(
                           width: SQSizes.sm,
@@ -315,13 +329,96 @@ class ProductDetailsScreen extends StatelessWidget {
                     ProductDetailsOptionContainer(
                       title: "Reviews",
                       leadingIcon: Iconsax.keyboard_outline,
-                      func: () {},
-                    )
+                      func: onReviewClicked,
+                    ),
+                    const SizedBox(
+                      height: SQSizes.md,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Reviews and Rating (5)",
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        InkWell(
+                          overlayColor: WidgetStateColor.transparent,
+                          onTap: () => Get.to(
+                            () => const ReviewScreen(),
+                          ),
+                          child: Text(
+                            "View All",
+                            style: Theme.of(context).textTheme.bodySmall!.apply(
+                                  color: SQColors.black,
+                                ),
+                          ),
+                        )
+                      ],
+                    ),
+                    // SectionHeading(
+                    //   headingTitle: "Reviews and Rating (5)",
+                    //   func: () => Get.to(
+                    //     () => const ReviewScreen(),
+                    //   ),
+                    //   buttonTitle: "View All",
+                    // ),
+                    const SizedBox(
+                      height: SQSizes.xs,
+                    ),
+                    const SmallReviewContainer(
+                      imagelink: "assets/images/headphone.jpg",
+                      review: "Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a ",
+                      rating: 3.5,
+                      reviewedBy: "Suman S.",
+                    ),
+                    const SmallReviewContainer(
+                      imagelink: "assets/images/headphone.jpg",
+                      review: "Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a ",
+                      rating: 3.5,
+                      reviewedBy: "Suman S.",
+                    ),
+                    const SmallReviewContainer(
+                      imagelink: "assets/images/headphone.jpg",
+                      review: "Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a ",
+                      rating: 3.5,
+                      reviewedBy: "Suman S.",
+                    ),
                   ],
                 ),
               ),
               const SizedBox(
-                height: 100,
+                height: SQSizes.md,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: SectionHeading(
+                  headingTitle: "Similar Products",
+                  func: () {},
+                ),
+              ),
+              const SizedBox(
+                height: SQSizes.md,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: SizedBox(
+                  height: size.width * 0.6,
+                  child: ListView(
+                    physics: const ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    children: products
+                        .map((element) => Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              child: ProductContainer(productDetails: element),
+                            ))
+                        .take(5)
+                        .toList(),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: size.width * 0.25,
               )
             ],
           ),
