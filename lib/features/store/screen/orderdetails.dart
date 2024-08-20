@@ -1,5 +1,6 @@
 import 'package:ecommerce/features/store/screen/checkout.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
+import 'package:ecommerce/widgets/elevatedbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
@@ -32,13 +33,16 @@ class OrderDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 10,
+              ),
               decoration: BoxDecoration(
                 color: SQColors.primary,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                "Order No: #98731223",
+                "Order No: #9a00e",
                 style: Theme.of(context).textTheme.headlineSmall!.apply(
                       color: Colors.white,
                     ),
@@ -174,7 +178,39 @@ class OrderDetailsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
+            const SizedBox(
+              height: SQSizes.md,
+            ),
+            SizedBox(
+              width: size.width,
+              height: size.height * 0.055,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(
+                      width: 1,
+                      color: SQColors.primary,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      5,
+                    ),
+                  ),
+                ),
+                child: Text(
+                  "Cancel Order",
+                  style: Theme.of(context).textTheme.headlineSmall!.apply(
+                        color: Colors.black,
+                      ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: SQSizes.md,
+            ),
+            SQElevatedButton(func: () {}, title: "Raise a Concern"),
           ],
         ),
       ),

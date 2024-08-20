@@ -1,7 +1,7 @@
-import 'package:ecommerce/features/store/screen/navigation/home.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../../widgets/sectionheading.dart';
 
 class MessageSettings extends StatelessWidget {
   const MessageSettings({super.key});

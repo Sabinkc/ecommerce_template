@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
+import '../../../../widgets/sectionheading.dart';
 import '../../../personalization/screen/address/address.dart';
 import '../../../personalization/screen/editprofile.dart';
 import '../../controllers/ordercontrollers.dart';
@@ -11,7 +12,6 @@ import '../orders.dart';
 import '../settings/settings.dart';
 import '../widgets/profiletile.dart';
 import '../wishlist.dart';
-import 'home.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

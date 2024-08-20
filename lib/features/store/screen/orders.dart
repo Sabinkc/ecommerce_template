@@ -6,6 +6,7 @@ import 'package:icons_plus/icons_plus.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 import '../controllers/ordercontrollers.dart';
+import '../model/alltabs.dart';
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});
@@ -13,13 +14,7 @@ class OrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final orderController = Get.put(OrderControllers());
-    final List orderTabs = [
-      "All",
-      "To Pay",
-      "To Ship",
-      "To Receive",
-      "All Returns",
-    ];
+
     return DefaultTabController(
       length: orderTabs.length,
       initialIndex: orderController.tabIndex.value,

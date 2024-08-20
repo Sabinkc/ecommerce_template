@@ -1,5 +1,4 @@
 import 'package:ecommerce/features/store/controllers/checkoutcontroller.dart';
-import 'package:ecommerce/features/store/screen/navigation/home.dart';
 import 'package:ecommerce/features/store/screen/ordersuccess.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +6,7 @@ import 'package:icons_plus/icons_plus.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../widgets/elevatedbutton.dart';
+import '../../../widgets/sectionheading.dart';
 import '../model/functions.dart';
 
 class CheckOutScreen extends StatelessWidget {

@@ -5,6 +5,9 @@ import '../../../utils/popups/screenloader.dart';
 import '../../../utils/validators/validation.dart';
 
 class SignupController extends GetxController {
+  /// This controller is for Signup Screen, it controlls all textfield, password
+  /// obscure and also have validation. On successful login it will take user to
+  /// landing screen.
   static SignupController get instance => Get.find();
   final hidepassword = true.obs;
   final hideconfirmpassword = true.obs;
