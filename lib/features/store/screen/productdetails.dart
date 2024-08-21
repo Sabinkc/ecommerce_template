@@ -1,5 +1,4 @@
 import 'package:ecommerce/features/store/model/products.dart';
-import 'package:ecommerce/features/store/screen/reviews/review.dart';
 import 'package:ecommerce/features/store/screen/reviews/smallreview.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ import '../../../widgets/sectionheading.dart';
 import '../controllers/wishlistcontroller.dart';
 import '../model/functions.dart';
 import '../controllers/productdetailscontroller.dart';
-import 'reviews/SmallReviewContainer.dart';
 import 'widgets/productcontainer.dart';
 import 'widgets/specifications.dart';
 
@@ -182,10 +180,13 @@ class ProductDetailsScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ImageCarousel(
-                imageController: imageController,
-                images: image.values.elementAt(0),
-              ),
+              Obx(() {
+                final List<String> selected = image.entries.elementAt(productdetailsController.selectedColorIndex.value).value;
+                return ImageCarousel(
+                  imageController: imageController,
+                  images: selected,
+                );
+              }),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 child: Column(
@@ -281,6 +282,53 @@ class ProductDetailsScreen extends StatelessWidget {
                       height: SQSizes.md,
                     ),
                     Text(
+                      "Colors:",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(
+                      height: SQSizes.sm,
+                    ),
+                    Obx(() {
+                      final List allcolors = image.keys.toList();
+                      return Wrap(
+                        spacing: 8,
+                        runSpacing: 6,
+                        children: allcolors.asMap().entries.map((entry) {
+                          int index = entry.key;
+                          Color color = entry.value;
+                          return InkWell(
+                            overlayColor: WidgetStateColor.transparent,
+                            onTap: () => productdetailsController.changeSelectedColorIndex(index),
+                            child: Container(
+                              width: 35,
+                              height: 35,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  strokeAlign: BorderSide.strokeAlignOutside,
+                                  width: 2,
+                                  color: productdetailsController.selectedColorIndex.value == index ? color : Colors.transparent,
+                                ),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: Container(
+                                  width: 25,
+                                  height: 25,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: color,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      );
+                    }),
+                    const SizedBox(
+                      height: SQSizes.md,
+                    ),
+                    Text(
                       "Description",
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
@@ -334,55 +382,6 @@ class ProductDetailsScreen extends StatelessWidget {
                     const SizedBox(
                       height: SQSizes.md,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Reviews and Rating (5)",
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        InkWell(
-                          overlayColor: WidgetStateColor.transparent,
-                          onTap: () => Get.to(
-                            () => const ReviewScreen(),
-                          ),
-                          child: Text(
-                            "View All",
-                            style: Theme.of(context).textTheme.bodySmall!.apply(
-                                  color: SQColors.black,
-                                ),
-                          ),
-                        )
-                      ],
-                    ),
-                    // SectionHeading(
-                    //   headingTitle: "Reviews and Rating (5)",
-                    //   func: () => Get.to(
-                    //     () => const ReviewScreen(),
-                    //   ),
-                    //   buttonTitle: "View All",
-                    // ),
-                    const SizedBox(
-                      height: SQSizes.xs,
-                    ),
-                    const SmallReviewContainer(
-                      imagelink: "assets/images/headphone.jpg",
-                      review: "Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a ",
-                      rating: 3.5,
-                      reviewedBy: "Suman S.",
-                    ),
-                    const SmallReviewContainer(
-                      imagelink: "assets/images/headphone.jpg",
-                      review: "Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a ",
-                      rating: 3.5,
-                      reviewedBy: "Suman S.",
-                    ),
-                    const SmallReviewContainer(
-                      imagelink: "assets/images/headphone.jpg",
-                      review: "Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a ",
-                      rating: 3.5,
-                      reviewedBy: "Suman S.",
-                    ),
                   ],
                 ),
               ),
@@ -410,7 +409,16 @@ class ProductDetailsScreen extends StatelessWidget {
                     children: products
                         .map((element) => Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8),
-                              child: ProductContainer(productDetails: element),
+                              child: ProductContainer(
+                                productDetails: element,
+                                func: () {
+                                  productdetailsController.changeSelectedColorIndex(0);
+                                  Get.to(
+                                    preventDuplicates: false,
+                                    () => ProductDetailsScreen(productDetails: element),
+                                  );
+                                },
+                              ),
                             ))
                         .take(5)
                         .toList(),

@@ -1,14 +1,16 @@
 import 'package:ecommerce/features/store/screen/checkout.dart';
+import 'package:ecommerce/features/store/screen/reviews/addreview.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/widgets/elevatedbutton.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../../../utils/constants/colors.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
-  const OrderDetailsScreen({super.key});
-
+  const OrderDetailsScreen({super.key, required this.orderStatus});
+  final String orderStatus;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -186,7 +188,11 @@ class OrderDetailsScreen extends StatelessWidget {
               width: size.width,
               height: size.height * 0.055,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: orderStatus == "To Review"
+                    ? () {
+                        Get.to(() => const AddReviewScreen());
+                      }
+                    : () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
@@ -200,7 +206,7 @@ class OrderDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  "Cancel Order",
+                  orderStatus == "To Review" ? "Review Product" : "Cancel Order",
                   style: Theme.of(context).textTheme.headlineSmall!.apply(
                         color: Colors.black,
                       ),

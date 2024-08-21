@@ -200,7 +200,7 @@ class CartItemContainer extends StatelessWidget {
               child: Obx(
                 () => GFCheckbox(
                   size: 25,
-                  type: GFCheckboxType.custom,
+                  type: GFCheckboxType.basic,
                   customBgColor: SQColors.primary,
                   onChanged: (value) {
                     cartControllers.selectItems(cartItemDetails["cartItemId"]);

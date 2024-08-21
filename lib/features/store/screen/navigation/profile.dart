@@ -1,4 +1,6 @@
 import 'package:ecommerce/features/store/controllers/wishlistcontroller.dart';
+import 'package:ecommerce/features/store/screen/others/messages.dart';
+import 'package:ecommerce/features/store/screen/others/myreviews.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -47,10 +49,18 @@ class ProfileScreen extends StatelessWidget {
         },
       },
       {
+        "icon": Iconsax.keyboard_open_outline,
+        "option": "To Review",
+        "func": () {
+          orderController.changeTabIndex(4);
+          Get.to(() => const OrdersScreen());
+        },
+      },
+      {
         "icon": Iconsax.undo_outline,
         "option": "All Returns",
         "func": () {
-          orderController.changeTabIndex(4);
+          orderController.changeTabIndex(5);
           Get.to(() => const OrdersScreen());
         },
       },
@@ -59,7 +69,9 @@ class ProfileScreen extends StatelessWidget {
       {
         "icon": Iconsax.message_outline,
         "option": "Messages",
-        "func": () {},
+        "func": () {
+          Get.to(() => const MessagesScreen());
+        },
       },
       {
         "icon": Iconsax.send_2_outline,
@@ -69,7 +81,9 @@ class ProfileScreen extends StatelessWidget {
       {
         "icon": Iconsax.keyboard_outline,
         "option": "My Reviews",
-        "func": () {},
+        "func": () {
+          Get.to(() => const MyReviewsScreen());
+        },
       },
       {
         "icon": Iconsax.card_coin_outline,
@@ -297,7 +311,7 @@ class ProfileScreen extends StatelessWidget {
                         return OrderOptions(
                           optionTitle: entry["option"],
                           icon: entry["icon"],
-                          func: () {},
+                          func: entry["func"],
                         );
                       },
                     ).toList(),

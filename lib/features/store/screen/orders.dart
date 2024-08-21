@@ -67,7 +67,7 @@ class OrdersScreen extends StatelessWidget {
                         imageLink: "assets/images/phonecase.jpg",
                         productTitle: "Benks ArmorPro Case for iPhone 15 Pro Max 600D Aramid Fiber Cover",
                         quantityNo: "1",
-                        orderStatus: "PENDING",
+                        orderStatus: "To Pay",
                         deliveredBy: "20 Aug, 2024",
                       ),
                       OrderedItemContainer(
@@ -76,11 +76,12 @@ class OrdersScreen extends StatelessWidget {
                         imageLink: "assets/images/laptop.jpg",
                         productTitle: "Lenovo Ideapad 1 15lGL7 11th Gen Intel Celeron",
                         quantityNo: "1",
-                        orderStatus: "PENDING",
+                        orderStatus: "To Review",
                         deliveredBy: "20 Aug, 2024",
                       ),
                     ],
                   ),
+                  EmptyOrderListContainer(),
                   EmptyOrderListContainer(),
                   EmptyOrderListContainer(),
                   EmptyOrderListContainer(),
@@ -113,8 +114,11 @@ class OrderedItemContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return InkWell(
+      overlayColor: WidgetStateColor.transparent,
       onTap: () => Get.to(
-        () => const OrderDetailsScreen(),
+        () => OrderDetailsScreen(
+          orderStatus: orderStatus,
+        ),
       ),
       child: Container(
         margin: const EdgeInsets.symmetric(

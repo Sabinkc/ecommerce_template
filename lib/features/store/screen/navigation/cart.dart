@@ -35,13 +35,12 @@ class CartScreen extends StatelessWidget {
           ),
           Center(
             child: SizedBox(
-              width: 40,
-              height: 40,
+              width: 45,
+              height: 45,
               child: Obx(
                 () => GFCheckbox(
-                  type: GFCheckboxType.custom,
-                  customBgColor: SQColors.primary,
-                  size: 20,
+                  type: GFCheckboxType.basic,
+                  size: 22,
                   onChanged: (value) {
                     cartControllers.selectAllItems();
                   },

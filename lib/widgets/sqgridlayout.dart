@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../features/store/model/products.dart';
+import '../features/store/screen/productdetails.dart';
 import '../features/store/screen/widgets/productcontainer.dart';
 
 class SQGridLayout extends StatelessWidget {
@@ -24,6 +26,12 @@ class SQGridLayout extends StatelessWidget {
         final product = products[index];
         return ProductContainer(
           productDetails: product,
+          func: () {
+            Get.to(
+              preventDuplicates: false,
+              () => ProductDetailsScreen(productDetails: product),
+            );
+          },
         );
       },
     );

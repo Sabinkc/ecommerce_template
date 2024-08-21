@@ -6,15 +6,16 @@ import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../controllers/wishlistcontroller.dart';
 import '../../model/functions.dart';
-import '../productdetails.dart';
 
 class ProductContainer extends StatelessWidget {
   const ProductContainer({
     super.key,
     required this.productDetails,
+    required this.func,
   });
 
   final Map productDetails;
+  final VoidCallback func;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +24,7 @@ class ProductContainer extends StatelessWidget {
     final Map firstImage = productDetails["imagewithColor"];
     return InkWell(
       overlayColor: WidgetStateColor.transparent,
-      onTap: () {
-        Get.to(
-          preventDuplicates: false,
-          () => ProductDetailsScreen(productDetails: productDetails),
-        );
-      },
+      onTap: func,
       child: SizedBox(
         width: size.width * 0.41,
         child: Column(
