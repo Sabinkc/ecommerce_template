@@ -1,6 +1,8 @@
 import 'package:ecommerce/features/store/controllers/wishlistcontroller.dart';
+import 'package:ecommerce/features/store/screen/others/faqs.dart';
 import 'package:ecommerce/features/store/screen/others/messages.dart';
 import 'package:ecommerce/features/store/screen/others/myreviews.dart';
+import 'package:ecommerce/features/store/screen/others/voucher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -73,11 +75,11 @@ class ProfileScreen extends StatelessWidget {
           Get.to(() => const MessagesScreen());
         },
       },
-      {
-        "icon": Iconsax.send_2_outline,
-        "option": "Chat",
-        "func": () {},
-      },
+      // {
+      //   "icon": Iconsax.send_2_outline,
+      //   "option": "Chat",
+      //   "func": () {},
+      // },
       {
         "icon": Iconsax.keyboard_outline,
         "option": "My Reviews",
@@ -91,9 +93,13 @@ class ProfileScreen extends StatelessWidget {
         "func": () {},
       },
       {
-        "icon": Iconsax.info_circle_outline,
-        "option": "Help Center",
-        "func": () {},
+        "icon": Iconsax.message_question_outline,
+        "option": "FAQs",
+        "func": () {
+          Get.to(
+            () => const FAQsScreen(),
+          );
+        },
       },
     ];
     return Scaffold(
@@ -185,7 +191,11 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                                 InkWell(
                                   overlayColor: WidgetStateColor.transparent,
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.to(
+                                      () => const VoucherScreen(),
+                                    );
+                                  },
                                   child: RichText(
                                     text: TextSpan(
                                       children: [

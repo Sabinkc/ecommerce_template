@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/authentication/screen/emailverification.dart';
 import 'package:ecommerce/widgets/passwordfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -140,7 +141,12 @@ class SignUpScreen extends StatelessWidget {
                     height: SQSizes.spaceBtwSections,
                   ),
                   SQElevatedButton(
-                    func: signupController.textfieldchecker,
+                    func: () {
+                      Get.to(
+                        () => const EmailVerificationScreen(),
+                      );
+                    },
+                    //func: signupController.textfieldchecker,
                     title: "SIGN UP",
                   ),
                   const SizedBox(

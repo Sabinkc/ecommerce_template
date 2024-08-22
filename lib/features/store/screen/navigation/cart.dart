@@ -102,7 +102,7 @@ class CartScreen extends StatelessWidget {
               Obx(
                 () => cartControllers.selectedCartItems.isNotEmpty
                     ? const SizedBox(
-                        height: 180,
+                        height: 100,
                       )
                     : const SizedBox(
                         height: SQSizes.md,

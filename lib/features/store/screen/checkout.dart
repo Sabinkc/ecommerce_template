@@ -1,5 +1,6 @@
 import 'package:ecommerce/features/store/controllers/checkoutcontroller.dart';
 import 'package:ecommerce/features/store/screen/ordersuccess.dart';
+import 'package:ecommerce/widgets/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -37,11 +38,96 @@ class CheckOutScreen extends StatelessWidget {
           ),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
-        child: SQElevatedButton(
-          func: () {
-            Get.to(() => const OrderSuccessScreen());
-          },
-          title: "Place Order",
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InkWell(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Enter Voucher Code",
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: const Icon(Icons.close),
+                          ),
+                        ],
+                      ),
+                      content: SQTextField(
+                        controller: TextEditingController(),
+                        hinttext: "Code",
+                      ),
+                      actions: [
+                        SQElevatedButton(
+                          func: () {
+                            checkoutController.addDiscount(100.0);
+                            Get.back();
+                          },
+                          title: "SUBMIT",
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: Row(
+                children: [
+                  const Icon(
+                    Iconsax.ticket_bold,
+                    color: SQColors.primary,
+                  ),
+                  const SizedBox(
+                    width: SQSizes.sml,
+                  ),
+                  Expanded(
+                    child: Text(
+                      "Voucher",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ),
+                  Text(
+                    "Click to add",
+                    style: Theme.of(context).textTheme.bodySmall!.apply(
+                          color: SQColors.textPrimary,
+                        ),
+                  ),
+                  const SizedBox(
+                    width: SQSizes.sml,
+                  ),
+                  const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 15,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: SQSizes.sml,
+            ),
+            const Divider(),
+            const SizedBox(
+              height: SQSizes.sml,
+            ),
+            SQElevatedButton(
+              func: () {
+                Get.to(() => const OrderSuccessScreen());
+              },
+              title: "Place Order",
+            ),
+          ],
         ),
       ),
       body: SingleChildScrollView(
@@ -104,10 +190,14 @@ class CheckOutScreen extends StatelessWidget {
                       title: "Shipping Fee",
                       price: "${checkoutController.shippingFee}",
                     ),
-                    // ReceiptContent(
-                    //   title: "Tax Fee",
-                    //   price: formatNumber(checkoutController.taxCalculator()),
-                    // ),
+                    Obx(
+                      () => checkoutController.voucherDiscount.value > 0
+                          ? ReceiptContent(
+                              title: "Discount",
+                              price: formatNumber(checkoutController.voucherDiscount.value),
+                            )
+                          : const SizedBox.shrink(),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 3),
                       child: Row(
@@ -118,21 +208,23 @@ class CheckOutScreen extends StatelessWidget {
                             "Order Total :",
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
-                          RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: "Rs. ",
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                                TextSpan(
-                                  text: formatNumber(checkoutController.getOrderTotal()),
-                                  style: Theme.of(context).textTheme.headlineSmall!.apply(
-                                        fontWeightDelta: 1,
-                                        color: SQColors.primary,
-                                      ),
-                                ),
-                              ],
+                          Obx(
+                            () => RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: "Rs. ",
+                                    style: Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                  TextSpan(
+                                    text: formatNumber(checkoutController.getOrderTotal()),
+                                    style: Theme.of(context).textTheme.headlineSmall!.apply(
+                                          fontWeightDelta: 1,
+                                          color: SQColors.primary,
+                                        ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -252,7 +344,7 @@ class CheckOutScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 80,
+                height: 120,
               ),
             ],
           ),
@@ -397,18 +489,24 @@ class ReceiptContent extends StatelessWidget {
         children: [
           Text(
             "$title :",
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme.of(context).textTheme.titleMedium!.apply(
+                  color: title == "Discount" ? Colors.red : Colors.black,
+                ),
           ),
           RichText(
             text: TextSpan(
               children: [
                 TextSpan(
                   text: "Rs: ",
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: Theme.of(context).textTheme.bodyMedium!.apply(
+                        color: title == "Discount" ? Colors.red : Colors.black,
+                      ),
                 ),
                 TextSpan(
                   text: price,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleLarge!.apply(
+                        color: title == "Discount" ? Colors.red : Colors.black,
+                      ),
                 ),
               ],
             ),

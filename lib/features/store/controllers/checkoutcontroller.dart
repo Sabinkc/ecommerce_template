@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 class CheckoutController extends GetxController {
   static CheckoutController get instance => Get.find();
   RxList checkoutItem = [].obs;
-  double shippingFee = 100.0;
+  double shippingFee = 50.0;
   RxDouble taxFee = 0.0.obs;
   RxDouble subTotal = 0.0.obs;
+  RxDouble voucherDiscount = 0.0.obs;
 
   double getSubTotalPrice() {
     for (var item in checkoutItem) {
@@ -24,13 +25,19 @@ class CheckoutController extends GetxController {
     return taxFee.value;
   }
 
+  void addDiscount(double discount) {
+    voucherDiscount.value = discount;
+    getOrderTotal();
+  }
+
   void resetValue() {
     checkoutItem.value = [];
     taxFee.value = 0.0;
     subTotal.value = 0.0;
+    voucherDiscount.value = 0.0;
   }
 
   double getOrderTotal() {
-    return subTotal.value + shippingFee;
+    return subTotal.value + shippingFee - voucherDiscount.value;
   }
 }

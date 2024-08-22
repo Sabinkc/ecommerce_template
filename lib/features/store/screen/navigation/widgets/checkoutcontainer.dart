@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:icons_plus/icons_plus.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../widgets/elevatedbutton.dart';
@@ -29,105 +28,62 @@ class CheckoutContainer extends StatelessWidget {
           ),
         ),
       ),
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(
-                Iconsax.ticket_bold,
-                color: SQColors.primary,
-              ),
-              const SizedBox(
-                width: SQSizes.sml,
-              ),
-              Expanded(
-                child: Text(
-                  "Voucher",
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              ),
               Text(
-                "Click to add",
-                style: Theme.of(context).textTheme.bodySmall!.apply(
-                      color: SQColors.textPrimary,
-                    ),
-              ),
-              const SizedBox(
-                width: SQSizes.sml,
-              ),
-              const Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 15,
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: SQSizes.sml,
-          ),
-          const Divider(),
-          const SizedBox(
-            height: SQSizes.sml,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Total Price",
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  Obx(
-                    () => RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "Rs ",
-                            style: Theme.of(context).textTheme.labelLarge,
-                          ),
-                          TextSpan(
-                            text: formatNumber(cartControllers.calculateTotalPrice()),
-                            style: Theme.of(context).textTheme.headlineSmall!.apply(
-                                  fontSizeDelta: 5,
-                                  color: SQColors.primary,
-                                ),
-                          ),
-                          TextSpan(
-                            text: ".00",
-                            style: Theme.of(context).textTheme.labelLarge,
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                width: SQSizes.lg,
+                "Total Price",
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               Obx(
-                () => Flexible(
-                  child: SizedBox(
-                    height: 45,
-                    child: SQElevatedButton(
-                      func: () {
-                        cartControllers.addToCheckout();
-
-                        Get.to(
-                          () => const CheckOutScreen(),
-                        );
-                      },
-                      title: "CHECKOUT (${cartControllers.selectedCartItems.length})",
-                    ),
+                () => RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "Rs ",
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ),
+                      TextSpan(
+                        text: formatNumber(cartControllers.calculateTotalPrice()),
+                        style: Theme.of(context).textTheme.headlineSmall!.apply(
+                              fontSizeDelta: 5,
+                              color: SQColors.primary,
+                            ),
+                      ),
+                      TextSpan(
+                        text: ".00",
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ),
+                    ],
                   ),
                 ),
-              ),
+              )
             ],
           ),
           const SizedBox(
-            height: SQSizes.sm,
+            width: SQSizes.lg,
+          ),
+          Obx(
+            () => Flexible(
+              child: SizedBox(
+                height: 45,
+                child: SQElevatedButton(
+                  func: () {
+                    cartControllers.addToCheckout();
+
+                    Get.to(
+                      () => const CheckOutScreen(),
+                    );
+                  },
+                  title: "CHECKOUT (${cartControllers.selectedCartItems.length})",
+                ),
+              ),
+            ),
           ),
         ],
       ),
