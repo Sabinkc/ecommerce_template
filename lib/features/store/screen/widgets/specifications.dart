@@ -77,11 +77,13 @@ class SpecificationContainer extends StatelessWidget {
                 const SizedBox(
                   width: SQSizes.sml,
                 ),
-                Text(
-                  subtitle,
-                  style: Theme.of(context).textTheme.bodyMedium!.apply(
-                        color: SQColors.darkGrey,
-                      ),
+                Flexible(
+                  child: Text(
+                    subtitle,
+                    style: Theme.of(context).textTheme.bodyMedium!.apply(
+                          color: SQColors.darkGrey,
+                        ),
+                  ),
                 ),
               ],
             ),

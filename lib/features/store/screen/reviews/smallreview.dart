@@ -44,19 +44,19 @@ class SmallReviewScreen extends StatelessWidget {
           physics: const ClampingScrollPhysics(),
           children: [
             const SmallReviewContainer(
-              imagelink: "assets/images/headphone.jpg",
+              imagelink: "assets/images/iphonecases/iphone15_1.jpg",
               review: "Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a ",
               rating: 3.5,
               reviewedBy: "Suman S.",
             ),
             const SmallReviewContainer(
-              imagelink: "assets/images/headphone.jpg",
+              imagelink: "assets/images/iphonecases/iphone15_1.jpg",
               review: "Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a ",
               rating: 3.5,
               reviewedBy: "Suman S.",
             ),
             const SmallReviewContainer(
-              imagelink: "assets/images/headphone.jpg",
+              imagelink: "assets/images/iphonecases/iphone15_1.jpg",
               review: "Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a ",
               rating: 3.5,
               reviewedBy: "Suman S.",

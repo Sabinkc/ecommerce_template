@@ -44,6 +44,10 @@ class AddReviewScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(10),
+                      image: const DecorationImage(
+                        image: AssetImage("assets/images/iphonecases/iphone15_1.jpg"),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -127,6 +131,10 @@ class AddReviewScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.purple,
                       borderRadius: BorderRadius.circular(10),
+                      image: const DecorationImage(
+                        image: AssetImage("assets/images/iphonecases/iphone15_1.jpg"),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Container(
@@ -136,6 +144,10 @@ class AddReviewScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(10),
+                      image: const DecorationImage(
+                        image: AssetImage("assets/images/iphonecases/iphone15_1.jpg"),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Container(
@@ -145,6 +157,10 @@ class AddReviewScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.cyanAccent,
                       borderRadius: BorderRadius.circular(10),
+                      image: const DecorationImage(
+                        image: AssetImage("assets/images/iphonecases/iphone15_1.jpg"),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ],

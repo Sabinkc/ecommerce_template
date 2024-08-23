@@ -29,7 +29,7 @@ class MyReviewsScreen extends StatelessWidget {
         child: Column(
           children: [
             MyReviewContainer(
-              imagelink: "assets/images/phonecase.jpg",
+              imagelink: "assets/images/iphonecases/iphone15_1.jpg",
               productTitle: "Benks ArmorPro Case for iPhone 15 Pro Max 600D Aramid Fiber Cover",
               date: "08/21/2024",
               rating: 3.5,
@@ -149,6 +149,10 @@ class MyReviewContainer extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.purple,
                   borderRadius: BorderRadius.circular(10),
+                  image: const DecorationImage(
+                    image: AssetImage("assets/images/iphonecases/iphone15_1.jpg"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Container(
@@ -158,6 +162,10 @@ class MyReviewContainer extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.blue,
                   borderRadius: BorderRadius.circular(10),
+                  image: const DecorationImage(
+                    image: AssetImage("assets/images/iphonecases/iphone15_1.jpg"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Container(
@@ -167,6 +175,10 @@ class MyReviewContainer extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.cyanAccent,
                   borderRadius: BorderRadius.circular(10),
+                  image: const DecorationImage(
+                    image: AssetImage("assets/images/iphonecases/iphone15_1.jpg"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ],

@@ -193,14 +193,15 @@ class ProductDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Category: ${productDetails["category"]}",
+                      "Category: ${productDetails["categoryId"]}",
                       style: Theme.of(context).textTheme.labelMedium,
                     ),
                     const SizedBox(
                       height: SQSizes.sm,
                     ),
-                    Obx(
-                      () => Row(
+                    Obx(() {
+                      final String name = productDetails["productName"];
+                      return Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -212,18 +213,20 @@ class ProductDetailsScreen extends StatelessWidget {
                               maxLines: productdetailsController.istitleExpanded.value ? 3 : 1,
                             ),
                           ),
-                          InkWell(
-                            onTap: () {
-                              productdetailsController.changetitleExpanded();
-                            },
-                            overlayColor: WidgetStateColor.transparent,
-                            child: Icon(
-                              productdetailsController.istitleExpanded.value ? Icons.keyboard_arrow_up_sharp : Icons.keyboard_arrow_down_sharp,
-                            ),
-                          ),
+                          name.length > 39
+                              ? InkWell(
+                                  onTap: () {
+                                    productdetailsController.changetitleExpanded();
+                                  },
+                                  overlayColor: WidgetStateColor.transparent,
+                                  child: Icon(
+                                    productdetailsController.istitleExpanded.value ? Icons.keyboard_arrow_up_sharp : Icons.keyboard_arrow_down_sharp,
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
                         ],
-                      ),
-                    ),
+                      );
+                    }),
                     const SizedBox(
                       height: SQSizes.md,
                     ),

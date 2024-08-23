@@ -64,7 +64,7 @@ class OrdersScreen extends StatelessWidget {
                       OrderedItemContainer(
                         placedDate: "18 Aug, 2024",
                         orderNo: "#98731223",
-                        imageLink: "assets/images/phonecase.jpg",
+                        imageLink: "assets/images/iphonecases/iphone15_1.jpg",
                         productTitle: "Benks ArmorPro Case for iPhone 15 Pro Max 600D Aramid Fiber Cover",
                         quantityNo: "1",
                         orderStatus: "To Pay",

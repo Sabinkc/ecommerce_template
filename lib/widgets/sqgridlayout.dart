@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../features/store/model/products.dart';
 import '../features/store/screen/productdetails.dart';
 import '../features/store/screen/widgets/productcontainer.dart';
 
 class SQGridLayout extends StatelessWidget {
   const SQGridLayout({
     super.key,
+    required this.allproducts,
   });
-
+  final List allproducts;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -21,9 +21,9 @@ class SQGridLayout extends StatelessWidget {
         mainAxisSpacing: 5,
         crossAxisSpacing: 12,
       ),
-      itemCount: products.length,
+      itemCount: allproducts.length,
       itemBuilder: (context, index) {
-        final product = products[index];
+        final product = allproducts[index];
         return ProductContainer(
           productDetails: product,
           func: () {

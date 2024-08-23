@@ -4,6 +4,7 @@ import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../widgets/sqgridlayout.dart';
 import '../controllers/wishlistcontroller.dart';
+import '../model/products.dart';
 import 'widgets/emptywishlistcontainer.dart';
 import 'widgets/wishlistitemcontainer.dart';
 
@@ -57,7 +58,9 @@ class WishListScreen extends StatelessWidget {
               const SizedBox(
                 height: SQSizes.md,
               ),
-              const SQGridLayout(),
+              SQGridLayout(
+                allproducts: products,
+              ),
             ],
           ),
         ),

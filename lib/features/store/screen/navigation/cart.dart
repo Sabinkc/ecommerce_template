@@ -5,6 +5,7 @@ import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../widgets/sqgridlayout.dart';
 import '../../controllers/cartcontrollers.dart';
+import '../../model/products.dart';
 import 'widgets/cartitemcontainer.dart';
 import 'widgets/checkoutcontainer.dart';
 import 'widgets/discountvouchercontainer.dart';
@@ -94,11 +95,13 @@ class CartScreen extends StatelessWidget {
               const SizedBox(
                 height: SQSizes.md,
               ),
-              const Padding(
-                  padding: EdgeInsets.symmetric(
+              Padding(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 15,
                   ),
-                  child: SQGridLayout()),
+                  child: SQGridLayout(
+                    allproducts: products,
+                  )),
               Obx(
                 () => cartControllers.selectedCartItems.isNotEmpty
                     ? const SizedBox(

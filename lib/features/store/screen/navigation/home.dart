@@ -7,6 +7,7 @@ import '../../../../widgets/sectionheading.dart';
 import '../../../../widgets/sqgridlayout.dart';
 import '../../controllers/tabbarcontroller.dart';
 import '../../model/alltabs.dart';
+import '../../model/products.dart';
 import '../widgets/cartcounteritem.dart';
 import '../wishlist.dart';
 import 'widgets/allcategorylist.dart';
@@ -130,22 +131,41 @@ class HomeScreen extends StatelessWidget {
                 ),
               ];
             },
-            body: const Padding(
-              padding: EdgeInsets.only(top: 15, left: 12, right: 12),
+            body: Padding(
+              padding: const EdgeInsets.only(top: 15, left: 12, right: 12),
               child: TabBarView(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  SQGridLayout(),
-                  SQGridLayout(),
-                  SQGridLayout(),
-                  SQGridLayout(),
-                  SQGridLayout(),
+                  SQGridLayout(
+                    allproducts: products,
+                  ),
+                  const SectionListView(section: "New In"),
+                  const SectionListView(section: "Deals"),
+                  const SectionListView(section: "Popular"),
+                  const SectionListView(section: "Best Seller"),
                 ],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class SectionListView extends StatelessWidget {
+  const SectionListView({
+    super.key,
+    required this.section,
+  });
+  final String section;
+  @override
+  Widget build(BuildContext context) {
+    // Filter products by section
+    List filteredProducts = products.where((product) => product["section"] == section).toList();
+
+    return SQGridLayout(
+      allproducts: filteredProducts,
     );
   }
 }
