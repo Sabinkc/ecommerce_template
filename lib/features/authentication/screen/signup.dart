@@ -1,18 +1,19 @@
 import 'package:ecommerce/features/authentication/screen/emailverification.dart';
-import 'package:ecommerce/widgets/passwordfield.dart';
+import 'package:ecommerce/common/widgets/passwordfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
-import '../../../widgets/elevatedbutton.dart';
-import '../../../widgets/logo.dart';
-import '../../../widgets/policytext.dart';
-import '../../../widgets/textfield.dart';
+import '../../../common/widgets/elevatedbutton.dart';
+import '../../../common/widgets/logo.dart';
+import '../../../common/widgets/policytext.dart';
+import '../../../common/widgets/textfield.dart';
 import '../controllers/signupcontroller.dart';
 
 class SignUpScreen extends StatelessWidget {
-  ///This Screen helps user create a new account. It have four input fields through which user can fill their details.
+  /// This Screen helps user create a new account.
+  /// It have four input fields through which user can fill their details.
   const SignUpScreen({super.key});
 
   @override

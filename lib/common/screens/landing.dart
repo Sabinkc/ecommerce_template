@@ -1,14 +1,14 @@
 import 'package:ecommerce/common/controllers/landingcontroller.dart';
-import 'package:ecommerce/features/store/screen/navigation/cart.dart';
-import 'package:ecommerce/features/store/screen/navigation/category.dart';
-import 'package:ecommerce/features/store/screen/navigation/profile.dart';
+import 'package:ecommerce/features/store/screen/navigation/cart/cart.dart';
+import 'package:ecommerce/features/store/screen/navigation/category/category.dart';
+import 'package:ecommerce/features/store/screen/navigation/profile/profile.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-import '../../features/store/screen/navigation/home.dart';
+import '../../features/store/screen/navigation/home/home.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});

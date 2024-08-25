@@ -1,11 +1,14 @@
 import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/widgets/elevatedbutton.dart';
+import 'package:ecommerce/common/widgets/elevatedbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import '../../../../utils/constants/colors.dart';
+import 'widget/addresstextfield.dart';
 
 class AddAddressScreen extends StatelessWidget {
+  /// Through this screen user can add address.
+  /// User need to fill all textfields.
   const AddAddressScreen({super.key});
 
   @override
@@ -144,55 +147,6 @@ class AddAddressScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class AddAddressTextField extends StatelessWidget {
-  const AddAddressTextField({
-    super.key,
-    required this.controller,
-    required this.title,
-    required this.icon,
-  });
-
-  final TextEditingController controller;
-  final String title;
-  final IconData icon;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        const SizedBox(
-          height: SQSizes.sm,
-        ),
-        TextField(
-          controller: controller,
-          style: Theme.of(context).textTheme.bodyLarge,
-          decoration: InputDecoration(
-            prefixIcon: Icon(
-              icon,
-            ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(color: SQColors.borderPrimary, width: 2),
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: SQColors.black, width: 2),
-            ),
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: SQColors.borderPrimary, width: 2),
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: SQSizes.sml,
-        ),
-      ],
     );
   }
 }

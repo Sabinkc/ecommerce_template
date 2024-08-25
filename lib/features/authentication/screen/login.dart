@@ -5,30 +5,42 @@ import 'package:ecommerce/features/authentication/screen/signup.dart';
 import '../../../common/screens/landing.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
-import '../../../widgets/elevatedbutton.dart';
-import '../../../widgets/logo.dart';
-import '../../../widgets/passwordfield.dart';
-import '../../../widgets/policytext.dart';
-import '../../../widgets/textfield.dart';
+import '../../../common/widgets/elevatedbutton.dart';
+import '../../../common/widgets/logo.dart';
+import '../../../common/widgets/passwordfield.dart';
+import '../../../common/widgets/policytext.dart';
+import '../../../common/widgets/textfield.dart';
 import '../controllers/logincontroller.dart';
 import 'forgotpassword.dart';
 
 class LoginScreen extends StatelessWidget {
+  /// Through this screen user can login to the app.
+  /// User need to input their linked email and password in the given textfields.
+  /// If the account exist it will navigate user to landing screen otherwise throws error.
+  /// This screen also have forgot password and account register link which take user to respective screens.
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // storing phone size
     final size = MediaQuery.of(context).size;
+
+    // getting the controller
     final loginController = Get.put(LoginController());
 
     return KeyboardDismisser(
-      gestures: const [GestureType.onTap, GestureType.onPanUpdateAnyDirection],
+      // To dismiss keyboard
+      gestures: const [
+        GestureType.onTap,
+        GestureType.onPanUpdateAnyDirection,
+      ],
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 30,
           forceMaterialTransparency: true,
         ),
         body: SafeArea(
+          // all content
           child: SingleChildScrollView(
             physics: const ClampingScrollPhysics(),
             child: Padding(
@@ -95,6 +107,7 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(
                       height: SQSizes.sml,
                     ),
+                    // Navigate user to Forgot Password Screen
                     Align(
                       alignment: Alignment.centerRight,
                       child: InkWell(
@@ -113,16 +126,18 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(
                       height: SQSizes.sml,
                     ),
+                    // Navigate user to Landing Screen
                     SQElevatedButton(
                       func: () {
                         Get.to(() => const LandingScreen());
                       },
-                      // func: loginController.textfieldchecker,
+                      //func: loginController.textfieldchecker,
                       title: "SIGN IN",
                     ),
                     const SizedBox(
                       height: SQSizes.md,
                     ),
+                    // Navigate user to Sign Up Screen
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -152,6 +167,7 @@ class LoginScreen extends StatelessWidget {
                         height: size.width * 0.45,
                       ),
                     ),
+                    // Navigate user to Policy and Terms Screen
                     const LoginPolicyText(),
                   ],
                 ),

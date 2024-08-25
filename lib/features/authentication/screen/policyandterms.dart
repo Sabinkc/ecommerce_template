@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import '../../../utils/constants/colors.dart';
 
 class PolicyAndTermsScreen extends StatelessWidget {
+  /// User can read all the policy and terms in this screen.
   const PolicyAndTermsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final tabController = Get.put(TabController());
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -52,9 +50,6 @@ class PolicyAndTermsScreen extends StatelessWidget {
                         text: "Terms and Conditions",
                       ),
                     ],
-                    onTap: (index) {
-                      tabController.changeTabIndex(index);
-                    },
                   ),
                 ),
                 const Flexible(
@@ -76,13 +71,5 @@ class PolicyAndTermsScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class TabController extends GetxController {
-  var selectedIndex = 0.obs;
-
-  void changeTabIndex(int index) {
-    selectedIndex.value = index;
   }
 }

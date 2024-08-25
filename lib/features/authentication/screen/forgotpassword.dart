@@ -1,14 +1,15 @@
-import 'package:ecommerce/widgets/elevatedbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
-import '../../../widgets/textfield.dart';
+import '../../../common/widgets/elevatedbutton.dart';
+import '../../../common/widgets/textfield.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
+  /// Through this screen user can reset their password.
+  /// User need to input their linked email in the given textfield.
+  /// If the email exist it will send reset link otherwise throws error.
   const ForgotPasswordScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return KeyboardDismisser(
@@ -58,7 +59,6 @@ class ForgotPasswordScreen extends StatelessWidget {
                   height: SQSizes.spaceBtwSections,
                 ),
                 SQElevatedButton(func: () {}, title: "SUBMIT"),
-                Container(),
               ],
             ),
           ),

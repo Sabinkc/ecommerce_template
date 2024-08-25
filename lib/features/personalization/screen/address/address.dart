@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../../../../utils/constants/sizes.dart';
-import '../widget/addresscontainer.dart';
+import 'widget/addresscontainer.dart';
 
 class AddressScreen extends StatelessWidget {
+  /// Through this screen view their address.
+  /// User can add new address by clicking floating action button
+  /// And to edit user can simply click Edit Button
   const AddressScreen({super.key});
 
   @override

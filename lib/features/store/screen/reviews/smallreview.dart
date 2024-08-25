@@ -1,6 +1,6 @@
 import 'package:ecommerce/features/store/screen/reviews/review.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/widgets/elevatedbutton.dart';
+import 'package:ecommerce/common/widgets/elevatedbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../screen/navigation/cart/controllers/quickcartcontrollers.dart';
+import '../screen/navigation/cart/widgets/quickcart.dart';
 
-import '../controllers/quickcartcontrollers.dart';
-import '../screen/widgets/quickcart.dart';
-
+// func to add comma in numbers
 String formatNumber(num value) {
   return value.toString().replaceAllMapped(
         RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
@@ -11,6 +11,7 @@ String formatNumber(num value) {
       );
 }
 
+// func to show modal bottom sheet
 void onCartClicked(productDetails) {
   final quickcartControllers = Get.put(QuickCartControllers());
   quickcartControllers.changeSelectedColorIndex(0);

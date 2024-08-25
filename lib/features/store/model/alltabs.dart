@@ -1,3 +1,4 @@
+// List of home tabs options
 final List homeTabsOption = [
   "For you",
   "New In",
@@ -5,6 +6,8 @@ final List homeTabsOption = [
   "Popular",
   "Best Seller",
 ];
+
+// List of category tabs
 final List categoryTabs = [
   "All",
   "Headphones",
@@ -14,6 +17,8 @@ final List categoryTabs = [
   "Airpods",
   "Protectors",
 ];
+
+// List of order Tabs
 final List orderTabs = [
   "All",
   "To Pay",
@@ -22,6 +27,8 @@ final List orderTabs = [
   "To Review",
   "All Returns",
 ];
+
+// List of all categories
 final List categories = [
   {
     "image": "assets/images/headphonecat.jpg",

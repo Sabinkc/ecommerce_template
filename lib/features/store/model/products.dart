@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// List of all product
 final List products = [
   {
     "productId": "Lenovo",

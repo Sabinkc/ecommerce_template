@@ -1,4 +1,4 @@
-import 'package:ecommerce/widgets/elevatedbutton.dart';
+import 'package:ecommerce/common/widgets/elevatedbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:pinput/pinput.dart';
