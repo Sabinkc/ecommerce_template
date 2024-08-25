@@ -6,6 +6,8 @@ import '../../../../utils/constants/colors.dart';
 import 'widget/reviewitemcontainer.dart';
 
 class ReviewProductScreen extends StatelessWidget {
+  /// Through this screen, User can add review to the product.
+  /// User can rate the product, write a review and add upto 3 images.
   const ReviewProductScreen({super.key});
 
   @override

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class HomeImageCarousel extends StatelessWidget {
+  /// Custom widget for home screen bannner.
   const HomeImageCarousel({
     super.key,
   });

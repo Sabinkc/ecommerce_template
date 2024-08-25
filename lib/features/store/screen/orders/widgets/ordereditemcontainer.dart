@@ -6,6 +6,8 @@ import '../../../../../utils/constants/sizes.dart';
 import '../orderdetails.dart';
 
 class OrderedItemContainer extends StatelessWidget {
+  /// Custom widget to display ordered item.
+  /// It takes date, order number, image, title, quantity, order status and delivered date.
   const OrderedItemContainer({
     super.key,
     required this.placedDate,

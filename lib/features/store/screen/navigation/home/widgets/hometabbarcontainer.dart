@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../../../../utils/constants/colors.dart';
 
 class HomeTabBarContainer extends StatelessWidget {
+  /// Custom widget for tab bar in Home Screen.
+  /// It takes tab bar name, current index and its own index.
   const HomeTabBarContainer({
     super.key,
     required this.tabsText,

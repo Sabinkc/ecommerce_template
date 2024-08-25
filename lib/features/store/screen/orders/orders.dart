@@ -8,6 +8,7 @@ import 'widgets/emptyorderlistcontainer.dart';
 import 'widgets/ordereditemcontainer.dart';
 
 class OrdersScreen extends StatelessWidget {
+  /// Users can find all their ordered item in this screen.
   const OrdersScreen({super.key});
 
   @override

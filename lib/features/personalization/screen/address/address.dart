@@ -2,6 +2,7 @@ import 'package:ecommerce/features/personalization/screen/address/addaddress.dar
 import 'package:ecommerce/features/personalization/screen/address/editaddress.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../../../../utils/constants/sizes.dart';
@@ -50,16 +51,40 @@ class AddressScreen extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                AddressContainer(
-                  fullname: "Suman Shrestha",
-                  phoneno: "9818167498",
-                  municipality: "Budanilkantha",
-                  street: "Chunikhel",
-                  landmark: "Karuna Hospital",
-                  place: "HOME",
-                  defaultShipping: true,
-                  func: () => Get.to(
-                    () => const EditAddressScreen(),
+                Slidable(
+                  endActionPane: ActionPane(
+                    extentRatio: 0.3,
+                    motion: const ScrollMotion(),
+                    children: [
+                      Flexible(
+                        child: InkWell(
+                          onTap: () {},
+                          child: Container(
+                            width: 150,
+                            height: 180,
+                            margin: const EdgeInsets.only(left: 10),
+                            color: Colors.red,
+                            child: const Icon(
+                              Iconsax.trash_outline,
+                              color: Colors.white,
+                              size: 25,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  child: AddressContainer(
+                    fullname: "Suman Shrestha",
+                    phoneno: "9818167498",
+                    municipality: "Budanilkantha",
+                    street: "Chunikhel",
+                    landmark: "Karuna Hospital",
+                    place: "HOME",
+                    defaultShipping: true,
+                    func: () => Get.to(
+                      () => const EditAddressScreen(),
+                    ),
                   ),
                 ),
                 const SizedBox(

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../../utils/constants/colors.dart';
 
 class OrderSuccessScreen extends StatelessWidget {
+  /// This screen will be shown when the item is successfully ordered.
   const OrderSuccessScreen({super.key});
 
   @override

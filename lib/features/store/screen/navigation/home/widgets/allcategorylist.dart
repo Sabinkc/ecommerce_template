@@ -6,6 +6,7 @@ import '../../../../model/alltabs.dart';
 import 'homecategorycontainer.dart';
 
 class AllCategoryList extends StatelessWidget {
+  /// Custom widget which shows all the category along with their pictures
   const AllCategoryList({
     super.key,
   });

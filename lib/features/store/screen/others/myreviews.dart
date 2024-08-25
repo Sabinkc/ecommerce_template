@@ -6,6 +6,7 @@ import 'package:icons_plus/icons_plus.dart';
 import '../../../../utils/constants/colors.dart';
 
 class MyReviewsScreen extends StatelessWidget {
+  /// This screen shows all the reviews done by user in different products.
   const MyReviewsScreen({super.key});
 
   @override

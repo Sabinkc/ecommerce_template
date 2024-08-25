@@ -3,6 +3,8 @@ import '../../../../../../utils/constants/colors.dart';
 import '../../../../../../utils/constants/sizes.dart';
 
 class HomeCategoryContainer extends StatelessWidget {
+  /// Category Conatiner for Home Screen.
+  /// It take name and image, which get displayed in vertical manner.
   const HomeCategoryContainer({
     super.key,
     required this.categroyName,

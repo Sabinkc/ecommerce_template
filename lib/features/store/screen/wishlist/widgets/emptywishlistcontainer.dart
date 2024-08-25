@@ -3,6 +3,7 @@ import 'package:icons_plus/icons_plus.dart';
 import '../../../../../utils/constants/colors.dart';
 
 class EmptyWishlistContainer extends StatelessWidget {
+  /// Custom widget which get displayed when there are no item in Wishlist list.
   const EmptyWishlistContainer({
     super.key,
   });

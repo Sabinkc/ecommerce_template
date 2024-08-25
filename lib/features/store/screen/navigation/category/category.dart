@@ -10,6 +10,7 @@ import '../../../model/products.dart';
 import 'widget/productlist.dart';
 
 class CategoryScreen extends StatelessWidget {
+  /// User can surf thru different category on this screen
   const CategoryScreen({super.key});
 
   @override

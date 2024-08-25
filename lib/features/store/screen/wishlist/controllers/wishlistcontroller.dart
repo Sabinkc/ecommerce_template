@@ -24,21 +24,21 @@ class WishlistController extends GetxController {
         ? {
             // if fav, removing the item
             favoriteItems.remove(product),
-            SQLoader.sucessSnackBar(
-              title: "Added to Wishlist",
-              message: "An Item has been added to wishlist.",
-              duration: 1,
-              icon: Iconsax.bag_happy_outline,
-            )
-          }
-        : {
-            // else adding the item
-            favoriteItems.add(product),
             SQLoader.warningSnackBar(
               title: "Removed from Wishlist",
               message: "An Item has been removed from wishlist.",
               duration: 1,
               icon: Iconsax.bag_cross_1_outline,
+            )
+          }
+        : {
+            // else adding the item
+            favoriteItems.add(product),
+            SQLoader.sucessSnackBar(
+              title: "Added to Wishlist",
+              message: "An Item has been added to wishlist.",
+              duration: 1,
+              icon: Iconsax.bag_happy_outline,
             )
           };
   }

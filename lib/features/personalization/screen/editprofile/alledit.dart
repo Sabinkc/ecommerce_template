@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import '../../../../utils/constants/colors.dart';
 
 class EditUserScreen extends StatelessWidget {
+  /// User can edit their details in this screen
+  /// It takes title, subtitile, and hinttext
   const EditUserScreen({
     super.key,
     required this.title,

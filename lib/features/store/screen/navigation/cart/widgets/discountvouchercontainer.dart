@@ -4,6 +4,7 @@ import 'package:icons_plus/icons_plus.dart';
 import '../../../../../../utils/constants/colors.dart';
 
 class DiscountVoucherContainter extends StatelessWidget {
+  /// Custom Widget to notifiy user about their Discount Voucher.
   const DiscountVoucherContainter({
     super.key,
   });

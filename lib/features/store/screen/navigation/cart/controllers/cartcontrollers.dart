@@ -1,5 +1,8 @@
 import 'package:ecommerce/features/store/screen/checkout/controllers/checkoutcontroller.dart';
 import 'package:get/get.dart';
+import 'package:icons_plus/icons_plus.dart';
+
+import '../../../../../../utils/popups/loader.dart';
 
 class CartControllers extends GetxController {
   /// This controller is for Cart it contollers all the function of cart screen.
@@ -60,7 +63,12 @@ class CartControllers extends GetxController {
     // removing the item from all list
     selectedCartItems.remove(cartItemId);
     allCartItems.removeWhere((item) => item["cartItemId"] == cartItemId);
-
+    SQLoader.warningSnackBar(
+      title: "Removed from Cart",
+      message: "An item has been removed from the cart.",
+      duration: 1,
+      icon: Iconsax.bag_cross_1_outline,
+    );
     // calling func to change select all value
     selectAllValue();
   }

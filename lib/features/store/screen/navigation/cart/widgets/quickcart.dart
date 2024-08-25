@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
-
 import '../../../../../../utils/constants/colors.dart';
 import '../../../../../../utils/constants/sizes.dart';
 import '../../../../../../utils/popups/loader.dart';
@@ -13,6 +12,9 @@ import '../../../../model/functions.dart';
 import '../../../product/productdetails.dart';
 
 class QuickCartScreen extends StatelessWidget {
+  /// Custom widget to quicky add item to cart.
+  /// It take product info to display images, product name, price, colors,
+  ///  specs and quantity.
   const QuickCartScreen({super.key, this.productInfo});
   final dynamic productInfo;
   @override

@@ -1,8 +1,3 @@
-import 'package:ecommerce/features/store/screen/wishlist/controllers/wishlistcontroller.dart';
-import 'package:ecommerce/features/store/screen/others/faqs.dart';
-import 'package:ecommerce/features/store/screen/others/messages.dart';
-import 'package:ecommerce/features/store/screen/others/myreviews.dart';
-import 'package:ecommerce/features/store/screen/others/voucher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -13,12 +8,19 @@ import '../../../../personalization/screen/address/address.dart';
 import '../../../../personalization/screen/editprofile/editprofile.dart';
 import '../../orders/controllers/ordercontrollers.dart';
 import '../../orders/orders.dart';
+import '../../others/faqs.dart';
+import '../../others/messages.dart';
+import '../../others/myreviews.dart';
+import '../../others/voucher.dart';
 import '../../settings/settings.dart';
 import '../../widgets/profiletile.dart';
+import '../../wishlist/controllers/wishlistcontroller.dart';
 import '../../wishlist/wishlist.dart';
 import 'widgets/orderoptions.dart';
 
 class ProfileScreen extends StatelessWidget {
+  /// Profile Screen which have profile tile, orders option, account information
+  /// other options.
   const ProfileScreen({super.key});
 
   @override

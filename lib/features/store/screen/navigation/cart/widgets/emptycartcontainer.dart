@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../utils/constants/sizes.dart';
 
 class EmptyCartContainer extends StatelessWidget {
+  /// Cutsom Widget to display when there are no item in cart list.
   const EmptyCartContainer({
     super.key,
   });

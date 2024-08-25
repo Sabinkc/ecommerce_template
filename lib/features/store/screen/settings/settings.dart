@@ -1,14 +1,14 @@
-import 'package:ecommerce/features/authentication/screen/policyandterms.dart';
-import 'package:ecommerce/features/store/screen/settings/appsettings.dart';
-import 'package:ecommerce/features/store/screen/settings/messagesettings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
-
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
+import '../../../authentication/screen/policyandterms.dart';
+import 'appsettings.dart';
+import 'messagesettings.dart';
 
 class SettingScreen extends StatelessWidget {
+  /// User can navigate to different settings through this screen.
   const SettingScreen({super.key});
 
   @override

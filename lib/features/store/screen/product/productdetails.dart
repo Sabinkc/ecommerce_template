@@ -16,6 +16,9 @@ import 'widgets/productcontainer.dart';
 import 'widgets/specifications.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
+  /// This screen display product details.
+  /// It display images, name, price, colors, specifications and reviews.
+  /// User can also add the item to cart and wishlist from this screen.
   const ProductDetailsScreen({
     super.key,
     required this.productDetails,

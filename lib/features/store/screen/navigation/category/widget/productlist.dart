@@ -4,6 +4,8 @@ import '../../../../../../common/widgets/sqgridlayout.dart';
 import '../../../../model/products.dart';
 
 class ProductListView extends StatelessWidget {
+  /// Custom widget which take category id to display product of that category,
+  /// along with it's banner.
   const ProductListView({
     super.key,
     required this.categoryId,

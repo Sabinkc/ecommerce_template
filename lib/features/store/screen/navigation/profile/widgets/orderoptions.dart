@@ -4,6 +4,8 @@ import '../../../../../../utils/constants/colors.dart';
 import '../../../../../../utils/constants/sizes.dart';
 
 class OrderOptions extends StatelessWidget {
+  /// Custom widget to display order options in the screen.
+  /// It takes title, icon and func.
   const OrderOptions({
     super.key,
     required this.optionTitle,

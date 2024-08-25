@@ -4,11 +4,12 @@ import 'package:getwidget/getwidget.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../../../../../../utils/constants/colors.dart';
 import '../../../../../../utils/constants/sizes.dart';
-import '../../../../../../utils/popups/loader.dart';
 import '../controllers/cartcontrollers.dart';
 import '../../../../model/functions.dart';
 
 class CartItemContainer extends StatelessWidget {
+  /// Custom Widget to display cart item.
+  /// It takes Cart Item Details.
   const CartItemContainer({
     super.key,
     required this.cartItemDetails,
@@ -167,12 +168,6 @@ class CartItemContainer extends StatelessWidget {
                               overlayColor: WidgetStateColor.transparent,
                               onTap: () {
                                 cartControllers.removeItemFromCart(cartItemDetails["cartItemId"]);
-                                SQLoader.warningSnackBar(
-                                  title: "Removed from Cart",
-                                  message: "An Item has been removed from the cart.",
-                                  duration: 1,
-                                  icon: Iconsax.bag_cross_1_outline,
-                                );
                               },
                               child: const Icon(Iconsax.trash_outline),
                             ),

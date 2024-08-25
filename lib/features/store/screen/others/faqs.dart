@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../../utils/constants/colors.dart';
 
 class FAQsScreen extends StatelessWidget {
+  /// This Screen have frequently asked questions for users.
   const FAQsScreen({super.key});
 
   @override

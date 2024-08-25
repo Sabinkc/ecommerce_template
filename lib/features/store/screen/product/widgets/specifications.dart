@@ -4,6 +4,8 @@ import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 
 class SpecificationsScreen extends StatelessWidget {
+  /// This Widget display specification details of products.
+  /// It takes specification details.
   const SpecificationsScreen({super.key, required this.specificationDetails});
   final Map specificationDetails;
   @override

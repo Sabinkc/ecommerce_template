@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:icons_plus/icons_plus.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../common/widgets/sectionheading.dart';
@@ -9,13 +8,15 @@ import 'controllers/tabbarcontroller.dart';
 import '../../../model/alltabs.dart';
 import '../../../model/products.dart';
 import 'widgets/cartcounteritem.dart';
-import '../../wishlist/wishlist.dart';
 import 'widgets/allcategorylist.dart';
 import 'widgets/homeimagecarousel.dart';
 import 'widgets/hometabbarcontainer.dart';
 import 'widgets/searchandfiltercontainer.dart';
+import 'widgets/wishlistcounteritem.dart';
 
 class HomeScreen extends StatelessWidget {
+  /// Home Screen UI which have search container, image carousel, category and
+  /// Section tabs.
   const HomeScreen({super.key});
 
   @override
@@ -40,22 +41,9 @@ class HomeScreen extends StatelessWidget {
           shape: const Border(
             bottom: BorderSide(color: SQColors.borderSecondary),
           ),
-          actions: [
-            InkWell(
-              onTap: () {
-                Get.to(
-                  () => const WishListScreen(),
-                );
-              },
-              child: const Icon(
-                Iconsax.heart_outline,
-                color: SQColors.black,
-              ),
-            ),
-            const CartCounterItem(),
-            const SizedBox(
-              width: SQSizes.xs,
-            ),
+          actions: const [
+            WishlistCounterItem(),
+            CartCounterItem(),
           ],
           forceMaterialTransparency: true,
         ),

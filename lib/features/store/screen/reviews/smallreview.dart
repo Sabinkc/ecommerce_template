@@ -8,6 +8,8 @@ import '../../../../utils/constants/colors.dart';
 import 'SmallReviewContainer.dart';
 
 class SmallReviewScreen extends StatelessWidget {
+  /// Custom Screen which shows three reviews done by users and a button to
+  /// navigate user to review screen.
   const SmallReviewScreen({
     super.key,
   });

@@ -5,6 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../utils/constants/colors.dart';
 
 class ReviewScreen extends StatelessWidget {
+  /// This screen display all the review done ny users in the product.
   const ReviewScreen({super.key});
 
   @override

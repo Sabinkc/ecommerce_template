@@ -9,6 +9,8 @@ import '../controllers/wishlistcontroller.dart';
 import '../../../model/functions.dart';
 
 class WishlistItemContainer extends StatelessWidget {
+  /// Custom Widget to display Wishlist items.
+  /// It takes product details.
   const WishlistItemContainer({
     super.key,
     required this.productDetails,
@@ -21,7 +23,6 @@ class WishlistItemContainer extends StatelessWidget {
     final Map image = productDetails["imagewithColor"] ?? {};
     return Container(
       width: size.width,
-      margin: const EdgeInsets.only(bottom: 15),
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(color: SQColors.borderPrimary),

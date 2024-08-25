@@ -5,6 +5,7 @@ import '../../../../../utils/constants/sizes.dart';
 import '../../../model/functions.dart';
 
 class CheckoutItemContainer extends StatelessWidget {
+  /// Checkout item container which takes item variables and display them.
   const CheckoutItemContainer({
     super.key,
     required this.imagelink,

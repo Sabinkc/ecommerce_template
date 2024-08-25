@@ -4,6 +4,7 @@ import '../../../../utils/constants/colors.dart';
 import '../../../../common/widgets/sectionheading.dart';
 
 class MessageSettings extends StatelessWidget {
+  /// Through this screen, User can change all notification settings.
   const MessageSettings({super.key});
 
   @override

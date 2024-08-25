@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:icons_plus/icons_plus.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../common/widgets/sqgridlayout.dart';
@@ -12,6 +14,8 @@ import 'widgets/discountvouchercontainer.dart';
 import 'widgets/emptycartcontainer.dart';
 
 class CartScreen extends StatelessWidget {
+  /// Cart Screen thru where user can check select or delete items.
+  /// Also have recommendation products.
   const CartScreen({super.key});
 
   @override
@@ -73,11 +77,38 @@ class CartScreen extends StatelessWidget {
                     ? ListView(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        children: cartControllers.allCartItems
-                            .map(
-                              (items) => CartItemContainer(cartItemDetails: items),
-                            )
-                            .toList(),
+                        children: cartControllers.allCartItems.map(
+                          (items) {
+                            return Slidable(
+                              key: UniqueKey(),
+                              endActionPane: ActionPane(
+                                extentRatio: 0.3,
+                                motion: const ScrollMotion(),
+                                children: [
+                                  Flexible(
+                                    child: InkWell(
+                                      onTap: () {
+                                        cartControllers.removeItemFromCart(items["cartItemId"]);
+                                      },
+                                      child: Container(
+                                        width: 150,
+                                        height: 160,
+                                        margin: const EdgeInsets.only(left: 10),
+                                        color: Colors.red,
+                                        child: const Icon(
+                                          Iconsax.trash_outline,
+                                          color: Colors.white,
+                                          size: 27,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              child: CartItemContainer(cartItemDetails: items),
+                            );
+                          },
+                        ).toList(),
                       )
                     : const EmptyCartContainer(),
               ),

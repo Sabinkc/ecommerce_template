@@ -4,6 +4,7 @@ import 'package:icons_plus/icons_plus.dart';
 import '../../../../utils/constants/colors.dart';
 
 class AppSettings extends StatelessWidget {
+  /// Through this screen, User can change all app settings.
   const AppSettings({super.key});
 
   @override

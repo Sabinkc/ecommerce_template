@@ -1,32 +1,34 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../../../common/controllers/landingcontroller.dart';
-import '../../../../../../utils/constants/colors.dart';
-import '../../cart/controllers/cartcontrollers.dart';
+import 'package:icons_plus/icons_plus.dart';
 
-class CartCounterItem extends StatelessWidget {
-  /// Custom widget to get to cart screen and also display total number
-  /// of cart items
-  const CartCounterItem({
+import '../../../../../../utils/constants/colors.dart';
+import '../../../wishlist/controllers/wishlistcontroller.dart';
+import '../../../wishlist/wishlist.dart';
+
+class WishlistCounterItem extends StatelessWidget {
+  /// Custom widget to get to wishlist screen and also display total number
+  /// of favorite items
+  const WishlistCounterItem({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(CartControllers());
-    final landingcontroller = Get.put(LandingScreenController());
+    final controller = Get.put(WishlistController());
     return Stack(
       children: [
         IconButton(
-          onPressed: () => landingcontroller.index(2),
+          onPressed: () => Get.to(
+            () => const WishListScreen(),
+          ),
           icon: const Icon(
-            CupertinoIcons.cart,
+            Iconsax.heart_outline,
             color: SQColors.black,
           ),
         ),
         Obx(
-          () => controller.allCartItems.isNotEmpty
+          () => controller.favoriteItems.isNotEmpty
               ? Positioned(
                   right: 5,
                   top: 5,
@@ -40,7 +42,7 @@ class CartCounterItem extends StatelessWidget {
                     child: Center(
                       child: Obx(
                         () => Text(
-                          "${controller.allCartItems.length}",
+                          "${controller.favoriteItems.length}",
                           style: Theme.of(context).textTheme.labelLarge!.apply(
                                 color: SQColors.light,
                                 fontSizeFactor: 0.9,

@@ -8,6 +8,8 @@ import '../../wishlist/controllers/wishlistcontroller.dart';
 import '../../../model/functions.dart';
 
 class ProductContainer extends StatelessWidget {
+  /// Custom Widget to display product.
+  /// It takes product details and func.
   const ProductContainer({
     super.key,
     required this.productDetails,

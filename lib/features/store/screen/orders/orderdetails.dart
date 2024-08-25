@@ -4,10 +4,12 @@ import 'package:icons_plus/icons_plus.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../common/widgets/elevatedbutton.dart';
-import '../checkout/checkout.dart';
+
+import '../checkout/widgets/recieptcontent.dart';
 import '../reviews/reviewproduct.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
+  /// Through this screen user can view order details.
   const OrderDetailsScreen({super.key, required this.orderStatus});
   final String orderStatus;
   @override

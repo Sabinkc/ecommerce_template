@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:icons_plus/icons_plus.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../common/widgets/sqgridlayout.dart';
@@ -9,6 +11,7 @@ import 'widgets/emptywishlistcontainer.dart';
 import 'widgets/wishlistitemcontainer.dart';
 
 class WishListScreen extends StatelessWidget {
+  /// User can find their favorite items in this Screen.
   const WishListScreen({super.key});
 
   @override
@@ -41,8 +44,38 @@ class WishListScreen extends StatelessWidget {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           children: wishlistController.favoriteItems.map((product) {
-                            return WishlistItemContainer(
-                              productDetails: product,
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 15.0),
+                              child: Slidable(
+                                key: UniqueKey(),
+                                endActionPane: ActionPane(
+                                  extentRatio: 0.3,
+                                  motion: const ScrollMotion(),
+                                  children: [
+                                    Flexible(
+                                      child: InkWell(
+                                        onTap: () {
+                                          wishlistController.addToWishList(product["productId"], product);
+                                        },
+                                        child: Container(
+                                          width: 150,
+                                          height: 150,
+                                          margin: const EdgeInsets.only(left: 15),
+                                          color: Colors.red,
+                                          child: const Icon(
+                                            Iconsax.trash_outline,
+                                            color: Colors.white,
+                                            size: 25,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                child: WishlistItemContainer(
+                                  productDetails: product,
+                                ),
+                              ),
                             );
                           }).toList(),
                         ),

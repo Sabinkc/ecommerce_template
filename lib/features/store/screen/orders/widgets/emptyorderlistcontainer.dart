@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-
 import '../../../../../utils/constants/sizes.dart';
 
 class EmptyOrderListContainer extends StatelessWidget {
+  /// Custom widget which get displayed when there are no item in order list.
   const EmptyOrderListContainer({
     super.key,
   });

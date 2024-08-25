@@ -8,6 +8,9 @@ import '../../../../model/functions.dart';
 import '../../../checkout/checkout.dart';
 
 class TotalPriceAndCheckoutContainer extends StatelessWidget {
+  /// Custom Bottom Container for Cart Screen.
+  /// It should total price and total selected item.
+  /// If no item is selected it will be hidden.
   const TotalPriceAndCheckoutContainer({
     super.key,
   });
