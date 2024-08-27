@@ -87,6 +87,7 @@ class CartScreen extends StatelessWidget {
                                 children: [
                                   Flexible(
                                     child: InkWell(
+                                      overlayColor: WidgetStateColor.transparent,
                                       onTap: () {
                                         cartControllers.removeItemFromCart(items["cartItemId"]);
                                       },

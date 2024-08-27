@@ -18,6 +18,24 @@ final List categoryTabs = [
   "Protectors",
 ];
 
+// List of Filter options
+final List<String> sortOptions = [
+  "Popularity",
+  "Rating",
+  "Deals & Discount",
+  "Price",
+  "New Arrivals",
+];
+
+// List of all Brands
+final List<String> brands = [
+  "Apple",
+  "MI",
+  "Samsung",
+  "Oppo",
+  "Vivo",
+];
+
 // List of order Tabs
 final List orderTabs = [
   "All",

@@ -58,6 +58,7 @@ class AddressScreen extends StatelessWidget {
                     children: [
                       Flexible(
                         child: InkWell(
+                          overlayColor: WidgetStateColor.transparent,
                           onTap: () {},
                           child: Container(
                             width: 150,

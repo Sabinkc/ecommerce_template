@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/store/screen/filter/filter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
@@ -34,6 +35,21 @@ class CategoryScreen extends StatelessWidget {
               bottom: BorderSide(color: SQColors.borderSecondary),
             ),
             forceMaterialTransparency: true,
+            actions: [
+              IconButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) => const FilterScreen(),
+                  );
+                },
+                icon: const Icon(
+                  Icons.sort,
+                  color: Colors.black,
+                  size: 30,
+                ),
+              ),
+            ],
           ),
           body: SafeArea(
             child: Padding(

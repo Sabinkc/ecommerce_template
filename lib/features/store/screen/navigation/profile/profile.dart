@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/store/screen/others/paymentoptions/paymentoptions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -9,8 +10,8 @@ import '../../../../personalization/screen/editprofile/editprofile.dart';
 import '../../orders/controllers/ordercontrollers.dart';
 import '../../orders/orders.dart';
 import '../../others/faqs.dart';
-import '../../others/messages.dart';
-import '../../others/myreviews.dart';
+import '../../others/messages/messages.dart';
+import '../../others/myreviews/myreviews.dart';
 import '../../others/voucher.dart';
 import '../../settings/settings.dart';
 import '../../widgets/profiletile.dart';
@@ -93,7 +94,9 @@ class ProfileScreen extends StatelessWidget {
       {
         "icon": Iconsax.card_coin_outline,
         "option": "Payment Options",
-        "func": () {},
+        "func": () {
+          Get.to(() => const PaymentOptionsScreen());
+        },
       },
       {
         "icon": Iconsax.message_question_outline,

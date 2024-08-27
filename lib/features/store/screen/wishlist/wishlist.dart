@@ -54,6 +54,7 @@ class WishListScreen extends StatelessWidget {
                                   children: [
                                     Flexible(
                                       child: InkWell(
+                                        overlayColor: WidgetStateColor.transparent,
                                         onTap: () {
                                           wishlistController.addToWishList(product["productId"], product);
                                         },

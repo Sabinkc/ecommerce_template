@@ -1,13 +1,11 @@
+import 'package:ecommerce/features/store/screen/checkout/widgets/addvoucher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
-
 import '../../../../../common/widgets/elevatedbutton.dart';
-import '../../../../../common/widgets/textfield.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../orders/ordersuccess.dart';
-import '../controllers/checkoutcontroller.dart';
 
 class CheckoutBottomContainer extends StatelessWidget {
   /// Through this Widget user can add voucher code and place order.
@@ -19,7 +17,7 @@ class CheckoutBottomContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final checkoutController = Get.put(CheckoutController());
+
     return Container(
       width: size.width,
       decoration: const BoxDecoration(
@@ -34,45 +32,10 @@ class CheckoutBottomContainer extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              // Dialog Box with textfield and button where user can input code.
-              showDialog(
+              showModalBottomSheet(
+                enableDrag: true,
                 context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        10,
-                      ),
-                    ),
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Enter Voucher Code",
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: const Icon(Icons.close),
-                        ),
-                      ],
-                    ),
-                    content: SQTextField(
-                      controller: TextEditingController(),
-                      hinttext: "Code",
-                    ),
-                    actions: [
-                      SQElevatedButton(
-                        func: () {
-                          checkoutController.addDiscount(100.0);
-                          Get.back();
-                        },
-                        title: "SUBMIT",
-                      ),
-                    ],
-                  );
-                },
+                builder: (context) => const AddVoucherScreen(),
               );
             },
             child: Row(

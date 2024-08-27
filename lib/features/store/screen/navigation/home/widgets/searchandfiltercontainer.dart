@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../../../../../../utils/constants/colors.dart';
 import '../../../../../../utils/constants/sizes.dart';
-import '../../../search.dart';
+import '../../../search/search.dart';
 
 class SearchAndFilterContainer extends StatelessWidget {
   ///Custom widget to navigate user to Search Page.

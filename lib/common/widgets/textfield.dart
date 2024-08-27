@@ -7,15 +7,18 @@ class SQTextField extends StatelessWidget {
     super.key,
     required this.controller,
     required this.hinttext,
+    this.inputType = TextInputType.text,
   });
 
   final TextEditingController controller;
   final String hinttext;
+  final TextInputType inputType;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      keyboardType: inputType,
       decoration: InputDecoration(
         hintText: hinttext,
         hintStyle: Theme.of(context).textTheme.labelLarge!.apply(color: SQColors.textSecondary),
