@@ -1,10 +1,14 @@
+import 'package:ecommerce/features/store/screen/search/searchresult.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
-import '../../../utils/constants/colors.dart';
-import '../../../utils/constants/sizes.dart';
+import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../filter/filter.dart';
+import 'controllers/searchcontroller.dart';
+import 'widgets/searchedproductcontainer.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -12,7 +16,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final List recentlySearched = ["Phone Case", "Laptop", "Watch", "Iphone", "Mouse", "Screen", "Earphone", "Headphone"];
+    final controller = Get.put(SearchControllers());
     return KeyboardDismisser(
       gestures: const [GestureType.onTap, GestureType.onPanUpdateAnyDirection],
       child: Scaffold(
@@ -43,9 +47,16 @@ class SearchScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "What are you looking for?",
-                    style: Theme.of(context).textTheme.headlineSmall,
+                  InkWell(
+                    onTap: () {
+                      Get.to(
+                        () => const SearchResultScreen(),
+                      );
+                    },
+                    child: Text(
+                      "What are you looking for?",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
                   ),
                   const SizedBox(
                     height: SQSizes.md,
@@ -58,7 +69,14 @@ class SearchScreen extends StatelessWidget {
                           height: size.height * 0.055,
                           // width: size.width * 0.7,
                           child: TextField(
+                            controller: controller.search,
                             autofocus: true,
+                            onSubmitted: (value) {
+                              Get.to(
+                                () => const SearchResultScreen(),
+                              );
+                              controller.addRecently(value);
+                            },
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
                                 Iconsax.search_normal_1_outline,
@@ -85,7 +103,12 @@ class SearchScreen extends StatelessWidget {
                         width: SQSizes.xs,
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) => const FilterScreen(),
+                          );
+                        },
                         icon: const Icon(
                           Icons.sort,
                           color: Colors.black,
@@ -106,7 +129,9 @@ class SearchScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.bodyLarge!.apply(color: SQColors.black),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.clearRecently();
+                        },
                         icon: const Icon(
                           Iconsax.trash_outline,
                           size: 18,
@@ -114,27 +139,18 @@ class SearchScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Wrap(
-                    runSpacing: 10,
-                    spacing: 10,
-                    children: recentlySearched
-                        .map(
-                          (word) => Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
-                            decoration: BoxDecoration(
-                              color: SQColors.softGrey,
-                              borderRadius: BorderRadius.circular(2),
+                  Obx(
+                    () => Wrap(
+                      runSpacing: 10,
+                      spacing: 10,
+                      children: controller.recentlySearched
+                          .map(
+                            (query) => SearchedProductContainer(
+                              word: query,
                             ),
-                            child: Text(
-                              word,
-                              style: Theme.of(context).textTheme.labelMedium!.apply(
-                                    color: Colors.black,
-                                    fontWeightDelta: 1,
-                                  ),
-                            ),
-                          ),
-                        )
-                        .toList(),
+                          )
+                          .toList(),
+                    ),
                   ),
                 ],
               ),
