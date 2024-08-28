@@ -1,4 +1,6 @@
+import 'package:ecommerce/features/authentication/screen/changepassword.dart';
 import 'package:ecommerce/features/personalization/screen/editprofile/alledit.dart';
+import 'package:ecommerce/features/personalization/screen/editprofile/selectbirthday.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -97,12 +99,20 @@ class EditProfileScreen extends StatelessWidget {
                 value: "Male",
               ),
               ProfileMenu(
-                func: () {},
+                func: () {
+                  Get.to(
+                    () => const SelectBirthdayScreen(),
+                  );
+                },
                 title: "Birthday",
                 value: "02 Oct, 2002",
               ),
               ProfileMenu(
-                func: () {},
+                func: () {
+                  Get.to(
+                    () => const ChangePasswordScreen(),
+                  );
+                },
                 title: "Change Password",
                 value: "",
               ),
