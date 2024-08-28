@@ -12,7 +12,6 @@ class VoucherScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -31,145 +30,37 @@ class VoucherScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-            ClipPath(
-              clipper: TicketRoundedEdgeClipper(
-                edge: Edge.vertical,
-                position: 150,
-                radius: 15,
-              ),
-              child: Container(
-                width: size.width,
-                height: 125,
-                decoration: BoxDecoration(
-                  color: SQColors.primary.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 145,
-                      decoration: const BoxDecoration(),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: "15",
-                                  style: Theme.of(context).textTheme.headlineLarge!.apply(
-                                        color: SQColors.primary,
-                                      ),
-                                ),
-                                TextSpan(
-                                  text: " % off",
-                                  style: Theme.of(context).textTheme.titleMedium!.apply(
-                                        color: SQColors.primary,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Text(
-                            "No min Spend",
-                            style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                  color: SQColors.primary,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    DottedLine(
-                      direction: Axis.vertical,
-                      dashColor: SQColors.primary.withOpacity(0.3),
-                      dashLength: 5,
-                    ),
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Free Shipping",
-                              style: Theme.of(context).textTheme.titleMedium!.apply(
-                                    color: SQColors.primary,
-                                  ),
-                            ),
-                            Text(
-                              "Selected Products",
-                              style: Theme.of(context).textTheme.labelLarge!.apply(
-                                    color: SQColors.primary,
-                                  ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(vertical: 5),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 5,
-                                vertical: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: SQColors.primary.withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Text(
-                                "T&C",
-                                style: Theme.of(context).textTheme.labelMedium!.apply(
-                                      color: SQColors.primary,
-                                    ),
-                              ),
-                            ),
-                            Text(
-                              "Valid till: 31 Aug, 11:59 PM",
-                              style: Theme.of(context).textTheme.labelMedium!.apply(
-                                    color: SQColors.primary,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            VoucherOneContainer(
+              discountPerc: "15",
+              extras: "No min Spend",
+              content: "Free Shipping",
+              content1: "Selected Products",
+              date: "Valid till: 31 Aug, 11:59 PM",
+              func: () {},
+            ),
+            const SizedBox(
+              height: SQSizes.md,
+            ),
+            VoucherOneContainer(
+              discountPerc: "5",
+              extras: "",
+              content1: "Only for Phonecases",
+              content: "",
+              date: "Valid till: 31 Aug, 11:59 PM",
+              func: () {},
             ),
             const SizedBox(
               height: SQSizes.spaceBtwSections,
             ),
-            Slidable(
-              endActionPane: ActionPane(
-                extentRatio: 0.3,
-                motion: const ScrollMotion(),
-                children: [
-                  Flexible(
-                    child: InkWell(
-                      overlayColor: WidgetStateColor.transparent,
-                      onTap: () {},
-                      child: Container(
-                        width: 150,
-                        height: 290,
-                        margin: const EdgeInsets.only(left: 10),
-                        color: Colors.red,
-                        child: const Icon(
-                          Iconsax.trash_outline,
-                          color: Colors.white,
-                          size: 25,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              child: VoucherContainer(
-                discountperc: "15",
-                subtitles: const [
-                  "Free Shipping",
-                  "Only Selected Products",
-                  "Vaid Till 31, Aug.",
-                ],
-                func: () {},
-                notes: "This voucher is a token of our gratitude for joining us. Your support is helping us shape the future of e-commerce.",
-              ),
+            VoucherContainer(
+              discountperc: "15",
+              subtitles: const [
+                "Free Shipping",
+                "Only Selected Products",
+                "Vaid Till 31, Aug.",
+              ],
+              func: () {},
+              notes: "This voucher is a token of our gratitude for joining us. Your support is helping us shape the future of e-commerce.",
             ),
             const SizedBox(
               height: SQSizes.md,
@@ -183,6 +74,156 @@ class VoucherScreen extends StatelessWidget {
               func: () {},
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class VoucherOneContainer extends StatelessWidget {
+  const VoucherOneContainer({
+    super.key,
+    required this.discountPerc,
+    required this.extras,
+    required this.content,
+    required this.content1,
+    required this.date,
+    required this.func,
+  });
+
+  final String discountPerc, extras, content, content1, date;
+  final VoidCallback func;
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Slidable(
+      endActionPane: ActionPane(
+        extentRatio: 0.3,
+        motion: const ScrollMotion(),
+        children: [
+          Flexible(
+            child: InkWell(
+              overlayColor: WidgetStateColor.transparent,
+              onTap: () {},
+              child: Container(
+                width: 150,
+                height: 290,
+                margin: const EdgeInsets.only(left: 10),
+                color: Colors.red,
+                child: const Icon(
+                  Iconsax.trash_outline,
+                  color: Colors.white,
+                  size: 25,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      child: InkWell(
+        onTap: func,
+        child: ClipPath(
+          clipper: TicketRoundedEdgeClipper(
+            edge: Edge.vertical,
+            position: 150,
+            radius: 15,
+          ),
+          child: Container(
+            width: size.width,
+            height: 125,
+            decoration: BoxDecoration(
+              color: SQColors.primary.withOpacity(0.15),
+              border: Border.all(color: SQColors.primary),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 145,
+                  decoration: const BoxDecoration(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: discountPerc,
+                              style: Theme.of(context).textTheme.headlineLarge!.apply(
+                                    color: SQColors.black,
+                                  ),
+                            ),
+                            TextSpan(
+                              text: " % off",
+                              style: Theme.of(context).textTheme.titleMedium!.apply(
+                                    color: SQColors.black,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        extras,
+                        style: Theme.of(context).textTheme.bodyMedium!.apply(
+                              color: SQColors.black,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+                DottedLine(
+                  direction: Axis.vertical,
+                  dashColor: SQColors.black.withOpacity(0.3),
+                  dashLength: 5,
+                ),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          content,
+                          style: Theme.of(context).textTheme.titleMedium!.apply(
+                                color: SQColors.darkerGrey,
+                              ),
+                        ),
+                        Text(
+                          content1,
+                          style: Theme.of(context).textTheme.labelLarge!.apply(
+                                color: SQColors.darkerGrey,
+                              ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 5),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 5,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: SQColors.primary.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            "T&C",
+                            style: Theme.of(context).textTheme.labelMedium!.apply(
+                                  color: SQColors.primary,
+                                ),
+                          ),
+                        ),
+                        Text(
+                          date,
+                          style: Theme.of(context).textTheme.labelMedium!.apply(
+                                color: SQColors.black,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -207,94 +248,119 @@ class VoucherContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Container(
-      width: size.width,
-      padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: SQColors.borderPrimary,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return Slidable(
+      endActionPane: ActionPane(
+        extentRatio: 0.3,
+        motion: const ScrollMotion(),
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: discountperc,
-                      style: Theme.of(context).textTheme.headlineLarge,
-                    ),
-                    TextSpan(
-                      text: " % off",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    TextSpan(
-                      text: ", $extra",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
+          Flexible(
+            child: InkWell(
+              overlayColor: WidgetStateColor.transparent,
+              onTap: () {},
+              child: Container(
+                width: 150,
+                height: 290,
+                margin: const EdgeInsets.only(left: 10),
+                color: Colors.red,
+                child: const Icon(
+                  Iconsax.trash_outline,
+                  color: Colors.white,
+                  size: 25,
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 5),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 5,
-                  vertical: 4,
-                ),
-                decoration: BoxDecoration(
-                  color: SQColors.primary.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  "T&C",
-                  style: Theme.of(context).textTheme.labelMedium!.apply(
-                        color: SQColors.primary,
+            ),
+          ),
+        ],
+      ),
+      child: Container(
+        width: size.width,
+        padding: const EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: SQColors.borderPrimary,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: discountperc,
+                        style: Theme.of(context).textTheme.headlineLarge,
                       ),
+                      TextSpan(
+                        text: " % off",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      TextSpan(
+                        text: ", $extra",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          ListView(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: subtitles
-                .map(
-                  (option) => VoucherSubtitle(subtitle: option),
-                )
-                .toList(),
-          ),
-          const SizedBox(
-            height: SQSizes.sm,
-          ),
-          notes.isNotEmpty
-              ? Container(
-                  padding: const EdgeInsets.all(10),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 5),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 5,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
-                    color: SQColors.softGrey,
+                    color: SQColors.primary.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
-                    notes,
-                    style: Theme.of(context).textTheme.labelLarge!.apply(
-                          color: SQColors.darkerGrey,
+                    "T&C",
+                    style: Theme.of(context).textTheme.labelMedium!.apply(
+                          color: SQColors.primary,
                         ),
                   ),
-                )
-              : const SizedBox.shrink(),
-          const SizedBox(
-            height: SQSizes.md,
-          ),
-          SQElevatedButton(
-            func: func,
-            title: "Use Voucher",
-          ),
-        ],
+                ),
+              ],
+            ),
+            ListView(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: subtitles
+                  .map(
+                    (option) => VoucherSubtitle(subtitle: option),
+                  )
+                  .toList(),
+            ),
+            const SizedBox(
+              height: SQSizes.sm,
+            ),
+            notes.isNotEmpty
+                ? Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: SQColors.softGrey,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      notes,
+                      style: Theme.of(context).textTheme.labelLarge!.apply(
+                            color: SQColors.darkerGrey,
+                          ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
+            const SizedBox(
+              height: SQSizes.md,
+            ),
+            SQElevatedButton(
+              func: func,
+              title: "Use Voucher",
+            ),
+          ],
+        ),
       ),
     );
   }

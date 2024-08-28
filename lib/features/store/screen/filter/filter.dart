@@ -100,8 +100,8 @@ class FilterScreen extends StatelessWidget {
                 height: SQSizes.sml,
               ),
               Wrap(
-                spacing: 10,
-                runSpacing: 10,
+                spacing: 12,
+                runSpacing: 12,
                 children: sortOptions.map(
                   (option) {
                     return SortOption(title: option);
@@ -119,8 +119,8 @@ class FilterScreen extends StatelessWidget {
                 height: SQSizes.sml,
               ),
               Wrap(
-                spacing: 10,
-                runSpacing: 10,
+                spacing: 12,
+                runSpacing: 12,
                 children: categoryTabs.map(
                   (option) {
                     return SortOption(title: option);
@@ -139,7 +139,7 @@ class FilterScreen extends StatelessWidget {
               ),
               Wrap(
                 spacing: 10,
-                runSpacing: 10,
+                runSpacing: 12,
                 children: brands.map(
                   (option) {
                     return SortOption(title: option);

@@ -55,6 +55,34 @@ class AddVoucherScreen extends StatelessWidget {
             const SizedBox(
               height: SQSizes.sm,
             ),
+            VoucherOneContainer(
+              discountPerc: "15",
+              extras: "No min Spend",
+              content: "Free Shipping",
+              content1: "Selected Products",
+              date: "Valid till: 31 Aug, 11:59 PM",
+              func: () {
+                checkoutController.addDiscount(100.0);
+                Get.back();
+              },
+            ),
+            const SizedBox(
+              height: SQSizes.md,
+            ),
+            VoucherOneContainer(
+              discountPerc: "5",
+              extras: "",
+              content1: "Only for Phonecases",
+              content: "",
+              date: "Valid till: 31 Aug, 11:59 PM",
+              func: () {
+                checkoutController.addDiscount(100.0);
+                Get.back();
+              },
+            ),
+            const SizedBox(
+              height: SQSizes.md,
+            ),
             VoucherContainer(
               discountperc: "15",
               subtitles: const [

@@ -89,13 +89,13 @@ class CategoryScreen extends StatelessWidget {
                             children: [
                               Container(
                                 width: size.width,
-                                height: size.height * 0.15,
+                                height: size.height * 0.145,
                                 decoration: BoxDecoration(
-                                  color: Colors.red,
+                                  //color: Colors.red,
                                   borderRadius: BorderRadius.circular(10),
                                   image: const DecorationImage(
-                                    image: AssetImage("assets/images/Banner.jpg"),
-                                    fit: BoxFit.cover,
+                                    image: AssetImage("assets/images/banner1.jpg"),
+                                    fit: BoxFit.contain,
                                   ),
                                 ),
                               ),
@@ -108,11 +108,26 @@ class CategoryScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const ProductListView(categoryId: "Headphones"),
-                        const ProductListView(categoryId: "Watches"),
-                        const ProductListView(categoryId: "Cases"),
-                        const ProductListView(categoryId: "Speakers"),
-                        const ProductListView(categoryId: "Airpods"),
+                        const ProductListView(
+                          categoryId: "Headphones",
+                          bannerimage: "assets/images/headphone1banner.jpg",
+                        ),
+                        const ProductListView(
+                          categoryId: "Watches",
+                          bannerimage: "assets/images/blackfridaybanner.jpg",
+                        ),
+                        const ProductListView(
+                          categoryId: "Cases",
+                          bannerimage: "assets/images/phonecasebanner.jpg",
+                        ),
+                        const ProductListView(
+                          categoryId: "Speakers",
+                          bannerimage: "assets/images/blackfridaybanner.jpg",
+                        ),
+                        const ProductListView(
+                          categoryId: "Airpods",
+                          bannerimage: "assets/images/airpodbanner.jpg",
+                        ),
                         Container(),
                       ],
                     ),

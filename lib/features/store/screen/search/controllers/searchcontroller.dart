@@ -14,7 +14,12 @@ class SearchControllers extends GetxController {
   TextEditingController search = TextEditingController();
 
   void addRecently(String query) {
-    recentlySearched.add(query);
+    recentlySearched.contains(query)
+        ? {
+            recentlySearched.remove(query),
+            recentlySearched.add(query),
+          }
+        : recentlySearched.add(query);
   }
 
   void clearRecently() {

@@ -145,8 +145,13 @@ class SearchScreen extends StatelessWidget {
                       spacing: 10,
                       children: controller.recentlySearched
                           .map(
-                            (query) => SearchedProductContainer(
-                              word: query,
+                            (query) => InkWell(
+                              onTap: () {
+                                controller.search.text = query;
+                              },
+                              child: SearchedProductContainer(
+                                word: query,
+                              ),
                             ),
                           )
                           .toList(),

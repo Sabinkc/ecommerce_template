@@ -119,7 +119,7 @@ class MessagesContainer extends StatelessWidget {
                   color: Colors.red,
                   borderRadius: BorderRadius.circular(8),
                   image: const DecorationImage(
-                    image: AssetImage("assets/images/Banner.jpg"),
+                    image: AssetImage("assets/images/banner1.jpg"),
                     fit: BoxFit.cover,
                   ),
                 ),

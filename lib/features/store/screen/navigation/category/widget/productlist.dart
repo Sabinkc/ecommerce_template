@@ -9,8 +9,9 @@ class ProductListView extends StatelessWidget {
   const ProductListView({
     super.key,
     required this.categoryId,
+    required this.bannerimage,
   });
-  final String categoryId;
+  final String categoryId, bannerimage;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -25,13 +26,12 @@ class ProductListView extends StatelessWidget {
             onTap: () {},
             child: Container(
               width: size.width,
-              height: size.height * 0.15,
+              height: size.height * 0.145,
               decoration: BoxDecoration(
-                color: Colors.red,
                 borderRadius: BorderRadius.circular(10),
-                image: const DecorationImage(
-                  image: AssetImage("assets/images/Banner.jpg"),
-                  fit: BoxFit.cover,
+                image: DecorationImage(
+                  image: AssetImage(bannerimage),
+                  fit: BoxFit.fitWidth,
                 ),
               ),
             ),

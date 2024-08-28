@@ -20,9 +20,10 @@ class SortOption extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
             border: Border.all(
               color: filtercontroller.isOptionSelected(title) ? Colors.black : Colors.grey,
-              width: 2,
+              width: 1,
             ),
           ),
           child: Text(
