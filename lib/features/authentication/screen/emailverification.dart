@@ -56,7 +56,15 @@ class EmailVerificationScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: SQSizes.spaceBtwSections,
+                height: SQSizes.spaceBtwItems,
+              ),
+              const Icon(
+                Icons.mail,
+                color: SQColors.primary,
+                size: 150,
+              ),
+              const SizedBox(
+                height: SQSizes.spaceBtwInputFields,
               ),
               Align(
                 alignment: Alignment.center,
