@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/store/screen/orders/raiseaconcern.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -217,7 +218,11 @@ class OrderDetailsScreen extends StatelessWidget {
             const SizedBox(
               height: SQSizes.md,
             ),
-            SQElevatedButton(func: () {}, title: "Raise a Concern"),
+            SQElevatedButton(
+                func: () => Get.to(
+                      () => const RaiseAConcernScreen(),
+                    ),
+                title: "Raise a Concern"),
           ],
         ),
       ),

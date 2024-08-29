@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../features/store/screen/reviews/SmallReviewContainer.dart';
 import '../features/store/screen/reviews/review.dart';
 import '../utils/constants/colors.dart';
 import '../utils/constants/sizes.dart';
+import 'vouchercontainer.dart';
 
 class AllExtraFeaturesScreen extends StatelessWidget {
   const AllExtraFeaturesScreen({super.key});
@@ -60,6 +60,19 @@ class AllExtraFeaturesScreen extends StatelessWidget {
               review: "Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a ",
               rating: 3.5,
               reviewedBy: "Suman S.",
+            ),
+            const SizedBox(
+              height: SQSizes.spaceBtwSections,
+            ),
+            VoucherContainer(
+              discountperc: "15",
+              subtitles: const [
+                "Free Shipping",
+                "Only Selected Products",
+                "Vaid Till 31, Aug.",
+              ],
+              func: () {},
+              notes: "This voucher is a token of our gratitude for joining us. Your support is helping us shape the future of e-commerce.",
             ),
           ],
         ),

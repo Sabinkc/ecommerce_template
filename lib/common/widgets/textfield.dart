@@ -8,17 +8,20 @@ class SQTextField extends StatelessWidget {
     required this.controller,
     required this.hinttext,
     this.inputType = TextInputType.text,
+    this.maxline = 1,
   });
 
   final TextEditingController controller;
   final String hinttext;
   final TextInputType inputType;
+  final int maxline;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
       keyboardType: inputType,
+      maxLines: maxline,
       decoration: InputDecoration(
         hintText: hinttext,
         hintStyle: Theme.of(context).textTheme.labelLarge!.apply(color: SQColors.textSecondary),

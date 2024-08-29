@@ -1,9 +1,8 @@
 import 'package:ecommerce/common/widgets/elevatedbutton.dart';
-import 'package:ecommerce/common/widgets/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-
+import '../../../../../common/widgets/textfieldwithtitle.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 
@@ -90,40 +89,6 @@ class AddPaymentOptionScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class TextFieldWithTitle extends StatelessWidget {
-  const TextFieldWithTitle({
-    super.key,
-    required this.title,
-    required this.hinttext,
-    required this.controller,
-  });
-
-  final String title, hinttext;
-  final TextEditingController controller;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        const SizedBox(
-          height: SQSizes.sml,
-        ),
-        SQTextField(
-          controller: controller,
-          hinttext: hinttext,
-        ),
-        const SizedBox(
-          height: SQSizes.spaceBtwItems,
-        ),
-      ],
     );
   }
 }

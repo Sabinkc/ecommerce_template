@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/store/screen/checkout/widgets/changepayment.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../../../../../common/widgets/sectionheading.dart';
@@ -16,7 +17,12 @@ class PaymentSection extends StatelessWidget {
       children: [
         SectionHeading(
           headingTitle: "Payment Method",
-          func: () {},
+          func: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => const ChangePaymentScreen(),
+            );
+          },
           buttonTitle: "Change",
         ),
         const SizedBox(

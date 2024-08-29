@@ -59,9 +59,9 @@ class EmailVerificationScreen extends StatelessWidget {
                 height: SQSizes.spaceBtwItems,
               ),
               const Icon(
-                Icons.mail,
+                Icons.mark_email_unread_outlined,
                 color: SQColors.primary,
-                size: 150,
+                size: 120,
               ),
               const SizedBox(
                 height: SQSizes.spaceBtwInputFields,
@@ -84,9 +84,10 @@ class EmailVerificationScreen extends StatelessWidget {
                   margin: const EdgeInsets.only(right: 2),
                   width: 56,
                   height: 56,
-                  textStyle: Theme.of(context).textTheme.titleLarge,
+                  textStyle: Theme.of(context).textTheme.headlineSmall,
                   decoration: BoxDecoration(
-                    color: SQColors.primary.withOpacity(0.5),
+                    border: Border.all(color: SQColors.primary),
+                    //color: SQColors.primary.withOpacity(0.5),
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),

@@ -12,7 +12,7 @@ import '../../orders/orders.dart';
 import '../../others/faqs.dart';
 import '../../others/messages/messages.dart';
 import '../../others/myreviews/myreviews.dart';
-import '../../others/voucher.dart';
+import '../../others/voucher/voucher.dart';
 import '../../settings/settings.dart';
 import '../../widgets/profiletile.dart';
 import '../../wishlist/controllers/wishlistcontroller.dart';

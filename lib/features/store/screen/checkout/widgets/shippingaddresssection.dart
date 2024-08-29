@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/store/screen/checkout/widgets/changeaddress.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../../../../../common/widgets/sectionheading.dart';
@@ -16,7 +17,12 @@ class ShippingAddressSection extends StatelessWidget {
       children: [
         SectionHeading(
           headingTitle: "Shipping Address",
-          func: () {},
+          func: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => const ChangeAddressScreen(),
+            );
+          },
           buttonTitle: "Change",
         ),
         const SizedBox(

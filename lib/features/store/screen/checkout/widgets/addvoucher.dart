@@ -1,10 +1,9 @@
 import 'package:ecommerce/common/widgets/textfield.dart';
-import 'package:ecommerce/features/store/screen/others/voucher.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../../utils/constants/colors.dart';
+import '../../others/voucher/widgets/voucheronecontainer.dart';
 import '../controllers/checkoutcontroller.dart';
 
 class AddVoucherScreen extends StatelessWidget {
@@ -82,34 +81,6 @@ class AddVoucherScreen extends StatelessWidget {
             ),
             const SizedBox(
               height: SQSizes.md,
-            ),
-            VoucherContainer(
-              discountperc: "15",
-              subtitles: const [
-                "Free Shipping",
-                "Only Selected Products",
-                "Vaid Till 31, Aug.",
-              ],
-              notes: "This voucher is a token of our gratitude for joining us. "
-                  "Your support is helping us shape the future of e-commerce.",
-              func: () {
-                checkoutController.addDiscount(100.0);
-                Get.back();
-              },
-            ),
-            const SizedBox(
-              height: SQSizes.md,
-            ),
-            VoucherContainer(
-              discountperc: "5",
-              subtitles: const [
-                "Only For Phonecases",
-                "Vaid Till 31, Aug.",
-              ],
-              func: () {
-                checkoutController.addDiscount(100.0);
-                Get.back();
-              },
             ),
           ],
         ),
