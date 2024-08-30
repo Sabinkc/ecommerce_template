@@ -13,11 +13,11 @@ class VoucherOneContainer extends StatelessWidget {
     required this.content,
     required this.content1,
     required this.date,
-    required this.func,
+    this.func,
   });
 
   final String discountPerc, extras, content, content1, date;
-  final VoidCallback func;
+  final void Function()? func;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

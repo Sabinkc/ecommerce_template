@@ -19,8 +19,8 @@ class VoucherScreen extends StatelessWidget {
         ),
         forceMaterialTransparency: true,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(
+      body: const SingleChildScrollView(
+        padding: EdgeInsets.symmetric(
           horizontal: 15,
           vertical: 10,
         ),
@@ -32,18 +32,16 @@ class VoucherScreen extends StatelessWidget {
               content: "Free Shipping",
               content1: "Selected Products",
               date: "Valid till: 31 Aug, 11:59 PM",
-              func: () {},
             ),
-            const SizedBox(
+            SizedBox(
               height: SQSizes.md,
             ),
             VoucherOneContainer(
               discountPerc: "5",
               extras: "",
-              content1: "Only for Phonecases",
-              content: "",
+              content: "Free Shipping",
+              content1: "Phonecases only",
               date: "Valid till: 31 Aug, 11:59 PM",
-              func: () {},
             ),
           ],
         ),

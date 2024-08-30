@@ -34,6 +34,7 @@ class SelectBirthdayScreen extends StatelessWidget {
               height: size.height * 0.2,
               child: CupertinoDatePicker(
                 initialDateTime: DateTime(2002, 10, 02),
+                maximumDate: DateTime.now(),
                 dateOrder: DatePickerDateOrder.dmy,
                 mode: CupertinoDatePickerMode.date,
                 onDateTimeChanged: (DateTime newDate) {

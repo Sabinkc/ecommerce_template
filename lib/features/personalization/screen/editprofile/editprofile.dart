@@ -65,7 +65,6 @@ class EditProfileScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
-              const Divider(),
               ProfileMenu(
                 func: () => Get.to(
                   () => const EditUserScreen(
@@ -92,6 +91,7 @@ class EditProfileScreen extends StatelessWidget {
                 func: () {},
                 title: "Email",
                 value: "sumansthahope@gmail.com",
+                showbutton: false,
               ),
               ProfileMenu(
                 func: () {},
@@ -131,11 +131,13 @@ class ProfileMenu extends StatelessWidget {
     required this.func,
     required this.title,
     required this.value,
+    this.showbutton = true,
   });
 
   final IconData icon;
   final VoidCallback func;
   final String title, value;
+  final bool showbutton;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -169,10 +171,12 @@ class ProfileMenu extends StatelessWidget {
             const SizedBox(
               width: SQSizes.sm,
             ),
-            Icon(
-              icon,
-              size: 15,
-            ),
+            showbutton
+                ? Icon(
+                    icon,
+                    size: 15,
+                  )
+                : const SizedBox.shrink(),
           ],
         ),
       ),

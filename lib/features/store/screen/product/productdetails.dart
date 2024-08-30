@@ -167,10 +167,11 @@ class ProductDetailsScreen extends StatelessWidget {
               child: SizedBox(
                 height: 45,
                 child: SQElevatedButton(
-                    func: () {
-                      onCartClicked(productDetails);
-                    },
-                    title: "Add to Cart"),
+                  func: () {
+                    onCartClicked(productDetails);
+                  },
+                  title: "Add to Cart",
+                ),
               ),
             ),
           ],
@@ -183,13 +184,15 @@ class ProductDetailsScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Obx(() {
-                final List<String> selected = image.entries.elementAt(productdetailsController.selectedColorIndex.value).value;
-                return ImageCarousel(
-                  imageController: imageController,
-                  images: selected,
-                );
-              }),
+              Obx(
+                () {
+                  final List<String> selected = image.entries.elementAt(productdetailsController.selectedColorIndex.value).value;
+                  return ImageCarousel(
+                    imageController: imageController,
+                    images: selected,
+                  );
+                },
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 child: Column(
@@ -202,34 +205,36 @@ class ProductDetailsScreen extends StatelessWidget {
                     const SizedBox(
                       height: SQSizes.sm,
                     ),
-                    Obx(() {
-                      final String name = productDetails["productName"];
-                      return Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            child: Text(
-                              productDetails["productName"],
-                              style: Theme.of(context).textTheme.headlineSmall,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: productdetailsController.istitleExpanded.value ? 3 : 1,
+                    Obx(
+                      () {
+                        final String name = productDetails["productName"];
+                        return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                productDetails["productName"],
+                                style: Theme.of(context).textTheme.headlineSmall,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: productdetailsController.istitleExpanded.value ? 3 : 1,
+                              ),
                             ),
-                          ),
-                          name.length > 39
-                              ? InkWell(
-                                  onTap: () {
-                                    productdetailsController.changetitleExpanded();
-                                  },
-                                  overlayColor: WidgetStateColor.transparent,
-                                  child: Icon(
-                                    productdetailsController.istitleExpanded.value ? Icons.keyboard_arrow_up_sharp : Icons.keyboard_arrow_down_sharp,
-                                  ),
-                                )
-                              : const SizedBox.shrink(),
-                        ],
-                      );
-                    }),
+                            name.length > 39
+                                ? InkWell(
+                                    onTap: () {
+                                      productdetailsController.changetitleExpanded();
+                                    },
+                                    overlayColor: WidgetStateColor.transparent,
+                                    child: Icon(
+                                      productdetailsController.istitleExpanded.value ? Icons.keyboard_arrow_up_sharp : Icons.keyboard_arrow_down_sharp,
+                                    ),
+                                  )
+                                : const SizedBox.shrink(),
+                          ],
+                        );
+                      },
+                    ),
                     const SizedBox(
                       height: SQSizes.md,
                     ),
@@ -237,8 +242,9 @@ class ProductDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         const Icon(
-                          Icons.star_rounded,
+                          Icons.star_border_rounded,
                           color: SQColors.primary,
+                          size: 24,
                         ),
                         const SizedBox(
                           width: SQSizes.sm,
@@ -251,10 +257,8 @@ class ProductDetailsScreen extends StatelessWidget {
                           width: SQSizes.xs,
                         ),
                         Text(
-                          "100 Reviews",
-                          style: Theme.of(context).textTheme.labelMedium!.apply(
-                                color: SQColors.primary,
-                              ),
+                          "(100) reviews",
+                          style: Theme.of(context).textTheme.labelMedium,
                         ),
                       ],
                     ),
@@ -265,7 +269,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         const Icon(
-                          Iconsax.like_tag_outline,
+                          Iconsax.like_shapes_outline,
                           color: SQColors.primary,
                         ),
                         const SizedBox(

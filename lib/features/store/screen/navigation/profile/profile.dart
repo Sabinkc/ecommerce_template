@@ -166,20 +166,22 @@ class ProfileScreen extends StatelessWidget {
                                       () => const WishListScreen(),
                                     );
                                   },
-                                  child: RichText(
-                                    text: TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: "${wishlistController.favoriteItems.length}",
-                                          style: Theme.of(context).textTheme.bodyLarge!.apply(
-                                                color: SQColors.primary,
-                                              ),
-                                        ),
-                                        TextSpan(
-                                          text: " Wishlist",
-                                          style: Theme.of(context).textTheme.bodyMedium,
-                                        ),
-                                      ],
+                                  child: Obx(
+                                    ()=> RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: "${wishlistController.favoriteItems.length}",
+                                            style: Theme.of(context).textTheme.bodyLarge!.apply(
+                                                  color: SQColors.primary,
+                                                ),
+                                          ),
+                                          TextSpan(
+                                            text: " Wishlist",
+                                            style: Theme.of(context).textTheme.bodyMedium,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -206,7 +208,7 @@ class ProfileScreen extends StatelessWidget {
                                     text: TextSpan(
                                       children: [
                                         TextSpan(
-                                          text: "0",
+                                          text: "2",
                                           style: Theme.of(context).textTheme.bodyLarge!.apply(
                                                 color: SQColors.primary,
                                               ),
