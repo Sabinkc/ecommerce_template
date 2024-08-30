@@ -1,3 +1,5 @@
+import 'package:ecommerce/features/store/screen/settings/feedback.dart';
+import 'package:ecommerce/features/store/screen/settings/requestaccountdelete.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -50,20 +52,28 @@ class SettingScreen extends StatelessWidget {
                 () => const PolicyAndTermsScreen(),
               ),
             ),
-            SettingTile(
-              title: 'Help',
-              icon: Iconsax.information_outline,
-              func: () {},
-            ),
+            // SettingTile(
+            //   title: 'Help',
+            //   icon: Iconsax.information_outline,
+            //   func: () {},
+            // ),
             SettingTile(
               title: 'Feedback',
               icon: Iconsax.personalcard_outline,
-              func: () {},
+              func: () {
+                Get.to(
+                  () => const FeedbackScreen(),
+                );
+              },
             ),
             SettingTile(
               title: 'Request Account Deletion',
               icon: Iconsax.user_minus_outline,
-              func: () {},
+              func: () {
+                Get.to(
+                  () => const RequestAccountDeletionScreen(),
+                );
+              },
             ),
             const SizedBox(
               height: SQSizes.xl,
