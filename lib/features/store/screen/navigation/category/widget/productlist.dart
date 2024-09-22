@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/store/model/alltabs.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../utils/constants/sizes.dart';
 import '../../../../../../common/widgets/sqgridlayout.dart';
@@ -9,33 +10,35 @@ class ProductListView extends StatelessWidget {
   const ProductListView({
     super.key,
     required this.categoryId,
-    required this.bannerimage,
+    this.bannerimage = "assets/images/headphone1banner.jpg",
   });
   final String categoryId, bannerimage;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     // Filter products by categoryId
-    List filteredProducts = products.where((product) => product["categoryId"] == categoryId).toList();
+    List filteredProducts = categoryId.contains(categoryTabs[0]["option"]) ? products : products.where((product) => product["categoryId"] == categoryId).toList();
 
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Column(
         children: [
-          InkWell(
-            onTap: () {},
-            child: Container(
-              width: size.width,
-              height: size.height * 0.145,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  image: AssetImage(bannerimage),
-                  fit: BoxFit.fitWidth,
+          bannerimage.isEmpty
+              ? const SizedBox.shrink()
+              : InkWell(
+                  onTap: () {},
+                  child: Container(
+                    width: size.width,
+                    height: size.height * 0.145,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        image: AssetImage(bannerimage),
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
           const SizedBox(
             height: SQSizes.md,
           ),

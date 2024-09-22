@@ -123,15 +123,17 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 15, left: 12, right: 12),
               child: TabBarView(
                 physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  SQGridLayout(
-                    allproducts: products,
-                  ),
-                  const SectionListView(section: "New In"),
-                  const SectionListView(section: "Deals"),
-                  const SectionListView(section: "Popular"),
-                  const SectionListView(section: "Best Seller"),
-                ],
+                children: homeTabsOption.map((data) => SectionListView(section: data)).toList(),
+                // children: [
+                //   SQGridLayout(
+                //     allproducts: products,
+                //   ),
+                //   const SectionListView(section: "New In"),
+                //   const SectionListView(section: "Deals"),
+                //   const SectionListView(section: "Popular"),
+                //   const SectionListView(section: "Best Seller"),
+                //   const SectionListView(section: "Test"),
+                // ],
               ),
             ),
           ),
@@ -150,7 +152,8 @@ class SectionListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Filter products by section
-    List filteredProducts = products.where((product) => product["section"] == section).toList();
+
+    List filteredProducts = section.contains("For you") ? products : products.where((product) => product["section"] == section).toList();
 
     return SQGridLayout(
       allproducts: filteredProducts,

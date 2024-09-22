@@ -4,10 +4,8 @@ import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
-import '../../../../../common/widgets/sqgridlayout.dart';
 import 'controllers/categorycontrollers.dart';
 import '../../../model/alltabs.dart';
-import '../../../model/products.dart';
 import 'widget/productlist.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -16,9 +14,7 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final categoryControllers = Get.put(CategoryControllers());
-
     return KeyboardDismisser(
       gestures: const [GestureType.onTap, GestureType.onPanUpdateAnyDirection],
       child: DefaultTabController(
@@ -64,10 +60,11 @@ class CategoryScreen extends StatelessWidget {
                     indicatorSize: TabBarIndicatorSize.label,
                     onTap: (value) => categoryControllers.changeTabIndex(value),
                     tabs: categoryTabs.asMap().entries.map((entry) {
+                      Map data = entry.value;
                       return Tab(
                         child: Obx(
                           () => Text(
-                            entry.value,
+                            data["option"],
                             style: Theme.of(context).textTheme.titleMedium!.apply(
                                   color: categoryControllers.tabIndex.value == entry.key ? SQColors.primary : SQColors.black,
                                 ),
@@ -83,53 +80,16 @@ class CategoryScreen extends StatelessWidget {
                     fit: FlexFit.loose,
                     child: TabBarView(
                       physics: const ClampingScrollPhysics(),
-                      children: [
-                        SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Container(
-                                width: size.width,
-                                height: size.height * 0.145,
-                                decoration: BoxDecoration(
-                                  //color: Colors.red,
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: const DecorationImage(
-                                    image: AssetImage("assets/images/banner1.jpg"),
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: SQSizes.md,
-                              ),
-                              SQGridLayout(
-                                allproducts: products,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const ProductListView(
-                          categoryId: "Headphones",
-                          bannerimage: "assets/images/headphone1banner.jpg",
-                        ),
-                        const ProductListView(
-                          categoryId: "Watches",
-                          bannerimage: "assets/images/blackfridaybanner.jpg",
-                        ),
-                        const ProductListView(
-                          categoryId: "Cases",
-                          bannerimage: "assets/images/phonecasebanner.jpg",
-                        ),
-                        const ProductListView(
-                          categoryId: "Speakers",
-                          bannerimage: "assets/images/blackfridaybanner.jpg",
-                        ),
-                        const ProductListView(
-                          categoryId: "Airpods",
-                          bannerimage: "assets/images/airpodbanner.jpg",
-                        ),
-                        Container(),
-                      ],
+                      children: categoryTabs.asMap().entries.map(
+                        (entry) {
+                          Map data = entry.value;
+
+                          return ProductListView(
+                            categoryId: data["option"],
+                            bannerimage: data["banner"],
+                          );
+                        },
+                      ).toList(),
                     ),
                   ),
                 ],

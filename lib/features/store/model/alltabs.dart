@@ -5,17 +5,43 @@ final List homeTabsOption = [
   "Deals",
   "Popular",
   "Best Seller",
+  "Test",
 ];
 
 // List of category tabs
 final List categoryTabs = [
-  "All",
-  "Headphones",
-  "Watches",
-  "Cases",
-  "Speakers",
-  "Airpods",
-  "Protectors",
+  {
+    "option": "All",
+    "banner": "assets/images/banner1.jpg",
+  },
+  {
+    "option": "Headphones",
+    "banner": "assets/images/headphone1banner.jpg",
+  },
+  {
+    "option": "Watches",
+    "banner": "assets/images/blackfridaybanner.jpg",
+  },
+  {
+    "option": "Cases",
+    "banner": "assets/images/phonecasebanner.jpg",
+  },
+  {
+    "option": "Speakers",
+    "banner": "assets/images/blackfridaybanner.jpg",
+  },
+  {
+    "option": "Airpods",
+    "banner": "assets/images/airpodbanner.jpg",
+  },
+  {
+    "option": "Protectors",
+    "banner": "",
+  },
+  {
+    "option": "Test",
+    "banner": "",
+  },
 ];
 
 // List of Filter options

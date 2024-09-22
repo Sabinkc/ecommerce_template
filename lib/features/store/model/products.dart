@@ -33,6 +33,37 @@ final List products = [
     },
     "specs": ["4GB / 64GB", "6GB / 128GB", "8GB / 256GB", "16GB / 512GB"]
   },
+  {
+    "productId": "Lenovo",
+    "categoryId": "Test",
+    "section": "Test",
+    "imagewithColor": {
+      Colors.grey: [
+        "assets/images/laptop.jpg",
+        "assets/images/laptop_1.jpg",
+        "assets/images/laptop.jpg",
+      ],
+      Colors.black: [
+        "assets/images/laptop.jpg",
+        "assets/images/laptop_1.jpg",
+        "assets/images/laptop.jpg",
+      ],
+    },
+    "productName": "Lenovo Ideapad 1 15lGL7 11th Gen Intel Celeron N4020 8GB DDR4 RAM 256GB SSD 15.6 HD Display",
+    "productPrice": 130000,
+    "discountedPrice": 110500,
+    "discount": true,
+    "discountPerc": 15,
+    "desc": "The slim and light Lenovo IdeaPad 3i laptop packs powerful 12th generation Intel Core i5 U series processors and Intel Iris Xe graphics card.Voltage:3.7 volts.",
+    "specifications": {
+      "Brand": "Lenovo",
+      "Display Size": "15.4 inch",
+      "CPU Cores": "Dual Core",
+      "Operating System": "Windows",
+      "Graphic Card": "Integrated",
+    },
+    "specs": ["4GB / 64GB", "6GB / 128GB", "8GB / 256GB", "16GB / 512GB"]
+  },
   //Watches
   {
     "productId": "Gshock",
